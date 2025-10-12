@@ -1,12 +1,17 @@
-import type { FC } from 'react';
+import { type FC, lazy, Suspense } from 'react';
 import { useRoutes } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
-import { IndexPage } from 'pages/IndexPage';
+
+const IndexPage = lazy(() => import('@pages/IndexPage'));
 
 const routeConfig: RouteObject[] = [
   {
     path: '/',
-    element: <IndexPage />,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <IndexPage />
+      </Suspense>
+    ),
   },
 ];
 
