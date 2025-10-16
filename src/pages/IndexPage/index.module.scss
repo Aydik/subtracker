@@ -1,0 +1,124 @@
+.indexPage {
+  background: radial-gradient(circle 50vw at 90% 10%, rgba(var(--color-primary-rgb), 0.5), transparent),
+  radial-gradient(circle 60vh at 5% 100%, rgba(var(--color-primary-rgb), 0.3), transparent);
+  background-color: black;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 20px 0 40px;
+  gap: 30px;
+}
+
+.logos {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.line {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+}
+
+.logo {
+  height: 8vh;
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    color: white;
+    margin: 0;
+    font-size: 3.625rem;
+    line-height: 1.25em;
+  }
+
+  h2 {
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 1.25em;
+  }
+}
+
+.actions {
+  width: 100%;
+  max-width: 300px;
+}
+
+.auth {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.divider {
+  align-items: center;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  margin: 2rem 0 1rem;
+
+  &__line {
+    width: 100%;
+    height: 2px;
+    background-color: white;
+  }
+
+  &__text {
+    color: white;
+    font-weight: 500;
+  }
+}
+
+.oAuth {
+  display: flex;
+  justify-content: space-between;
+
+  &__button {
+    height: 54px;
+    width: 54px !important;
+  }
+}
+
+.border {
+  position: fixed;
+  z-index: 1;
+  min-width: 40px;
+  width: 10vw;
+  height: 100vh;
+  top: 0;
+
+  &_left {
+    left: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7), transparent);
+  }
+
+  &_right {
+    right: 0;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.7), transparent);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    h1 {
+      font-size: 4.25rem;
+    }
+  }
+}
