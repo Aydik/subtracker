@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import styles from './index.module.scss';
 import Marquee from 'react-fast-marquee';
-import { Button } from 'antd';
+import { Button, Layout } from 'antd';
 import { Icon } from '@shared/ui/Icon';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
@@ -15,7 +15,7 @@ const services = [
 const IndexPage: FC = () => {
   const navigate = useNavigate();
   return (
-    <div className={styles.indexPage}>
+    <Layout.Content className={styles.indexPage}>
       <div className={styles.content}>
         <div className={styles.marque_container}>
           {services.map((line, index) => (
@@ -92,7 +92,7 @@ const IndexPage: FC = () => {
       </div>
       <div className={clsx(styles.border, styles.border_left)} />
       <div className={clsx(styles.border, styles.border_right)} />
-    </div>
+    </Layout.Content>
   );
 };
 

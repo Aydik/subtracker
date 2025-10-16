@@ -1,11 +1,17 @@
-:root{
+:root {
   // colors
   --color-gray: #2c3844;
+  --color-gray--hover: #3a4a58;
   --color-light-gray: #cccac3;
   --color-primary: #f8d81c;
+  --color-primary-hover: #f8d93e;
 
   // colors rgb
   --color-gray-rgb: 44, 56, 68;
   --color-light-gray-rgb: 204, 202, 195;
   --color-primary-rgb: 248, 216, 28;
+
+  // backgrounds
+  --bg-gradient: radial-gradient(circle 50vw at 90% 10%, rgba(var(--color-primary-rgb), 0.5), transparent),
+  radial-gradient(circle 60vh at 5% 100%, rgba(var(--color-primary-rgb), 0.3), transparent);
 }

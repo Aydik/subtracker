@@ -9,17 +9,17 @@ export const darkTheme: ThemeConfig = {
   components: {
     Button: {
       // default
-      defaultBg: '#2c3844',
+      defaultBg: 'var(--color-gray)',
       defaultColor: '#ffffff',
       defaultBorderColor: 'transparent',
 
-      defaultActiveBg: '#3a4a58',
-      defaultHoverBg: '#3a4a58',
+      defaultActiveBg: 'var(--color-gray--hover)',
+      defaultHoverBg: 'var(--color-gray--hover)',
       defaultHoverColor: '#ffffff',
       defaultHoverBorderColor: '#ffffff',
 
       // primary
-      colorPrimaryBgHover: '#f8d93e',
+      colorPrimaryBgHover: 'var(--color-primary--hover)',
       primaryColor: '#000000',
 
       // sizes

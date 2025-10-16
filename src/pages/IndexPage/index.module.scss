@@ -1,6 +1,5 @@
 .indexPage {
-  background: radial-gradient(circle 50vw at 90% 10%, rgba(var(--color-primary-rgb), 0.5), transparent),
-  radial-gradient(circle 60vh at 5% 100%, rgba(var(--color-primary-rgb), 0.3), transparent);
+  background: var(--bg-gradient);
   background-color: black;
   box-sizing: border-box;
   position: relative;
