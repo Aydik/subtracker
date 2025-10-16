@@ -1,5 +1,9 @@
 @use "normalize";
+@use "font";
+@use "variables";
 
 * {
-  font-family: "Tektur", sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: "Tinkoff Sans", sans-serif;
 }
