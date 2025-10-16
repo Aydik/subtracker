@@ -16,30 +16,30 @@ const IndexPage: FC = () => {
   const navigate = useNavigate();
   return (
     <div className={styles.indexPage}>
-      <div className={styles.logos}>
-        {services.map((line, index) => (
-          <Marquee
-            className={styles.line}
-            key={index}
-            speed={20 + (2 - index) * 10 - (index % 2) * 10}
-            direction={index % 2 === 0 ? 'left' : 'right'}
-          >
-            <div className={styles.line}>
-              {Array(5).fill(
-                line.map((service) => (
-                  <img
-                    className={styles.logo}
-                    key={service}
-                    src={`public/assets/images/services/${service}.png`}
-                    alt={service}
-                  />
-                )),
-              )}
-            </div>
-          </Marquee>
-        ))}
-      </div>
       <div className={styles.content}>
+        <div className={styles.marque_container}>
+          {services.map((line, index) => (
+            <Marquee
+              className={styles.line}
+              key={index}
+              speed={20 + (2 - index) * 10 - (index % 2) * 10}
+              direction={index % 2 === 0 ? 'left' : 'right'}
+            >
+              <div className={styles.marque}>
+                {Array(5).fill(
+                  line.map((service) => (
+                    <img
+                      className={styles.logo}
+                      key={service}
+                      src={`public/assets/images/services/${service}.png`}
+                      alt={service}
+                    />
+                  )),
+                )}
+              </div>
+            </Marquee>
+          ))}
+        </div>
         <div className={styles.title}>
           <h1>SubTracker</h1>
           <h2>
