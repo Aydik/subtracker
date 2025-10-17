@@ -11,12 +11,9 @@ export const LoginForm: FC = () => {
   };
 
   return (
-    <div className={styles.formContainer}>
-      <div className={styles.title}>
-        <h1>Вход</h1>
-      </div>
-
-      <Form form={form} onFinish={handleSubmit} className={styles.form} size="large">
+    <Form form={form} onFinish={handleSubmit} className={styles.form} size="large">
+      <h1 className={styles.title}>Вход</h1>
+      <div className={styles.fields}>
         <Form.Item
           label="Почта"
           name="email"
@@ -35,17 +32,15 @@ export const LoginForm: FC = () => {
         >
           <Input.Password placeholder="Введите ваш пароль" />
         </Form.Item>
-
-        <div className={styles.actions}>
-          <Link to="/auth/register" className={styles.link}>
-            Создать аккаунт
-          </Link>
-
-          <Button type="primary" htmlType="submit" block>
-            Войти
-          </Button>
-        </div>
-      </Form>
-    </div>
+      </div>
+      <div className={styles.actions}>
+        <Button type="primary" htmlType="submit">
+          Войти
+        </Button>
+        <Link to="/auth/register" className={styles.link}>
+          Создать аккаунт
+        </Link>
+      </div>
+    </Form>
   );
 };

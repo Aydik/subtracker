@@ -11,12 +11,9 @@ export const RegisterForm: FC = () => {
   };
 
   return (
-    <div className={styles.formContainer}>
-      <div className={styles.title}>
-        <h1>Регистрация</h1>
-      </div>
-
-      <Form form={form} onFinish={handleSubmit} className={styles.form} size="large">
+    <Form form={form} onFinish={handleSubmit} className={styles.form} size="large">
+      <h1 className={styles.title}>Регистрация</h1>
+      <div className={styles.fields}>
         <Form.Item
           label="Почта"
           name="email"
@@ -54,17 +51,15 @@ export const RegisterForm: FC = () => {
         >
           <Input.Password placeholder="Повторите ваш пароль" />
         </Form.Item>
-
-        <div className={styles.actions}>
-          <Link to="/auth/login" className={styles.link}>
-            Уже есть аккаунт? Войти
-          </Link>
-
-          <Button type="primary" htmlType="submit" block>
-            Создать аккаунт
-          </Button>
-        </div>
-      </Form>
-    </div>
+      </div>
+      <div className={styles.actions}>
+        <Button type="primary" htmlType="submit">
+          Создать аккаунт
+        </Button>
+        <Link to="/auth/login" className={styles.link}>
+          Уже есть аккаунт? Войти
+        </Link>
+      </div>
+    </Form>
   );
 };

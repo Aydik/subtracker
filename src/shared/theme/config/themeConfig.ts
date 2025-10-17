@@ -6,11 +6,6 @@ export const darkTheme: ThemeConfig = {
     fontFamily: 'Tektur, sans-serif',
     colorSplit: '#ffffff',
     colorText: '#ffffff',
-    colorBgContainer: 'var(--glass-bg)',
-    colorBorder: 'rgba(255, 255, 255, 0.2)',
-    colorTextPlaceholder: 'var(--color-light-gray)',
-    borderRadius: 10,
-    fontSize: 16,
   },
   components: {
     Button: {
@@ -40,23 +35,16 @@ export const darkTheme: ThemeConfig = {
 
     Form: {
       itemMarginBottom: 0,
-      labelColor: '#ffffff',
-      labelFontSize: 16,
-      labelHeight: 50,
-      verticalLabelPadding: '0 0 7px 0',
+      fontSize: 16,
     },
 
     Input: {
-      colorBgContainer: 'var(--glass-bg)',
+      colorBgContainer: 'rgba(var(--color-gray-rgb), 0.5)',
       colorText: '#ffffff',
       colorBorder: 'rgba(255, 255, 255, 0.2)',
       colorTextPlaceholder: 'var(--color-light-gray)',
-      borderRadius: 10,
-      paddingBlock: 16,
-      paddingInline: 16,
-      hoverBorderColor: 'var(--color-primary)',
-      activeBorderColor: 'var(--color-primary)',
-      activeShadow: '0 0 0 2px rgba(248, 216, 28, 0.2)',
+      hoverBorderColor: 'var(--color-primary-hover)',
+      activeShadow: '0 0 0 2px rgba(var(--color-primary-hover-rgb), 0.2)',
     },
   },
 };

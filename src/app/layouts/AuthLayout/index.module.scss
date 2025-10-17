@@ -1,7 +1,6 @@
 .authLayout {
+  box-sizing: border-box;
   min-height: 100vh;
-  background: var(--bg-gradient);
-  background-color: black;
   display: flex;
   align-items: center;
   justify-content: center;
