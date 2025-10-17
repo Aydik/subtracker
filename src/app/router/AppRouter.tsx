@@ -1,30 +1,49 @@
 import { type FC, lazy, Suspense } from 'react';
 import { useRoutes } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
-import { AuthLayout } from '@app/layouts/AuthLayout';
+import { PageLoader } from '@shared/ui/PageLoader';
 
 const IndexPage = lazy(() => import('@pages/IndexPage'));
+const AuthLayout = lazy(() => import('@app/layouts/AuthLayout'));
+const LoginForm = lazy(() =>
+  import('@features/auth').then((module) => ({ default: module.LoginForm })),
+);
+const RegisterForm = lazy(() =>
+  import('@features/auth').then((module) => ({ default: module.RegisterForm })),
+);
 
 const routeConfig: RouteObject[] = [
   {
     path: '/',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<PageLoader />}>
         <IndexPage />
       </Suspense>
     ),
   },
   {
     path: '/auth',
-    element: <AuthLayout />,
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <AuthLayout />
+      </Suspense>
+    ),
     children: [
       {
         path: 'login',
-        element: <div>LoginPage</div>,
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <LoginForm />
+          </Suspense>
+        ),
       },
       {
         path: 'register',
-        element: <div>RegisterPage</div>,
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <RegisterForm />
+          </Suspense>
+        ),
       },
     ],
   },

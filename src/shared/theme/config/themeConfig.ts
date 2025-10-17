@@ -5,6 +5,7 @@ export const darkTheme: ThemeConfig = {
     colorPrimary: '#f8d81c',
     fontFamily: 'Tektur, sans-serif',
     colorSplit: '#ffffff',
+    colorText: '#ffffff',
   },
   components: {
     Button: {
@@ -26,6 +27,24 @@ export const darkTheme: ThemeConfig = {
       fontWeight: 500,
       paddingInlineLG: 20,
       paddingBlockLG: 15,
+
+      boxShadow: 'none',
+      primaryShadow: 'none',
+      defaultShadow: 'none',
+    },
+
+    Form: {
+      itemMarginBottom: 0,
+      fontSize: 16,
+    },
+
+    Input: {
+      colorBgContainer: 'rgba(var(--color-gray-rgb), 0.5)',
+      colorText: '#ffffff',
+      colorBorder: 'rgba(255, 255, 255, 0.2)',
+      colorTextPlaceholder: 'var(--color-light-gray)',
+      hoverBorderColor: 'var(--color-primary-hover)',
+      activeShadow: '0 0 0 2px rgba(var(--color-primary-hover-rgb), 0.2)',
     },
   },
 };

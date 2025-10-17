@@ -8,8 +8,18 @@
 
   // colors rgb
   --color-gray-rgb: 44, 56, 68;
+  --color-gray--hover-rgb: 58, 74, 88;
   --color-light-gray-rgb: 204, 202, 195;
   --color-primary-rgb: 248, 216, 28;
+  --color-primary-hover-rgb: 248, 217, 62;
+
+  // glass effect
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-backdrop-filter: blur(20px);
+  --glass-box-shadow: inset 0 4px 8px 0 rgba(255, 255, 255, 0.2);
+
+  // border
+  --border-default: 1px solid rgba(255, 255, 255, 0.2);
 
   // backgrounds
   --bg-gradient: radial-gradient(circle 50vw at 90% 10%, rgba(var(--color-primary-rgb), 0.5), transparent),

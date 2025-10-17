@@ -7,3 +7,17 @@
   padding: 0;
   font-family: "Tinkoff Sans", sans-serif;
 }
+
+body {
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  background-color: black;
+}
+
+@mixin glass-effect{
+  border: var(--border-default);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-backdrop-filter);
+  box-shadow: var(--glass-box-shadow);
+}

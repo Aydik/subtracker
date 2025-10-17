@@ -1,6 +1,4 @@
 .indexPage {
-  background: var(--bg-gradient);
-  background-color: black;
   box-sizing: border-box;
   position: relative;
 }
@@ -121,10 +119,3 @@
   }
 }
 
-@media screen and (min-width: 768px) {
-  .title {
-    h1 {
-      font-size: 4.25rem;
-    }
-  }
-}
