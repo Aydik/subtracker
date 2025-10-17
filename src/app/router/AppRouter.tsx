@@ -4,6 +4,12 @@ import type { RouteObject } from 'react-router-dom';
 import { AuthLayout } from '@app/layouts/AuthLayout';
 
 const IndexPage = lazy(() => import('@pages/IndexPage'));
+const LoginForm = lazy(() =>
+  import('@features/auth').then((module) => ({ default: module.LoginForm })),
+);
+const RegisterForm = lazy(() =>
+  import('@features/auth').then((module) => ({ default: module.RegisterForm })),
+);
 
 const routeConfig: RouteObject[] = [
   {
@@ -20,11 +26,19 @@ const routeConfig: RouteObject[] = [
     children: [
       {
         path: 'login',
-        element: <div>LoginPage</div>,
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <LoginForm />
+          </Suspense>
+        ),
       },
       {
         path: 'register',
-        element: <div>RegisterPage</div>,
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <RegisterForm />
+          </Suspense>
+        ),
       },
     ],
   },

@@ -11,6 +11,12 @@
   --color-light-gray-rgb: 204, 202, 195;
   --color-primary-rgb: 248, 216, 28;
 
+  // glass effect
+  --glass-bg: rgba(255, 255, 255, 0.1);
+
+  // border
+  --border-bg: 1px solid rgba(255, 255, 255, 0.2);
+
   // backgrounds
   --bg-gradient: radial-gradient(circle 50vw at 90% 10%, rgba(var(--color-primary-rgb), 0.5), transparent),
   radial-gradient(circle 60vh at 5% 100%, rgba(var(--color-primary-rgb), 0.3), transparent);
