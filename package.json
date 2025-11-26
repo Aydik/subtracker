@@ -18,7 +18,8 @@
     "react-dom": "^19.1.0",
     "react-fast-marquee": "^1.6.5",
     "react-router-dom": "^7.6.3",
-    "sass": "^1.89.2"
+    "sass": "^1.89.2",
+    "undesign": "^0.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",

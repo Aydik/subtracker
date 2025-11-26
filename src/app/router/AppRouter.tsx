@@ -11,6 +11,12 @@ const LoginForm = lazy(() =>
 const RegisterForm = lazy(() =>
   import('@features/auth').then((module) => ({ default: module.RegisterForm })),
 );
+const HomePage = lazy(() =>
+  import('@pages/HomePage').then((module) => ({ default: module.HomePage })),
+);
+const MainLayout = lazy(() =>
+  import('@app/layouts/MainLayout').then((module) => ({ default: module.MainLayout })),
+);
 
 const routeConfig: RouteObject[] = [
   {
@@ -42,6 +48,24 @@ const routeConfig: RouteObject[] = [
         element: (
           <Suspense fallback={<PageLoader />}>
             <RegisterForm />
+          </Suspense>
+        ),
+      },
+    ],
+  },
+  {
+    path: '/subscriptions',
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <MainLayout />
+      </Suspense>
+    ),
+    children: [
+      {
+        index: true,
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <HomePage />
           </Suspense>
         ),
       },

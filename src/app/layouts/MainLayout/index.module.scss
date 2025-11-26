@@ -1,0 +1,31 @@
+@import '@app/styles';
+
+.mainLayout {
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  background-color: black;
+  color: white;
+  position: relative;
+
+  &Content {
+    padding: 16px 16px 80px;
+  }
+
+  &Nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    padding: 27px 0;
+    border-top: var(--border-default)
+  }
+}
+
+.navButton {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
