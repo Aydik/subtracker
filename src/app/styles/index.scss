@@ -21,3 +21,9 @@ body {
   backdrop-filter: var(--glass-backdrop-filter);
   box-shadow: var(--glass-box-shadow);
 }
+
+@mixin content {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 800px;
+}

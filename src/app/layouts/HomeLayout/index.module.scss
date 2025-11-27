@@ -8,12 +8,6 @@
   align-items: center;
 }
 
-@mixin content {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 800px;
-}
-
 .content {
   @include content;
   padding: 2rem 1rem 6rem;

@@ -3,7 +3,7 @@ import styles from './index.module.scss';
 import { mockSubscriptions } from '@widgets/Subscriptions/constants';
 import { Subscriptions } from '@widgets/Subscriptions';
 
-export const HomePage: FC = () => {
+const HomePage: FC = () => {
   const totalAmount = mockSubscriptions.reduce((sum, sub) => sum + sub.price, 0);
 
   return (

@@ -13,6 +13,8 @@ const RegisterForm = lazy(() =>
 );
 const HomeLayout = lazy(() => import('@app/layouts/HomeLayout'));
 const HomePage = lazy(() => import('@pages/HomePage'));
+const MainLayout = lazy(() => import('@app/layouts/MainLayout'));
+const SubscriptionPage = lazy(() => import('@pages/SubscriptionPage'));
 
 const routeConfig: RouteObject[] = [
   {
@@ -68,16 +70,45 @@ const routeConfig: RouteObject[] = [
     ],
   },
   {
-    path: 'calendar',
-    element: <Suspense fallback={<PageLoader />}>{/*<CalendarPage />*/}</Suspense>,
-  },
-  {
-    path: 'notifications',
-    element: <Suspense fallback={<PageLoader />}>{/*<NotificationsPage />*/}</Suspense>,
-  },
-  {
-    path: 'profile',
-    element: <Suspense fallback={<PageLoader />}>{/*<ProfilePage />*/}</Suspense>,
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <MainLayout />
+      </Suspense>
+    ),
+    children: [
+      {
+        path: '/subscription/:id',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <SubscriptionPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/calendar',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <SubscriptionPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/notifications',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <SubscriptionPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/profile',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <SubscriptionPage />
+          </Suspense>
+        ),
+      },
+    ],
   },
 ];
 

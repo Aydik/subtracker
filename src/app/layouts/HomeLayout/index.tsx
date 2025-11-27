@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import styles from './index.module.scss';
 import { Navigation } from '@widgets/navigation';
 
-export const HomeLayout: FC = () => {
+const HomeLayout: FC = () => {
   return (
     <div className={styles.homeLayout}>
       <div className={styles.navDesktopContainer}>
