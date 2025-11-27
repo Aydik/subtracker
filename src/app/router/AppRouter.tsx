@@ -71,6 +71,18 @@ const routeConfig: RouteObject[] = [
       },
     ],
   },
+  {
+    path: 'calendar',
+    element: <Suspense fallback={<PageLoader />}>{/*<CalendarPage />*/}</Suspense>,
+  },
+  {
+    path: 'notifications',
+    element: <Suspense fallback={<PageLoader />}>{/*<NotificationsPage />*/}</Suspense>,
+  },
+  {
+    path: 'profile',
+    element: <Suspense fallback={<PageLoader />}>{/*<ProfilePage />*/}</Suspense>,
+  },
 ];
 
 export const AppRouter: FC = () => useRoutes(routeConfig);
