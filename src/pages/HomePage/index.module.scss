@@ -1,63 +1,13 @@
-@import '@app/styles' ;
-
-.subscriptionsPage {
-  &Greeting {
-    font-weight: 500;
-    margin-bottom: -5px;
-  }
-
-  &Total {
-    font-size: 1.25rem;
-    margin-bottom: 36px;
-  }
-
-  &Content {
-    @include glass-effect;
-    border-radius: 10px;
-    padding: 16px;
-  }
-
-
-  &Title {
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin-bottom: 16px;
-  }
-
-  &Categories {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-
-  &List {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
-  }
+.caption{
+  margin: 0 0.5rem 1rem;
 }
 
-.categoryButton {
-  padding: 4px 12px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 1rem;
-
-  &Active {
-    background: var(--color-primary);
-    color: black;
-    font-weight: 500;
-  }
-
-  &:hover:not(&Active) {
-    background: var(--color-light-gray);
-  }
+.greeting{
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1em;
 }
 
-.subscriptionItem {
-  &:not(:last-child) {
-    border-bottom: var(--border-glass);
-  }
+.total{
+  font-size: 1.25rem;
 }

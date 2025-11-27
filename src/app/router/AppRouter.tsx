@@ -12,7 +12,7 @@ const RegisterForm = lazy(() =>
   import('@features/auth').then((module) => ({ default: module.RegisterForm })),
 );
 const HomeLayout = lazy(() => import('@app/layouts/HomeLayout'));
-// const HomePage = lazy(() => import('@pages/HomePage'));
+const HomePage = lazy(() => import('@pages/HomePage'));
 
 const routeConfig: RouteObject[] = [
   {
@@ -60,12 +60,9 @@ const routeConfig: RouteObject[] = [
       {
         index: true,
         element: (
-          // <Suspense fallback={<PageLoader />}>
-          //   <HomePage />
-          // </Suspense>
-          <div style={{ minWidth: '100%', minHeight: 1800, backgroundColor: 'red', opacity: 0.3 }}>
-            .
-          </div>
+          <Suspense fallback={<PageLoader />}>
+            <HomePage />
+          </Suspense>
         ),
       },
     ],
