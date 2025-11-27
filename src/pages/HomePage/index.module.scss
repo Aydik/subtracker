@@ -58,6 +58,6 @@
 
 .subscriptionItem {
   &:not(:last-child) {
-    border-bottom: var(--border-default);
+    border-bottom: var(--border-glass);
   }
 }

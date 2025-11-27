@@ -1,0 +1,22 @@
+.navigationDesktop {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.navButton {
+  all: unset;
+  padding: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.8;
+
+  &__label{
+    font-size: 18px;
+    line-height: 20px;
+  }
+}
