@@ -6,8 +6,10 @@ import { Navigation } from '@widgets/navigation';
 export const HomeLayout: FC = () => {
   return (
     <div className={styles.homeLayout}>
-      <div className={styles.navDesktopWrapper}>
-        <Navigation breakpoint="desktop" />
+      <div className={styles.navDesktopContainer}>
+        <div className={styles.navDesktopWrapper}>
+          <Navigation breakpoint="desktop" />
+        </div>
       </div>
       <main className={styles.content}>
         <Outlet />
