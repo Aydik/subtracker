@@ -13,9 +13,14 @@
   align-items: center;
   gap: 0.5rem;
   opacity: 0.8;
+  transition: 0.2s;
 
   &__label{
     font-size: 18px;
     line-height: 20px;
+  }
+
+  &:hover{
+    opacity: 1;
   }
 }
