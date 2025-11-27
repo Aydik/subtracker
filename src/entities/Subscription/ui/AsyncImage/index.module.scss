@@ -1,0 +1,24 @@
+@mixin image{
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fallback{
+  @include image;
+  border-radius: 50%;
+  background-color: var(--color-gray);
+  color: var(--color-light-gray);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.loader{
+  @include image;
+}
+
+.image{
+  @include image;
+}

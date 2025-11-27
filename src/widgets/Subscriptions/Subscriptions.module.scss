@@ -1,0 +1,36 @@
+@import '@app/styles';
+
+.subscriptions {
+  @include glass-effect;
+  border-radius: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  &__list {
+    margin-top: 1rem;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__divider{
+    height: 1px;
+    width: 100%;
+    margin: 0.5rem 0;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.addButton{
+  margin: 1rem 0 0.5rem;
+  align-self: center;
+  width: 100%;
+  max-width: 250px;
+}

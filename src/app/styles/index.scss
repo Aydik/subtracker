@@ -16,7 +16,7 @@ body {
 }
 
 @mixin glass-effect{
-  border: var(--border-default);
+  border: var(--border-glass);
   background: var(--glass-bg);
   backdrop-filter: var(--glass-backdrop-filter);
   box-shadow: var(--glass-box-shadow);
