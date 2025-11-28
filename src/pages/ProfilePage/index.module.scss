@@ -9,39 +9,6 @@
   padding: 1.25rem;
 }
 
-.userInfo {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 30px;
-}
-
-.userAvatar {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: var(--color-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: black;
-}
-
-.userDetails {
-  flex: 1;
-}
-
-.userName {
-  font-size: 1.75rem;
-  font-weight: 600;
-}
-
-.userEmail {
-  font-size: 1.25rem;
-}
-
 .settingItem {
   display: flex;
   justify-content: space-between;

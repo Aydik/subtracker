@@ -1,7 +1,8 @@
-import React from 'react';
+import type { FC } from 'react';
 import styles from './index.module.scss';
+import { UserCard } from '@entities/User';
 
-export const ProfilePage: React.FC = () => {
+export const ProfilePage: FC = () => {
   const handleLogout = () => {
     console.log('Выход из аккаунта');
   };
@@ -16,13 +17,7 @@ export const ProfilePage: React.FC = () => {
 
   return (
     <div className={styles.profilePage}>
-      <div className={styles.userInfo}>
-        <div className={styles.userAvatar}></div>
-        <div className={styles.userDetails}>
-          <h2 className={styles.userName}>Пользователь</h2>
-          <p className={styles.userEmail}>user@gmail.com</p>
-        </div>
-      </div>
+      <UserCard />
 
       <div className={styles.settingsSection}>
         <div className={styles.settingItem}>
