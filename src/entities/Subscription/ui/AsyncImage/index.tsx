@@ -25,6 +25,11 @@ export const AsyncImage: FC<Props> = ({ src, alt = '', className = '' }) => {
   const fallback = (
     <div className={clsx(styles.fallback, className)}>{alt.charAt(0).toUpperCase()}</div>
   );
+  const loader = (
+    <div className={clsx(styles.loader, className)}>
+      <Spin />
+    </div>
+  );
 
   if (!src || hasError) {
     return fallback;
@@ -32,11 +37,7 @@ export const AsyncImage: FC<Props> = ({ src, alt = '', className = '' }) => {
 
   return (
     <div>
-      {isLoading && (
-        <div className={clsx(styles.loader, className)}>
-          <Spin />
-        </div>
-      )}
+      {isLoading && loader}
       <img
         src={src}
         alt={alt}
