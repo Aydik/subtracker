@@ -1,12 +1,9 @@
 import type { FC } from 'react';
 import styles from './index.module.scss';
 import { UserCard } from '@entities/User';
+import { LogoutButton } from '@features/auth';
 
-export const ProfilePage: FC = () => {
-  const handleLogout = () => {
-    console.log('Выход из аккаунта');
-  };
-
+const ProfilePage: FC = () => {
   const handleConfigure = () => {
     console.log('Настроить способы входа');
   };
@@ -34,10 +31,7 @@ export const ProfilePage: FC = () => {
           </button>
         </div>
       </div>
-
-      <button className={styles.logoutButton} onClick={handleLogout}>
-        Выйти из аккаунта
-      </button>
+      <LogoutButton className={styles.logoutButton} />
     </div>
   );
 };
