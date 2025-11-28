@@ -15,6 +15,7 @@ const HomeLayout = lazy(() => import('@app/layouts/HomeLayout'));
 const HomePage = lazy(() => import('@pages/HomePage'));
 const MainLayout = lazy(() => import('@app/layouts/MainLayout'));
 const SubscriptionPage = lazy(() => import('@pages/SubscriptionPage'));
+const ProfilePage = lazy(() => import('@pages/ProfilePage'));
 
 const routeConfig: RouteObject[] = [
   {
@@ -104,7 +105,7 @@ const routeConfig: RouteObject[] = [
         path: '/profile',
         element: (
           <Suspense fallback={<PageLoader />}>
-            <SubscriptionPage />
+            <ProfilePage />
           </Suspense>
         ),
       },
