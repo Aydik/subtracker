@@ -2,7 +2,7 @@ import type {
   NotificationChannelType,
   PaymentNotification,
   Reminder,
-} from '@entities/Notification/types';
+} from '@entities/Notification';
 
 export const mockPayments: PaymentNotification[] = [
   {
@@ -10,7 +10,7 @@ export const mockPayments: PaymentNotification[] = [
     title: 'Завтра - Spotify 799 ₽',
     date: 'Завтра',
     amount: 799,
-    service: 'Spotify',
+    service: { name: 'Spotify', imageUrl: 'public/assets/images/services/spotify.png' },
     description: 'Не забудьте о платеже',
     status: 'upcoming',
   },
@@ -19,7 +19,7 @@ export const mockPayments: PaymentNotification[] = [
     title: 'Через 3 дня - Кинопоиск 799 ₽',
     date: 'Через 3 дня',
     amount: 799,
-    service: 'Кинопоиск',
+    service: { name: 'Кинопоиск', imageUrl: 'public/assets/images/services/kinopoisk.png' },
     description: 'Спишется с карты',
     status: 'pending',
   },
@@ -28,7 +28,7 @@ export const mockPayments: PaymentNotification[] = [
     title: 'Сегодня - Netflix 799 ₽',
     date: 'Сегодня',
     amount: 799,
-    service: 'Netflix',
+    service: { name: 'Netflix', imageUrl: 'public/assets/images/services/netflix.png' },
     description: 'Уже списано',
     status: 'completed',
   },

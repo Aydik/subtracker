@@ -5,4 +5,3 @@ export {
   SUBSCRIPTION_CATEGORY_OPTIONS_LOCALIZATION,
 } from './types';
 export { SubscriptionCard } from './ui/SubscriptionCard';
-export { AsyncImage } from './ui/AsyncImage';

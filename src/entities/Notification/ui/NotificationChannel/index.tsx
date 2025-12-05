@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { CHANNEL_LOCALIZATION, type NotificationChannelType } from '@entities/Notification/types';
+import { CHANNEL_LOCALIZATION, type NotificationChannelType } from '@entities/Notification';
 import styles from './index.module.scss';
 import { ToggleSwitch } from '@shared/ui/ToggleSwitch';
 

@@ -1,10 +1,10 @@
 import type { FC } from 'react';
 import { useState } from 'react';
 import styles from './index.module.scss';
-import { PaymentCard } from '@entities/Notification/ui/PaymentCard';
-import { ReminderItem } from '@entities/Notification/ui/ReminderItem';
-import { NotificationChannel } from '@entities/Notification/ui/NotificationChannel';
-import { mockChannels, mockPayments, mockReminders } from '@widgets/Notification/constants';
+import { ReminderItem } from '@entities/Notification';
+import { NotificationChannel } from '@entities/Notification';
+import { mockChannels, mockReminders } from '@widgets/Payments/constants';
+import { Payments } from '@widgets/Payments';
 
 export const NotificationsPage: FC = () => {
   const [channels, setChannels] = useState(mockChannels);
@@ -28,19 +28,7 @@ export const NotificationsPage: FC = () => {
 
   return (
     <div className={styles.notificationsPage}>
-      <div className={styles.paymentsSection}>
-        <h2 className={styles.sectionTitle}>Ближайшие платежи</h2>
-        <div className={styles.paymentsContainer}>
-          {mockPayments.map((payment, index) => (
-            <PaymentCard
-              key={payment.id}
-              payment={payment}
-              index={index}
-              isLast={index === mockPayments.length - 1}
-            />
-          ))}
-        </div>
-      </div>
+      <Payments />
 
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>Напоминания</h2>

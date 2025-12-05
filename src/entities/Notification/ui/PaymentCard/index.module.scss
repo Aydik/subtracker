@@ -1,14 +1,9 @@
 @import '@app/styles';
 
-.paymentCard {
+.payment__card {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-
-  &:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-  }
 }
 
 .paymentHeader {

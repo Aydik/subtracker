@@ -1,3 +1,5 @@
+import type { Service } from '@entities/Service';
+
 export const SUBSCRIPTION_CATEGORIES = ['music', 'streaming', 'other'] as const;
 export const SUBSCRIPTION_CATEGORY_OPTIONS = ['all', ...SUBSCRIPTION_CATEGORIES] as const;
 
@@ -16,10 +18,8 @@ export const SUBSCRIPTION_CATEGORY_OPTIONS_LOCALIZATION: Record<
 
 export interface Subscription {
   id: string;
-  name: string;
+  service: Service;
   price: number;
-  nextCharge: number;
   chargeDate: string;
   category: SubscriptionCategory;
-  logoUrl?: string;
 }
