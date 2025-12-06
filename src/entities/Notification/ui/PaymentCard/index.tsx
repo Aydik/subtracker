@@ -8,8 +8,6 @@ interface PaymentCardProps {
 }
 
 export const PaymentCard: FC<PaymentCardProps> = ({ payment }) => {
-  const statusText = PAYMENT_STATUS_LOCALIZATION[payment.status];
-
   return (
     <div className={styles.payment__card}>
       <AsyncImage
@@ -25,7 +23,9 @@ export const PaymentCard: FC<PaymentCardProps> = ({ payment }) => {
           <p className={styles.paymentDescription}>{payment.description}</p>
         </div>
       </div>
-      <div className={`${styles.statusBadge} ${styles[payment.status]}`}>{statusText}</div>
+      <div className={`${styles.statusBadge} ${styles[payment.status]}`}>
+        {PAYMENT_STATUS_LOCALIZATION[payment.status]}
+      </div>
     </div>
   );
 };

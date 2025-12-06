@@ -1,14 +1,12 @@
 @import '@app/styles';
 
-
 .reminderItem {
   @include glass-effect;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
-  border-radius: 10px;
-  margin-bottom: 12px;
+  padding: 1rem;
+  border-radius: 1rem;
   transition: all 0.2s ease;
 
   &:hover {
