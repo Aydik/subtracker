@@ -1,18 +1,18 @@
 import { type FC, useState } from 'react';
 import styles from './index.module.scss';
-import {
-  SUBSCRIPTION_CATEGORY_OPTIONS,
-  SUBSCRIPTION_CATEGORY_OPTIONS_LOCALIZATION,
-  type SubscriptionCategoryOption,
-} from '@entities/Subscription';
 import clsx from 'clsx';
+import {
+  SERVICE_CATEGORY_OPTIONS,
+  SERVICE_CATEGORY_OPTIONS_LOCALIZATION,
+  type ServiceCategoryOption,
+} from '@entities/Service';
 
 export const SubscriptionCategories: FC = () => {
-  const [activeCategory, setActiveCategory] = useState<SubscriptionCategoryOption>('all');
+  const [activeCategory, setActiveCategory] = useState<ServiceCategoryOption>('ALL');
 
   return (
     <div className={styles.subscriptionCategories}>
-      {SUBSCRIPTION_CATEGORY_OPTIONS.map((category) => (
+      {SERVICE_CATEGORY_OPTIONS.map((category) => (
         <button
           key={category}
           className={clsx(
@@ -21,7 +21,7 @@ export const SubscriptionCategories: FC = () => {
           )}
           onClick={() => setActiveCategory(category)}
         >
-          {SUBSCRIPTION_CATEGORY_OPTIONS_LOCALIZATION[category]}
+          {SERVICE_CATEGORY_OPTIONS_LOCALIZATION[category]}
         </button>
       ))}
     </div>
