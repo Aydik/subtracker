@@ -1,0 +1,36 @@
+@import "@app/styles";
+
+.initContainer {
+  @include glass-effect;
+  width: 100%;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.form {
+  @include glass-effect;
+  box-sizing: border-box;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.actions {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+
+  button {
+    width: 100%;
+    max-width: 200px;
+  }
+}

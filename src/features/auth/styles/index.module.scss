@@ -17,26 +17,6 @@
   font-weight: bold;
 }
 
-:global {
-  .ant-form-item {
-    display: block !important;
-  }
-
-  .ant-form-item-row {
-    display: block !important;
-  }
-
-  .ant-form-item-label {
-    display: block !important;
-    text-align: left !important;
-  }
-
-  .ant-form-item-control {
-    display: block !important;
-    width: 100% !important;
-  }
-}
-
 .fields {
   display: flex;
   flex-direction: column;

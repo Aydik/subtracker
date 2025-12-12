@@ -27,3 +27,23 @@ body {
   width: 100%;
   max-width: 800px;
 }
+
+:global {
+  .ant-form-item {
+    display: block !important;
+  }
+
+  .ant-form-item-row {
+    display: block !important;
+  }
+
+  .ant-form-item-label {
+    display: block !important;
+    text-align: left !important;
+  }
+
+  .ant-form-item-control {
+    display: block !important;
+    width: 100% !important;
+  }
+}

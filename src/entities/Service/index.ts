@@ -4,3 +4,4 @@ export {
   SERVICE_CATEGORY_OPTIONS_LOCALIZATION,
   SERVICE_CATEGORIES,
 } from './types';
+export { getServices } from './services/service.service';

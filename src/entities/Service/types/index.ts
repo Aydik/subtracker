@@ -12,6 +12,7 @@ export const SERVICE_CATEGORY_OPTIONS_LOCALIZATION: Record<ServiceCategoryOption
 };
 
 export interface Service {
+  id: string;
   name: string;
   imageUrl: string;
   category: ServiceCategory;

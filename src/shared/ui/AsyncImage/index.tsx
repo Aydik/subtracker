@@ -2,6 +2,7 @@ import { type FC, useState } from 'react';
 import styles from './index.module.scss';
 import { Spin } from 'antd';
 import clsx from 'clsx';
+import { LoadingOutlined } from '@ant-design/icons';
 
 interface Props {
   src: string;
@@ -27,7 +28,7 @@ export const AsyncImage: FC<Props> = ({ src, alt, className = '' }) => {
   );
   const loader = (
     <div className={clsx(styles.loader, className)}>
-      <Spin />
+      <Spin indicator={<LoadingOutlined spin />} />
     </div>
   );
 
