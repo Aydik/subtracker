@@ -49,8 +49,17 @@ body {
 
   .ant-select-dropdown .ant-select-item,
   .ant-select-selection-item,
+  .ant-picker-dropdown .ant-picker-header,
+  .ant-picker-dropdown .ant-picker-date-panel .ant-picker-content th,
+  .ant-picker-cell,
   .ant-picker,
-  .ant-picker-cell {
+  .ant-picker-now-btn {
     color: black !important;
+  }
+
+  .ant-btn-color-dangerous.ant-btn-variant-outlined {
+    background: var(--color-light-gray);
+    color: black;
+    border: none !important;
   }
 }
