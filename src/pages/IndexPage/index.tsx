@@ -1,45 +1,64 @@
-import type { FC } from 'react';
+import { type FC, useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import Marquee from 'react-fast-marquee';
 import { Button, Layout } from 'antd';
 import { Icon } from '@shared/ui/Icon';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
-
-const services = [
-  ['spotify', 'apple-music', 'netflix', 'instagram', 'vk'],
-  ['yandex-music', 'kinopoisk', 'ivi', 'twitter', 'youtube'],
-  ['duolingo', 'telegram', 'roblox', 'wechat', 'mts'],
-];
+import type { Service } from '@entities/Service';
+import { AsyncImage } from '@shared/ui/AsyncImage';
+import { getServices } from '@entities/Service/services/service.service.ts';
 
 const IndexPage: FC = () => {
   const navigate = useNavigate();
+  const [services, setServices] = useState<Service[][] | null>(null);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      const data = await getServices();
+
+      const groupSize = Math.ceil(data.length / 3);
+      const groupedServices: Service[][] = [];
+
+      for (let i = 0; i < 3; i++) {
+        const start = i * groupSize;
+        const end = start + groupSize;
+        groupedServices.push(data.slice(start, end));
+      }
+
+      setServices(groupedServices);
+    };
+    fetchServices();
+  }, []);
+
   return (
     <Layout.Content className={styles.indexPage}>
       <div className={styles.content}>
-        <div className={styles.marque_container}>
-          {services.map((line, index) => (
-            <Marquee
-              className={styles.line}
-              key={index}
-              speed={20 + (2 - index) * 10 - (index % 2) * 10}
-              direction={index % 2 === 0 ? 'left' : 'right'}
-            >
-              <div className={styles.marque}>
-                {Array(5).fill(
-                  line.map((service) => (
-                    <img
-                      className={styles.logo}
-                      key={service}
-                      src={`public/assets/images/services/${service}.png`}
-                      alt={service}
-                    />
-                  )),
-                )}
-              </div>
-            </Marquee>
-          ))}
-        </div>
+        {services !== null && (
+          <div className={styles.marque_container}>
+            {services.map((line, index) => (
+              <Marquee
+                className={styles.line}
+                key={index}
+                speed={20 + (2 - index) * 10 - (index % 2) * 10}
+                direction={index % 2 === 0 ? 'left' : 'right'}
+              >
+                <div className={styles.marque}>
+                  {Array(5).fill(
+                    line.map((service) => (
+                      <AsyncImage
+                        src={service.imageUrl}
+                        key={service.name}
+                        alt={service.name}
+                        className={styles.logo}
+                      />
+                    )),
+                  )}
+                </div>
+              </Marquee>
+            ))}
+          </div>
+        )}
         <div className={styles.title}>
           <h1>SubTracker</h1>
           <h2>

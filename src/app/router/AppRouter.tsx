@@ -16,6 +16,7 @@ const HomePage = lazy(() => import('@pages/HomePage'));
 const MainLayout = lazy(() => import('@app/layouts/MainLayout'));
 const SubscriptionPage = lazy(() => import('@pages/SubscriptionPage'));
 const ProfilePage = lazy(() => import('@pages/ProfilePage'));
+const NotificationsPage = lazy(() => import('@pages/NotificationsPage'));
 
 const routeConfig: RouteObject[] = [
   {
@@ -97,7 +98,7 @@ const routeConfig: RouteObject[] = [
         path: '/notifications',
         element: (
           <Suspense fallback={<PageLoader />}>
-            <SubscriptionPage />
+            <NotificationsPage />
           </Suspense>
         ),
       },

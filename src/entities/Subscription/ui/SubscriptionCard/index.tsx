@@ -1,7 +1,7 @@
 import { type FC } from 'react';
 import styles from './index.module.scss';
 import type { Subscription } from '@entities/Subscription';
-import { AsyncImage } from '@entities/Subscription';
+import { AsyncImage } from '@shared/ui/AsyncImage';
 
 interface SubscriptionCardProps {
   subscription: Subscription;
@@ -10,14 +10,10 @@ interface SubscriptionCardProps {
 export const SubscriptionCard: FC<SubscriptionCardProps> = ({ subscription }) => {
   return (
     <div className={styles.subscriptionCard}>
-      <AsyncImage
-        src={`public/assets/images/services/${subscription.logoUrl}.png`}
-        alt={subscription.name}
-        className={styles.subscriptionCard__logo}
-      />
+      <AsyncImage src={subscription.service.imageUrl} alt={subscription.service.name} />
 
       <div className={styles.subscriptionCard__info}>
-        <p className={styles.subscriptionCard__name}>{subscription.name}</p>
+        <p className={styles.subscriptionCard__name}>{subscription.service.name}</p>
         <p className={styles.subscriptionCard__charge}>
           Следующее списание: <br />
           {subscription.chargeDate}

@@ -3,29 +3,32 @@ import type { Subscription } from '@entities/Subscription';
 export const mockSubscriptions: Subscription[] = [
   {
     id: '1',
-    name: 'Netflix',
+    service: {
+      name: 'Netflix',
+      imageUrl: 'public/assets/images/services/netflix.png',
+      category: 'STREAMING',
+    },
     price: 799,
-    nextCharge: 799,
     chargeDate: '19 октября',
-    category: 'streaming',
-    logoUrl: 'netflix',
   },
   {
     id: '2',
-    name: 'Spotify',
+    service: {
+      name: 'Spotify',
+      imageUrl: 'public/assets/images/services/spotify.png',
+      category: 'MUSIC',
+    },
     price: 799,
-    nextCharge: 799,
     chargeDate: '19 октября',
-    category: 'music',
-    logoUrl: 'spotify',
   },
   {
     id: '3',
-    name: 'Кинопоиск',
+    service: {
+      name: 'Кинопоиск',
+      imageUrl: 'public/assets/images/services/kinopoisk.png',
+      category: 'STREAMING',
+    },
     price: 799,
-    nextCharge: 799,
     chargeDate: '19 октября',
-    category: 'streaming',
-    logoUrl: 'kinopoisk',
   },
 ];

@@ -4,12 +4,12 @@ import { Spin } from 'antd';
 import clsx from 'clsx';
 
 interface Props {
-  src?: string;
-  alt?: string;
+  src: string;
+  alt: string;
   className?: string;
 }
 
-export const AsyncImage: FC<Props> = ({ src, alt = '', className = '' }) => {
+export const AsyncImage: FC<Props> = ({ src, alt, className = '' }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
