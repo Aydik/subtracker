@@ -46,4 +46,11 @@ body {
     display: block !important;
     width: 100% !important;
   }
+
+  .ant-select-dropdown .ant-select-item,
+  .ant-select-selection-item,
+  .ant-picker,
+  .ant-picker-cell {
+    color: black !important;
+  }
 }
