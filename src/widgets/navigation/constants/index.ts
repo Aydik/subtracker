@@ -11,6 +11,6 @@ export const PAGES_LOCALIZATION = {
   '/calendar': 'Календарь платежей',
   '/notifications': 'Уведомления',
   '/profile': 'Профиль',
-  '/subscription/create': 'Добавить подписку',
+  '/subscription/add': 'Добавить подписку',
   '/subscription/:id': 'Редактировать подписку',
 };

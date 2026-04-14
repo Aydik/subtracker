@@ -11,6 +11,7 @@ export const mockPayments: PaymentNotification[] = [
     date: 'Завтра',
     amount: 799,
     service: {
+      id: '1',
       name: 'Spotify',
       imageUrl: 'public/assets/images/services/spotify.png',
       category: 'STREAMING',
@@ -24,6 +25,7 @@ export const mockPayments: PaymentNotification[] = [
     date: 'Через 3 дня',
     amount: 799,
     service: {
+      id: '2',
       name: 'Кинопоиск',
       imageUrl: 'public/assets/images/services/kinopoisk.png',
       category: 'MUSIC',
@@ -37,6 +39,7 @@ export const mockPayments: PaymentNotification[] = [
     date: 'Сегодня',
     amount: 799,
     service: {
+      id: '3',
       name: 'Netflix',
       imageUrl: 'public/assets/images/services/netflix.png',
       category: 'STREAMING',

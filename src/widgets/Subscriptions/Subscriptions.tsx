@@ -26,7 +26,7 @@ export const Subscriptions: FC = () => {
         type="primary"
         size="large"
         icon={<PlusOutlined />}
-        onClick={() => navigate('/subscription/create')}
+        onClick={() => navigate('/subscription/add')}
       >
         Добавить подписку
       </Button>
