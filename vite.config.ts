@@ -20,4 +20,15 @@ export default defineConfig({
   build: {
     target: 'es2020',
   },
+  server: {
+    port: 5173,
+    proxy: {
+      '/api': {
+        changeOrigin: true,
+        secure: false,
+        target: 'http://localhost:8080',
+      },
+    },
+    strictPort: true,
+  },
 });
