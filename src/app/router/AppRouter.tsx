@@ -2,6 +2,7 @@ import { type FC, lazy, Suspense } from 'react';
 import { useRoutes } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 import { PageLoader } from '@shared/ui/PageLoader';
+import UserLayout from '@app/layouts/UserLayout';
 
 const IndexPage = lazy(() => import('@pages/IndexPage'));
 const AuthLayout = lazy(() => import('@app/layouts/AuthLayout'));
@@ -54,61 +55,70 @@ const routeConfig: RouteObject[] = [
     ],
   },
   {
-    path: '/home',
     element: (
       <Suspense fallback={<PageLoader />}>
-        <HomeLayout />
+        <UserLayout />
       </Suspense>
     ),
     children: [
       {
-        index: true,
+        path: '/home',
         element: (
           <Suspense fallback={<PageLoader />}>
-            <HomePage />
+            <HomeLayout />
           </Suspense>
         ),
-      },
-    ],
-  },
-  {
-    element: (
-      <Suspense fallback={<PageLoader />}>
-        <MainLayout />
-      </Suspense>
-    ),
-    children: [
-      {
-        path: '/subscription/:id',
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <SubscriptionPage />
-          </Suspense>
-        ),
+        children: [
+          {
+            index: true,
+            element: (
+              <Suspense fallback={<PageLoader />}>
+                <HomePage />
+              </Suspense>
+            ),
+          },
+        ],
       },
       {
-        path: '/calendar',
         element: (
           <Suspense fallback={<PageLoader />}>
-            <SubscriptionPage />
+            <MainLayout />
           </Suspense>
         ),
-      },
-      {
-        path: '/notifications',
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <NotificationsPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: '/profile',
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <ProfilePage />
-          </Suspense>
-        ),
+        children: [
+          {
+            path: '/subscription/:id',
+            element: (
+              <Suspense fallback={<PageLoader />}>
+                <SubscriptionPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: '/calendar',
+            element: (
+              <Suspense fallback={<PageLoader />}>
+                <SubscriptionPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: '/notifications',
+            element: (
+              <Suspense fallback={<PageLoader />}>
+                <NotificationsPage />
+              </Suspense>
+            ),
+          },
+          {
+            path: '/profile',
+            element: (
+              <Suspense fallback={<PageLoader />}>
+                <ProfilePage />
+              </Suspense>
+            ),
+          },
+        ],
       },
     ],
   },

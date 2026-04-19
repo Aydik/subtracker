@@ -5,10 +5,10 @@ import styles from '../styles/index.module.scss';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginUserSchema } from '@features/auth/validationSchema.ts';
-import { useLogin } from '@/api/endpoints/security/security.ts';
-import type { UserLoginRequest } from '@/api/models';
+import type { UserLoginRequest } from '@src/api/models';
 import type { AxiosError } from 'axios';
 import type { ApiErrorResponse } from '@shared/types/apiTypes.ts';
+import { useLoginMutation } from '@src/store/api/services/userService.ts';
 
 export interface LoginFormValues {
   email: string;
@@ -25,7 +25,7 @@ export const LoginForm: FC = () => {
     mode: 'onChange',
   });
 
-  const { mutate: login, isPending } = useLogin();
+  const [login, { isLoading }] = useLoginMutation();
 
   const onSubmit = async (values: LoginFormValues) => {
     const requestData: UserLoginRequest = {
@@ -33,29 +33,25 @@ export const LoginForm: FC = () => {
       password: values.password,
     };
 
-    login(
-      { data: requestData },
-      {
-        onSuccess: () => {
-          message.destroy();
-          message.success('Вы успешно вошли в аккаунт!');
-          navigate('/home');
-        },
-        onError: (err: unknown) => {
-          const axiosError = err as AxiosError<ApiErrorResponse>;
-          const error = axiosError?.response?.data?.error;
+    try {
+      await login(requestData);
 
-          if (error === 'Forbidden') {
-            setError('password', {
-              message: 'Неверный email или пароль',
-            });
-          } else {
-            message.destroy();
-            message.error('Ошибка авторизации');
-          }
-        },
-      },
-    );
+      message.destroy();
+      message.success('Вы успешно вошли в аккаунт!');
+      navigate('/home');
+    } catch (err: unknown) {
+      const axiosError = err as AxiosError<ApiErrorResponse>;
+      const error = axiosError?.response?.data?.error;
+
+      if (error === 'Forbidden') {
+        setError('password', {
+          message: 'Неверный email или пароль',
+        });
+      } else {
+        message.destroy();
+        message.error('Ошибка авторизации');
+      }
+    }
   };
 
   return (
@@ -92,7 +88,7 @@ export const LoginForm: FC = () => {
       </div>
 
       <div className={styles.actions}>
-        <Button type="primary" htmlType="submit" loading={isPending}>
+        <Button type="primary" htmlType="submit" loading={isLoading}>
           Войти
         </Button>
         <Link to="/auth/register" className={styles.link}>

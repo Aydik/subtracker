@@ -3,12 +3,12 @@ import type { AxiosError } from 'axios';
 import { App, Button, Form, Input } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from '../styles/index.module.scss';
-import { useRegister } from '@/api/endpoints/security/security.ts';
-import type { UserRegistrationRequest } from '@/api/models';
+import type { UserRegistrationRequest } from '@src/api/models';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerUserSchema } from '@features/auth/validationSchema.ts';
 import type { ApiErrorResponse } from '@shared/types/apiTypes.ts';
+import { useRegisterMutation } from '@src/store/api/services/userService.ts';
 
 export interface RegisterFormValues {
   username: string;
@@ -27,7 +27,7 @@ export const RegisterForm: FC = () => {
     mode: 'onChange',
   });
 
-  const { mutate: register, isPending } = useRegister();
+  const [register, { isLoading }] = useRegisterMutation();
 
   const onSubmit = async (values: RegisterFormValues) => {
     const requestData: UserRegistrationRequest = {
@@ -36,33 +36,29 @@ export const RegisterForm: FC = () => {
       password: values.password,
     };
 
-    register(
-      { data: requestData },
-      {
-        onSuccess: () => {
-          message.destroy();
-          message.success('Аккаунт успешно создан!');
-          navigate('/home');
-        },
-        onError: (err: unknown) => {
-          const axiosError = err as AxiosError<ApiErrorResponse>;
-          const error = axiosError?.response?.data?.error;
+    try {
+      await register(requestData);
 
-          if (error === 'UsernameNotUniqueException') {
-            setError('username', {
-              message: 'Имя пользователя занято',
-            });
-          } else if (error === 'EmailNotUniqueException') {
-            setError('email', {
-              message: 'Email используется другим пользователем',
-            });
-          } else {
-            message.destroy();
-            message.error('Ошибка при регистрации');
-          }
-        },
-      },
-    );
+      message.destroy();
+      message.success('Аккаунт успешно создан!');
+      navigate('/home');
+    } catch (err: unknown) {
+      const axiosError = err as AxiosError<ApiErrorResponse>;
+      const error = axiosError?.response?.data?.error;
+
+      if (error === 'UsernameNotUniqueException') {
+        setError('username', {
+          message: 'Имя пользователя занято',
+        });
+      } else if (error === 'EmailNotUniqueException') {
+        setError('email', {
+          message: 'Email используется другим пользователем',
+        });
+      } else {
+        message.destroy();
+        message.error('Ошибка при регистрации');
+      }
+    }
   };
 
   return (
@@ -135,7 +131,7 @@ export const RegisterForm: FC = () => {
       </div>
 
       <div className={styles.actions}>
-        <Button type="primary" htmlType="submit" loading={isPending}>
+        <Button type="primary" htmlType="submit" loading={isLoading}>
           Создать аккаунт
         </Button>
         <Link to="/auth/login" className={styles.link}>

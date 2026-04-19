@@ -5,14 +5,6 @@
  * User Service API
  * OpenAPI spec version: 1.0
  */
-import { useMutation } from '@tanstack/react-query';
-import type {
-  MutationFunction,
-  QueryClient,
-  UseMutationOptions,
-  UseMutationResult,
-} from '@tanstack/react-query';
-
 import type {
   AuthResponse,
   RefreshTokenRequest,
@@ -22,285 +14,59 @@ import type {
 
 import { customAxios } from '../../axiosInstance';
 
-/**
- * Пользователь регистрируется с данными из тела запроса
- * @summary Регистрация пользователя
- */
-export const register = (
-  userRegistrationRequest: UserRegistrationRequest,
-  signal?: AbortSignal,
-) => {
-  return customAxios<AuthResponse>({
-    url: `/api/auth/register`,
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    data: userRegistrationRequest,
-    signal,
-  });
-};
-
-export const getRegisterMutationOptions = <
-  TError = AuthResponse | AuthResponse | AuthResponse,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof register>>,
-    TError,
-    { data: UserRegistrationRequest },
-    TContext
-  >;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof register>>,
-  TError,
-  { data: UserRegistrationRequest },
-  TContext
-> => {
-  const mutationKey = ['register'];
-  const { mutation: mutationOptions } = options
-    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
-      ? options
-      : { ...options, mutation: { ...options.mutation, mutationKey } }
-    : { mutation: { mutationKey } };
-
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof register>>,
-    { data: UserRegistrationRequest }
-  > = (props) => {
-    const { data } = props ?? {};
-
-    return register(data);
+export const getSecurity = () => {
+  /**
+   * Пользователь регистрируется с данными из тела запроса
+   * @summary Регистрация пользователя
+   */
+  const register = (userRegistrationRequest: UserRegistrationRequest) => {
+    return customAxios<AuthResponse>({
+      url: `/api/auth/register`,
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      data: userRegistrationRequest,
+    });
   };
-
-  return { mutationFn, ...mutationOptions };
-};
-
-export type RegisterMutationResult = NonNullable<Awaited<ReturnType<typeof register>>>;
-export type RegisterMutationBody = UserRegistrationRequest;
-export type RegisterMutationError = AuthResponse | AuthResponse | AuthResponse;
-
-/**
- * @summary Регистрация пользователя
- */
-export const useRegister = <
-  TError = AuthResponse | AuthResponse | AuthResponse,
-  TContext = unknown,
->(
-  options?: {
-    mutation?: UseMutationOptions<
-      Awaited<ReturnType<typeof register>>,
-      TError,
-      { data: UserRegistrationRequest },
-      TContext
-    >;
-  },
-  queryClient?: QueryClient,
-): UseMutationResult<
-  Awaited<ReturnType<typeof register>>,
-  TError,
-  { data: UserRegistrationRequest },
-  TContext
-> => {
-  const mutationOptions = getRegisterMutationOptions(options);
-
-  return useMutation(mutationOptions, queryClient);
-};
-/**
- * Обновляем Access token с помощью Refresh token
- * @summary Обновление токена
- */
-export const refreshToken = (refreshTokenRequest: RefreshTokenRequest, signal?: AbortSignal) => {
-  return customAxios<AuthResponse | AuthResponse>({
-    url: `/api/auth/refresh-token`,
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    data: refreshTokenRequest,
-    signal,
-  });
-};
-
-export const getRefreshTokenMutationOptions = <
-  TError = AuthResponse | AuthResponse | AuthResponse | AuthResponse,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof refreshToken>>,
-    TError,
-    { data: RefreshTokenRequest },
-    TContext
-  >;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof refreshToken>>,
-  TError,
-  { data: RefreshTokenRequest },
-  TContext
-> => {
-  const mutationKey = ['refreshToken'];
-  const { mutation: mutationOptions } = options
-    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
-      ? options
-      : { ...options, mutation: { ...options.mutation, mutationKey } }
-    : { mutation: { mutationKey } };
-
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof refreshToken>>,
-    { data: RefreshTokenRequest }
-  > = (props) => {
-    const { data } = props ?? {};
-
-    return refreshToken(data);
+  /**
+   * Обновляем Access token с помощью Refresh token
+   * @summary Обновление токена
+   */
+  const refreshToken = (refreshTokenRequest: RefreshTokenRequest) => {
+    return customAxios<AuthResponse | AuthResponse>({
+      url: `/api/auth/refresh-token`,
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      data: refreshTokenRequest,
+    });
   };
-
-  return { mutationFn, ...mutationOptions };
-};
-
-export type RefreshTokenMutationResult = NonNullable<Awaited<ReturnType<typeof refreshToken>>>;
-export type RefreshTokenMutationBody = RefreshTokenRequest;
-export type RefreshTokenMutationError = AuthResponse | AuthResponse | AuthResponse | AuthResponse;
-
-/**
- * @summary Обновление токена
- */
-export const useRefreshToken = <
-  TError = AuthResponse | AuthResponse | AuthResponse | AuthResponse,
-  TContext = unknown,
->(
-  options?: {
-    mutation?: UseMutationOptions<
-      Awaited<ReturnType<typeof refreshToken>>,
-      TError,
-      { data: RefreshTokenRequest },
-      TContext
-    >;
-  },
-  queryClient?: QueryClient,
-): UseMutationResult<
-  Awaited<ReturnType<typeof refreshToken>>,
-  TError,
-  { data: RefreshTokenRequest },
-  TContext
-> => {
-  const mutationOptions = getRefreshTokenMutationOptions(options);
-
-  return useMutation(mutationOptions, queryClient);
-};
-/**
- * Выход пользователя из системы
- * @summary Выход пользователя
- */
-export const logout = (signal?: AbortSignal) => {
-  return customAxios<void>({ url: `/api/auth/logout`, method: 'POST', signal });
-};
-
-export const getLogoutMutationOptions = <
-  TError = void | void | void,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<Awaited<ReturnType<typeof logout>>, TError, void, TContext>;
-}): UseMutationOptions<Awaited<ReturnType<typeof logout>>, TError, void, TContext> => {
-  const mutationKey = ['logout'];
-  const { mutation: mutationOptions } = options
-    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
-      ? options
-      : { ...options, mutation: { ...options.mutation, mutationKey } }
-    : { mutation: { mutationKey } };
-
-  const mutationFn: MutationFunction<Awaited<ReturnType<typeof logout>>, void> = () => {
-    return logout();
+  /**
+   * Выход пользователя из системы
+   * @summary Выход пользователя
+   */
+  const logout = () => {
+    return customAxios<void>({ url: `/api/auth/logout`, method: 'POST' });
   };
-
-  return { mutationFn, ...mutationOptions };
-};
-
-export type LogoutMutationResult = NonNullable<Awaited<ReturnType<typeof logout>>>;
-
-export type LogoutMutationError = void | void | void;
-
-/**
- * @summary Выход пользователя
- */
-export const useLogout = <TError = void | void | void, TContext = unknown>(
-  options?: {
-    mutation?: UseMutationOptions<Awaited<ReturnType<typeof logout>>, TError, void, TContext>;
-  },
-  queryClient?: QueryClient,
-): UseMutationResult<Awaited<ReturnType<typeof logout>>, TError, void, TContext> => {
-  const mutationOptions = getLogoutMutationOptions(options);
-
-  return useMutation(mutationOptions, queryClient);
-};
-/**
- * Пользователь аутентифицируется по данным из тела запроса
- * @summary Вход пользователя
- */
-export const login = (userLoginRequest: UserLoginRequest, signal?: AbortSignal) => {
-  return customAxios<AuthResponse>({
-    url: `/api/auth/login`,
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    data: userLoginRequest,
-    signal,
-  });
-};
-
-export const getLoginMutationOptions = <
-  TError = AuthResponse | AuthResponse | AuthResponse,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof login>>,
-    TError,
-    { data: UserLoginRequest },
-    TContext
-  >;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof login>>,
-  TError,
-  { data: UserLoginRequest },
-  TContext
-> => {
-  const mutationKey = ['login'];
-  const { mutation: mutationOptions } = options
-    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
-      ? options
-      : { ...options, mutation: { ...options.mutation, mutationKey } }
-    : { mutation: { mutationKey } };
-
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof login>>,
-    { data: UserLoginRequest }
-  > = (props) => {
-    const { data } = props ?? {};
-
-    return login(data);
+  /**
+   * Пользователь аутентифицируется по данным из тела запроса
+   * @summary Вход пользователя
+   */
+  const login = (userLoginRequest: UserLoginRequest) => {
+    return customAxios<AuthResponse>({
+      url: `/api/auth/login`,
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      data: userLoginRequest,
+    });
   };
-
-  return { mutationFn, ...mutationOptions };
+  return { register, refreshToken, logout, login };
 };
-
-export type LoginMutationResult = NonNullable<Awaited<ReturnType<typeof login>>>;
-export type LoginMutationBody = UserLoginRequest;
-export type LoginMutationError = AuthResponse | AuthResponse | AuthResponse;
-
-/**
- * @summary Вход пользователя
- */
-export const useLogin = <TError = AuthResponse | AuthResponse | AuthResponse, TContext = unknown>(
-  options?: {
-    mutation?: UseMutationOptions<
-      Awaited<ReturnType<typeof login>>,
-      TError,
-      { data: UserLoginRequest },
-      TContext
-    >;
-  },
-  queryClient?: QueryClient,
-): UseMutationResult<
-  Awaited<ReturnType<typeof login>>,
-  TError,
-  { data: UserLoginRequest },
-  TContext
-> => {
-  const mutationOptions = getLoginMutationOptions(options);
-
-  return useMutation(mutationOptions, queryClient);
-};
+export type RegisterResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getSecurity>['register']>>
+>;
+export type RefreshTokenResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getSecurity>['refreshToken']>>
+>;
+export type LogoutResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getSecurity>['logout']>>
+>;
+export type LoginResult = NonNullable<Awaited<ReturnType<ReturnType<typeof getSecurity>['login']>>>;

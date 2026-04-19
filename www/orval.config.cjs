@@ -8,7 +8,7 @@ const SERVICES = {
 
 const SHARED_OUTPUT = {
   mode: 'tags-split',
-  client: 'react-query',
+  client: 'axios',
   clean: false,
   override: {
     mutator: {

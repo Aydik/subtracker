@@ -1,10 +1,9 @@
 import { type FC, useEffect, useRef, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import styles from './index.module.scss';
 import { App, Spin } from 'antd';
 import { useLazyGetCurrentUserProfileQuery } from '@src/store/api/services/userService.ts';
 
-const AuthLayout: FC = () => {
+const UserLayout: FC = () => {
   const messageShown = useRef(false);
   const navigate = useNavigate();
   const { message } = App.useApp();
@@ -16,23 +15,20 @@ const AuthLayout: FC = () => {
   useEffect(() => {
     getUser({})
       .unwrap()
-      .then(() => {
+      .then(() => setIsLoading(false))
+      .catch(() => {
+        console.log('catch');
         if (!messageShown.current) {
-          message.info('Вы уже прошли аутентификацию');
+          message.info('Пройдите аутентификацию');
           messageShown.current = true;
         }
-        navigate('/home');
-      })
-      .catch(() => setIsLoading(false));
+        navigate('/auth/login');
+      });
   }, []);
 
   if (isLoading) return <Spin fullscreen />;
 
-  return (
-    <div className={styles.authLayout}>
-      <Outlet />
-    </div>
-  );
+  return <Outlet />;
 };
 
-export default AuthLayout;
+export default UserLayout;
