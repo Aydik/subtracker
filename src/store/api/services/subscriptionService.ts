@@ -1,5 +1,6 @@
 import { BaseApi } from '@src/store/api/baseApi.ts';
 import { getSubscriptions } from '@src/api/endpoints/subscriptions/subscriptions.ts';
+import type { GetServicesParams } from '@src/api/models';
 
 const subscriptionsApi = getSubscriptions();
 
@@ -16,7 +17,19 @@ export const subscriptionService = BaseApi.injectEndpoints({
         }
       },
     }),
+
+    getServices: build.query({
+      queryFn: async (request: GetServicesParams) => {
+        try {
+          const data = await subscriptionsApi.getServices(request);
+
+          return { data };
+        } catch (error) {
+          return { error };
+        }
+      },
+    }),
   }),
 });
 
-export const { useGetCategoriesQuery, useLazyGetCategoriesQuery } = subscriptionService;
+export const { useGetCategoriesQuery, useGetServicesQuery } = subscriptionService;
