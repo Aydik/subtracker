@@ -1,34 +1,28 @@
-import type { Subscription } from '@entities/Subscription';
+import type { SubscriptionResponse } from '@src/api/models';
 
-export const mockSubscriptions: Subscription[] = [
+export const mockSubscriptions: SubscriptionResponse[] = [
   {
-    id: '1',
-    service: {
-      name: 'Netflix',
-      imageUrl: 'public/assets/images/services/netflix.png',
-      category: 'STREAMING',
-    },
-    price: 799,
-    chargeDate: '19 октября',
+    subscriptionId: '1',
+    serviceName: 'Netflix',
+    logoUrl: 'public/assets/images/services/netflix.png',
+    amount: 799,
+    timeToPay: '19 октября',
+    category: 'STREAMING_VIDEO',
   },
   {
-    id: '2',
-    service: {
-      name: 'Spotify',
-      imageUrl: 'public/assets/images/services/spotify.png',
-      category: 'MUSIC',
-    },
-    price: 799,
-    chargeDate: '19 октября',
+    subscriptionId: '2',
+    serviceName: 'Spotify',
+    logoUrl: 'public/assets/images/services/spotify.png',
+    amount: 799,
+    timeToPay: '19 октября',
+    category: 'STREAMING_MUSIC',
   },
   {
-    id: '3',
-    service: {
-      name: 'Кинопоиск',
-      imageUrl: 'public/assets/images/services/kinopoisk.png',
-      category: 'STREAMING',
-    },
-    price: 799,
-    chargeDate: '19 октября',
+    subscriptionId: '3',
+    serviceName: 'Кинопоиск',
+    logoUrl: 'public/assets/images/services/kinopoisk.png',
+    amount: 799,
+    timeToPay: '19 октября',
+    category: 'STREAMING_VIDEO',
   },
 ];

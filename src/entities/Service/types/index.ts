@@ -1,13 +1,17 @@
-export const SERVICE_CATEGORIES = ['MUSIC', 'STREAMING', 'OTHER'] as const;
-export const SERVICE_CATEGORY_OPTIONS = ['ALL', ...SERVICE_CATEGORIES] as const;
-
-export type ServiceCategory = (typeof SERVICE_CATEGORIES)[number];
-export type ServiceCategoryOption = (typeof SERVICE_CATEGORY_OPTIONS)[number];
-
-export const SERVICE_CATEGORY_OPTIONS_LOCALIZATION: Record<ServiceCategoryOption, string> = {
+export const CATEGORIES_LOCALIZATION: Record<string, string> = {
   ALL: 'Все',
-  MUSIC: 'Музыка',
-  STREAMING: 'Стриминги',
+  STREAMING_VIDEO: 'Видео',
+  STREAMING_MUSIC: 'Музыка',
+  CLOUD_STORAGE: 'Хранилища',
+  PRODUCTIVITY: 'Продуктивность',
+  GAMING: 'Игры',
+  NEWS: 'Новости',
+  EDUCATION: 'Образование',
+  SOCIAL_MEDIA: 'Социальные сети',
+  SHOPPING: 'Шопинг',
+  HEALTH_FITNESS: 'Здоровье и фитнес',
+  FINANCE: 'Финансы',
+  TRAVEL: 'Путешествия',
   OTHER: 'Другое',
 };
 
@@ -15,5 +19,5 @@ export interface Service {
   id: string;
   name: string;
   imageUrl: string;
-  category: ServiceCategory;
+  category: string;
 }

@@ -6,19 +6,22 @@ import ruRU from 'antd/locale/ru_RU';
 import { ThemeProvider } from '@shared/theme';
 import { Provider } from 'react-redux';
 import { store } from '@src/store';
+import { CategoriesProvider } from '@app/context/CategoriesContext.tsx';
 
 function App() {
   return (
     <Provider store={store}>
-      <ThemeProvider>
-        <ConfigProvider locale={ruRU}>
-          <AntdApp>
-            <BrowserRouter basename="/subtracker/">
-              <AppRouter />
-            </BrowserRouter>
-          </AntdApp>
-        </ConfigProvider>
-      </ThemeProvider>
+      <CategoriesProvider>
+        <ThemeProvider>
+          <ConfigProvider locale={ruRU}>
+            <AntdApp>
+              <BrowserRouter basename="/subtracker/">
+                <AppRouter />
+              </BrowserRouter>
+            </AntdApp>
+          </ConfigProvider>
+        </ThemeProvider>
+      </CategoriesProvider>
     </Provider>
   );
 }

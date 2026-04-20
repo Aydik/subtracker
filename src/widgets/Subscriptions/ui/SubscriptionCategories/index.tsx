@@ -1,27 +1,26 @@
 import { type FC, useState } from 'react';
 import styles from './index.module.scss';
 import clsx from 'clsx';
-import {
-  SERVICE_CATEGORY_OPTIONS,
-  SERVICE_CATEGORY_OPTIONS_LOCALIZATION,
-  type ServiceCategoryOption,
-} from '@entities/Service';
+import { CATEGORIES_LOCALIZATION } from '@entities/Service';
+import { useCategories } from '@app/context/CategoriesContext.tsx';
 
 export const SubscriptionCategories: FC = () => {
-  const [activeCategory, setActiveCategory] = useState<ServiceCategoryOption>('ALL');
+  const { categories } = useCategories();
+
+  const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
 
   return (
     <div className={styles.subscriptionCategories}>
-      {SERVICE_CATEGORY_OPTIONS.map((category) => (
+      {[{ name: 'ALL' }, ...categories].map((category) => (
         <button
-          key={category}
+          key={category.name}
           className={clsx(
             styles.categoryButton,
-            activeCategory === category ? styles.categoryButton_active : undefined,
+            selectedCategory === category.name ? styles.categoryButton_active : undefined,
           )}
-          onClick={() => setActiveCategory(category)}
+          onClick={() => category.name && setSelectedCategory(category.name)}
         >
-          {SERVICE_CATEGORY_OPTIONS_LOCALIZATION[category]}
+          {CATEGORIES_LOCALIZATION[category.name || 'OTHER']}
         </button>
       ))}
     </div>

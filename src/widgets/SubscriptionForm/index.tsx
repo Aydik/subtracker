@@ -1,6 +1,6 @@
 import { useState, useEffect, type FC } from 'react';
 import { Form, Input, Select, DatePicker, Button, message, Spin } from 'antd';
-import dayjs from 'dayjs';
+import { Dayjs } from 'dayjs';
 import type { Service } from '@entities/Service';
 import { getServices } from '@entities/Service';
 import styles from './index.module.scss';
@@ -9,7 +9,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 interface ServiceFormValues {
   serviceId: string;
   amount: number;
-  nextChargeDate: dayjs.Dayjs;
+  nextChargeDate: Dayjs;
 }
 
 interface Props {
