@@ -5,7 +5,6 @@ import type {
   GetServicesParams,
   GetSubscriptionsParams,
 } from '@src/api/models';
-import { setSubscriptions } from '@src/store/slices/subscriptionsSlice.ts';
 
 const subscriptionsApi = getSubscriptions();
 
@@ -48,12 +47,9 @@ export const subscriptionService = BaseApi.injectEndpoints({
     }),
 
     getSubscriptions: build.query({
-      queryFn: async (request: GetSubscriptionsParams, { dispatch }) => {
+      queryFn: async (request: GetSubscriptionsParams) => {
         try {
           const data = await subscriptionsApi.getSubscriptions(request);
-
-          dispatch(setSubscriptions(data?.content || null));
-
           return { data };
         } catch (error) {
           return { error };

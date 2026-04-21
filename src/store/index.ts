@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './slices/userSlice.ts';
-import subscriptionsReducer from './slices/subscriptionsSlice.ts';
+import analyticsReducer from './slices/analyticsSlice.ts';
 import { BaseApi } from '@src/store/api/baseApi.ts';
 
 export const store = configureStore({
@@ -8,7 +8,7 @@ export const store = configureStore({
     [BaseApi.reducerPath]: BaseApi.reducer,
 
     user: userReducer,
-    subscriptions: subscriptionsReducer,
+    analytics: analyticsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
