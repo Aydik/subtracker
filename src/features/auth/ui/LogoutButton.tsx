@@ -17,7 +17,7 @@ export const LogoutButton: FC<Props> = ({ className = '' }) => {
 
   const handleLogout = async () => {
     try {
-      logout({});
+      await logout({}).unwrap();
 
       message.destroy();
       message.success('Вы вышли из аккаунта!');

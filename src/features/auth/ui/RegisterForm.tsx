@@ -37,7 +37,7 @@ export const RegisterForm: FC = () => {
     };
 
     try {
-      await register(requestData);
+      await register(requestData).unwrap();
 
       message.destroy();
       message.success('Аккаунт успешно создан!');

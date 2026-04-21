@@ -1,8 +1,8 @@
 import { type FC, useState } from 'react';
 import styles from './index.module.scss';
 import clsx from 'clsx';
-import { CATEGORIES_LOCALIZATION } from '@entities/Service';
 import { useCategories } from '@app/context/CategoriesContext.tsx';
+import { CATEGORIES_LOCALIZATION } from '@shared/types/Categories.ts';
 
 export const SubscriptionCategories: FC = () => {
   const { categories } = useCategories();

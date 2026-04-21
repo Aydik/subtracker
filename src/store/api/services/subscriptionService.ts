@@ -1,6 +1,6 @@
 import { BaseApi } from '@src/store/api/baseApi.ts';
 import { getSubscriptions } from '@src/api/endpoints/subscriptions/subscriptions.ts';
-import type { GetServicesParams } from '@src/api/models';
+import type { CreateSubscriptionRequest, GetServicesParams } from '@src/api/models';
 
 const subscriptionsApi = getSubscriptions();
 
@@ -29,7 +29,20 @@ export const subscriptionService = BaseApi.injectEndpoints({
         }
       },
     }),
+
+    createSubscription: build.mutation({
+      queryFn: async (request: CreateSubscriptionRequest) => {
+        try {
+          const data = await subscriptionsApi.createSubscription(request);
+
+          return { data };
+        } catch (error) {
+          return { error };
+        }
+      },
+    }),
   }),
 });
 
-export const { useGetCategoriesQuery, useGetServicesQuery } = subscriptionService;
+export const { useGetCategoriesQuery, useGetServicesQuery, useCreateSubscriptionMutation } =
+  subscriptionService;

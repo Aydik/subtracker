@@ -34,7 +34,7 @@ export const LoginForm: FC = () => {
     };
 
     try {
-      await login(requestData);
+      await login(requestData).unwrap();
 
       message.destroy();
       message.success('Вы успешно вошли в аккаунт!');
