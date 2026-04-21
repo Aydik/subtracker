@@ -37,7 +37,7 @@ export const userService = BaseApi.injectEndpoints({
       queryFn: async (_, { dispatch }) => {
         try {
           const data = await userApi.getCurrentUserProfile();
-          dispatch(setCurrentUser({ user: data }));
+          dispatch(setCurrentUser(data));
 
           return { data };
         } catch (error) {
