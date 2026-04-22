@@ -9,7 +9,7 @@ const HomePage: FC = () => {
   const username = useAppSelector((state) => state.user?.user?.username);
   const currency = useAppSelector((state) => state.user?.user?.currency);
 
-  const { data: analytics } = useGetAnalyticsQuery({});
+  const { data: analytics } = useGetAnalyticsQuery({}, { pollingInterval: 5000 });
 
   return (
     <div className={styles.homePage}>
