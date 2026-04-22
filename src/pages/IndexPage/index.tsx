@@ -1,35 +1,31 @@
-import { type FC, useEffect, useState } from 'react';
+import { type FC, useMemo } from 'react';
 import styles from './index.module.scss';
 import Marquee from 'react-fast-marquee';
 import { Button, Layout } from 'antd';
 import { Icon } from '@shared/ui/Icon';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
-import type { Service } from '@entities/Service';
 import { AsyncImage } from '@shared/ui/AsyncImage';
-import { getServices } from '@entities/Service/services/service.service.ts';
+import { useServices } from '@app/context/ServicesContext.tsx';
+import type { ServiceResponse } from '@src/api/models';
 
 const IndexPage: FC = () => {
   const navigate = useNavigate();
-  const [services, setServices] = useState<Service[][] | null>(null);
 
-  useEffect(() => {
-    const fetchServices = async () => {
-      const data = await getServices();
+  const { services: servicesData } = useServices();
 
-      const groupSize = Math.ceil(data.length / 3);
-      const groupedServices: Service[][] = [];
+  const services = useMemo<ServiceResponse[][]>(() => {
+    const groupSize = Math.ceil(servicesData.length / 3);
+    const groupedServices: ServiceResponse[][] = [];
 
-      for (let i = 0; i < 3; i++) {
-        const start = i * groupSize;
-        const end = start + groupSize;
-        groupedServices.push(data.slice(start, end));
-      }
+    for (let i = 0; i < 3; i++) {
+      const start = i * groupSize;
+      const end = start + groupSize;
+      groupedServices.push(servicesData.slice(start, end));
+    }
 
-      setServices(groupedServices);
-    };
-    fetchServices();
-  }, []);
+    return groupedServices;
+  }, [servicesData]);
 
   return (
     <Layout.Content className={styles.indexPage}>
@@ -47,9 +43,9 @@ const IndexPage: FC = () => {
                   {Array(5).fill(
                     line.map((service) => (
                       <AsyncImage
-                        src={service.imageUrl}
-                        key={service.name}
-                        alt={service.name}
+                        src={service.logoUrl || ''}
+                        key={service.serviceName}
+                        alt={service.serviceName || ''}
                         className={styles.logo}
                       />
                     )),

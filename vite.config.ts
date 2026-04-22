@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@src': path.resolve(__dirname, './src'),
       '@app': path.resolve(__dirname, './src/app'),
       '@pages': path.resolve(__dirname, './src/pages'),
       '@widgets': path.resolve(__dirname, './src/widgets'),
@@ -16,5 +16,19 @@ export default defineConfig({
       '@entities': path.resolve(__dirname, './src/entities'),
       '@shared': path.resolve(__dirname, './src/shared'),
     },
+  },
+  build: {
+    target: 'es2020',
+  },
+  server: {
+    port: 5173,
+    proxy: {
+      '/api': {
+        changeOrigin: true,
+        secure: false,
+        target: 'http://localhost:8080',
+      },
+    },
+    strictPort: true,
   },
 });

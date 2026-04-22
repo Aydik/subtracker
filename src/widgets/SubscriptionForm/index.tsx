@@ -1,64 +1,121 @@
-import { useState, useEffect, type FC } from 'react';
-import { Form, Input, Select, DatePicker, Button, message, Spin } from 'antd';
-import dayjs from 'dayjs';
-import type { Service } from '@entities/Service';
-import { getServices } from '@entities/Service';
+import { type FC, useCallback, useEffect, useMemo } from 'react';
+import { Form, Select, DatePicker, Button, Spin, App, Row, Col, Input } from 'antd';
 import styles from './index.module.scss';
 import { LoadingOutlined } from '@ant-design/icons';
-
-interface ServiceFormValues {
-  serviceId: string;
-  amount: number;
-  nextChargeDate: dayjs.Dayjs;
-}
+import { useNavigate } from 'react-router-dom';
+import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import type { CreateSubscriptionRequest } from '@src/api/models';
+import {
+  useCreateSubscriptionMutation,
+  useDeleteSubscriptionMutation,
+  useLazyGetSubscriptionByIdQuery,
+  useUpdateSubscriptionMutation,
+} from '@src/store/api/services/subscriptionService.ts';
+import { subscriptionSchema } from '@widgets/SubscriptionForm/validationSchema.ts';
+import { useServices } from '@app/context/ServicesContext.tsx';
+import { useAppSelector } from '@src/store/hooks.ts';
+import { CURRENCY } from '@shared/types/Currency.ts';
+import { toISOString } from '@shared/utils/formatDate.ts';
+import dayjs from 'dayjs';
 
 interface Props {
   id?: string;
 }
 
 export const SubscriptionForm: FC<Props> = ({ id }) => {
-  const [form] = Form.useForm<ServiceFormValues>();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [services, setServices] = useState<Service[]>([]);
-  const [init, setInit] = useState<boolean>(true);
+  const { message } = App.useApp();
+
+  const navigate = useNavigate();
+
+  const { services, isLoading: isLoadingServices } = useServices();
+  const currency = useAppSelector((state) => state.user.user?.currency);
+
+  const { control, handleSubmit, setValue } = useForm<CreateSubscriptionRequest>({
+    resolver: yupResolver(subscriptionSchema),
+    mode: 'onChange',
+  });
+
+  const [getSubscriptionById] = useLazyGetSubscriptionByIdQuery();
+  const [createSubscription, { isLoading: isLoadingCreate }] = useCreateSubscriptionMutation();
+  const [updateSubscription, { isLoading: isLoadingUpdate }] = useUpdateSubscriptionMutation();
+  const [deleteSubscription] = useDeleteSubscriptionMutation();
+
+  const isLoadingRequest = useMemo(
+    () => isLoadingCreate || isLoadingUpdate,
+    [isLoadingCreate, isLoadingUpdate],
+  );
 
   useEffect(() => {
-    loadServices();
-  }, []);
+    const fetchSubscription = async () => {
+      if (id) {
+        const data = await getSubscriptionById(id).unwrap();
 
-  const loadServices = async () => {
-    try {
-      setInit(true);
-      const servicesData = await getServices();
-      setServices(servicesData);
-    } catch (error) {
-      console.error('Ошибка при загрузке сервисов:', error);
-      message.error('Не удалось загрузить список сервисов');
-      setServices([]);
-    } finally {
-      setInit(false);
+        if (data?.serviceName && services) {
+          const serviceId = services.find(
+            (service) => service.serviceName === data?.serviceName,
+          )?.serviceId;
+          if (serviceId) {
+            setValue('serviceId', serviceId);
+          }
+        }
+        if (data?.amount) {
+          setValue('amount', data?.amount);
+        }
+        if (data?.timeToPay) {
+          setValue('timeToPay', data?.timeToPay);
+        }
+      }
+    };
+    fetchSubscription();
+  }, [id]);
+
+  const onSubmit = useCallback(
+    async (values: CreateSubscriptionRequest) => {
+      try {
+        if (id) {
+          await updateSubscription({
+            id,
+            updateSubscriptionRequest: {
+              amount: values.amount,
+              timeToPay: values.timeToPay,
+            },
+          }).unwrap();
+        } else {
+          await createSubscription({
+            serviceId: values.serviceId,
+            amount: values.amount,
+            timeToPay: values.timeToPay,
+          }).unwrap();
+        }
+
+        message.destroy();
+        message.success('Подписка успешно добавлена!');
+        navigate('/home');
+      } catch (err: unknown) {
+        console.error(err);
+        message.error('Ошибка при сохранении!');
+      }
+    },
+    [id],
+  );
+
+  const handleDelete = useCallback(async () => {
+    if (id) {
+      try {
+        await deleteSubscription(id).unwrap();
+
+        message.destroy();
+        message.success('Подписка успешно удалена!');
+        navigate('/home');
+      } catch (err: unknown) {
+        console.error(err);
+        message.error('Ошибка при удалении!');
+      }
     }
-  };
+  }, [id]);
 
-  const onFinish = async (values: ServiceFormValues) => {
-    setLoading(true);
-    try {
-      console.log('Отправляем данные:', {
-        service: values.serviceId,
-        amount: values.amount,
-        nextChargeDate: values.nextChargeDate.format('YYYY-MM-DD'),
-      });
-
-      message.success('Данные успешно сохранены!');
-      form.resetFields();
-    } catch (error) {
-      message.error('Ошибка при сохранении данных');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (init) {
+  if (isLoadingServices) {
     return (
       <div className={styles.initContainer}>
         <Spin size="large" indicator={<LoadingOutlined spin />} />
@@ -68,68 +125,87 @@ export const SubscriptionForm: FC<Props> = ({ id }) => {
   }
 
   return (
-    <Form<ServiceFormValues> form={form} onFinish={onFinish} className={styles.form}>
-      <Form.Item
-        name="service"
-        label="Сервис"
-        rules={[{ required: true, message: 'Выберите сервис' }]}
-      >
-        <Select placeholder="Выберите сервис" showSearch>
-          {services.map((service) => (
-            <Select.Option key={service.name} value={service.name}>
-              {service.name}
-            </Select.Option>
-          ))}
-        </Select>
-      </Form.Item>
+    <Form onFinish={handleSubmit(onSubmit)} className={styles.form}>
+      <Controller
+        name="serviceId"
+        control={control}
+        render={({ field, fieldState: { error } }) => (
+          <Form.Item label="Сервис" validateStatus={error ? 'error' : ''} help={error?.message}>
+            <Select
+              size="large"
+              placeholder="Netflix, Spotify..."
+              showSearch
+              value={field.value}
+              onChange={field.onChange}
+              disabled={!!id}
+            >
+              {services.map((service) => (
+                <Select.Option key={service.serviceId} value={service.serviceId}>
+                  {service.serviceName}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+        )}
+      />
 
-      <Form.Item
-        name="amount"
-        label="Сумма списания"
-        rules={[
-          { required: true, message: 'Введите сумму' },
-          {
-            pattern: /^\d+$/,
-            message: 'Введите целое положительное число',
-          },
-          () => ({
-            validator(_, value) {
-              if (!value || Number(value) > 0) {
-                return Promise.resolve();
-              }
-              return Promise.reject(new Error('Сумма должна быть больше 0'));
-            },
-          }),
-        ]}
-      >
-        <Input
-          placeholder="0"
-          onKeyPress={(e) => {
-            if (!/\d/.test(e.key)) {
-              e.preventDefault();
-            }
-          }}
-          onChange={(e) => {
-            e.target.value = e.target.value.replace(/[^\d]/g, '');
-          }}
-        />
-      </Form.Item>
-
-      <Form.Item
-        name="nextChargeDate"
-        label="Дата следующего списания"
-        rules={[{ required: true, message: 'Выберите дату' }]}
-      >
-        <DatePicker style={{ width: '100%' }} format="DD.MM.YYYY" />
-      </Form.Item>
+      <Row gutter={16}>
+        <Col span={12}>
+          <Controller
+            name="timeToPay"
+            control={control}
+            render={({ field, fieldState: { error } }) => (
+              <Form.Item
+                label="Дата следующего списания"
+                validateStatus={error ? 'error' : ''}
+                help={error?.message}
+              >
+                <DatePicker
+                  size="large"
+                  style={{ width: '100%' }}
+                  format="DD.MM.YYYY"
+                  value={field.value ? dayjs(field.value) : null}
+                  onChange={(value) => field.onChange(toISOString(value))}
+                />
+              </Form.Item>
+            )}
+          />
+        </Col>
+        <Col span={12}>
+          <Controller
+            name="amount"
+            control={control}
+            render={({ field, fieldState: { error } }) => (
+              <Form.Item
+                label="Сумма списания"
+                validateStatus={error ? 'error' : ''}
+                help={error?.message}
+              >
+                <Input
+                  size="large"
+                  style={{ width: '100%' }}
+                  suffix={CURRENCY[currency || 'RUB']}
+                  maxLength={5}
+                  placeholder="0"
+                  value={field.value}
+                  onChange={(e) => {
+                    const cleanedValue = e.target.value?.replace(/[^\d]/g, '') || null;
+                    field.onChange(cleanedValue);
+                  }}
+                />
+              </Form.Item>
+            )}
+          />
+        </Col>
+      </Row>
 
       <div className={styles.actions}>
         {id && (
-          <Button danger htmlType="button">
+          <Button size="large" danger htmlType="button" onClick={handleDelete}>
             Удалить
           </Button>
         )}
-        <Button type="primary" htmlType="submit" loading={loading}>
+        <Button size="large" type="primary" htmlType="submit" loading={isLoadingRequest}>
           Сохранить
         </Button>
       </div>
