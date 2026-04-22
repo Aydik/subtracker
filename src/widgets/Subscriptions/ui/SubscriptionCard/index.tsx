@@ -3,12 +3,17 @@ import styles from './index.module.scss';
 import { AsyncImage } from '@shared/ui/AsyncImage';
 import type { SubscriptionResponse } from '@src/api/models';
 import { isoToRussianDate } from '@shared/utils/formatDate.ts';
+import { EditOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 interface SubscriptionCardProps {
   subscription: SubscriptionResponse;
 }
 
 export const SubscriptionCard: FC<SubscriptionCardProps> = ({ subscription }) => {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.subscriptionCard}>
       <AsyncImage src={subscription.logoUrl || ''} alt={subscription.serviceName || ''} />
@@ -22,6 +27,11 @@ export const SubscriptionCard: FC<SubscriptionCardProps> = ({ subscription }) =>
       </div>
 
       <div className={styles.subscriptionCard__price}>{subscription.amount} ₽</div>
+      <Button
+        type="text"
+        icon={<EditOutlined />}
+        onClick={() => navigate(`/subscription/${subscription.subscriptionId}`)}
+      />
     </div>
   );
 };

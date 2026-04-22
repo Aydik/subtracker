@@ -4,6 +4,7 @@ import type {
   CreateSubscriptionRequest,
   GetServicesParams,
   GetSubscriptionsParams,
+  UpdateSubscriptionRequest,
 } from '@src/api/models';
 
 const subscriptionsApi = getSubscriptions();
@@ -56,6 +57,45 @@ export const subscriptionService = BaseApi.injectEndpoints({
         }
       },
     }),
+
+    getSubscriptionById: build.query({
+      queryFn: async (id: string) => {
+        try {
+          const data = await subscriptionsApi.getSubscriptionById(id);
+          return { data };
+        } catch (error) {
+          return { error };
+        }
+      },
+    }),
+
+    deleteSubscription: build.mutation({
+      queryFn: async (id: string) => {
+        try {
+          const data = await subscriptionsApi.deleteSubscription(id);
+          return { data };
+        } catch (error) {
+          return { error };
+        }
+      },
+    }),
+
+    updateSubscription: build.mutation({
+      queryFn: async (request: {
+        id: string;
+        updateSubscriptionRequest: UpdateSubscriptionRequest;
+      }) => {
+        try {
+          const data = await subscriptionsApi.updateSubscription(
+            request.id,
+            request.updateSubscriptionRequest,
+          );
+          return { data };
+        } catch (error) {
+          return { error };
+        }
+      },
+    }),
   }),
 });
 
@@ -63,5 +103,8 @@ export const {
   useGetCategoriesQuery,
   useGetServicesQuery,
   useLazyGetSubscriptionsQuery,
+  useLazyGetSubscriptionByIdQuery,
   useCreateSubscriptionMutation,
+  useDeleteSubscriptionMutation,
+  useUpdateSubscriptionMutation,
 } = subscriptionService;

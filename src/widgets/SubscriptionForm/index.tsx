@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import { type FC, useCallback, useEffect, useMemo } from 'react';
 import { Form, Select, DatePicker, Button, Spin, App, Row, Col, Input } from 'antd';
 import styles from './index.module.scss';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -6,7 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import type { CreateSubscriptionRequest } from '@src/api/models';
-import { useCreateSubscriptionMutation } from '@src/store/api/services/subscriptionService.ts';
+import {
+  useCreateSubscriptionMutation,
+  useDeleteSubscriptionMutation,
+  useLazyGetSubscriptionByIdQuery,
+  useUpdateSubscriptionMutation,
+} from '@src/store/api/services/subscriptionService.ts';
 import { subscriptionSchema } from '@widgets/SubscriptionForm/validationSchema.ts';
 import { useServices } from '@app/context/ServicesContext.tsx';
 import { useAppSelector } from '@src/store/hooks.ts';
@@ -23,35 +28,94 @@ export const SubscriptionForm: FC<Props> = ({ id }) => {
 
   const navigate = useNavigate();
 
-  const { services, isLoading } = useServices();
+  const { services, isLoading: isLoadingServices } = useServices();
   const currency = useAppSelector((state) => state.user.user?.currency);
 
-  const { control, handleSubmit } = useForm<CreateSubscriptionRequest>({
+  const { control, handleSubmit, setValue } = useForm<CreateSubscriptionRequest>({
     resolver: yupResolver(subscriptionSchema),
     mode: 'onChange',
   });
 
-  const [createSubscription] = useCreateSubscriptionMutation();
+  const [getSubscriptionById] = useLazyGetSubscriptionByIdQuery();
+  const [createSubscription, { isLoading: isLoadingCreate }] = useCreateSubscriptionMutation();
+  const [updateSubscription, { isLoading: isLoadingUpdate }] = useUpdateSubscriptionMutation();
+  const [deleteSubscription] = useDeleteSubscriptionMutation();
 
-  const onSubmit = async (values: CreateSubscriptionRequest) => {
-    const requestData: CreateSubscriptionRequest = {
-      serviceId: values.serviceId,
-      amount: values.amount,
-      timeToPay: values.timeToPay,
+  const isLoadingRequest = useMemo(
+    () => isLoadingCreate || isLoadingUpdate,
+    [isLoadingCreate, isLoadingUpdate],
+  );
+
+  useEffect(() => {
+    const fetchSubscription = async () => {
+      if (id) {
+        const data = await getSubscriptionById(id).unwrap();
+
+        if (data?.serviceName && services) {
+          const serviceId = services.find(
+            (service) => service.serviceName === data?.serviceName,
+          )?.serviceId;
+          if (serviceId) {
+            setValue('serviceId', serviceId);
+          }
+        }
+        if (data?.amount) {
+          setValue('amount', data?.amount);
+        }
+        if (data?.timeToPay) {
+          setValue('timeToPay', data?.timeToPay);
+        }
+      }
     };
+    fetchSubscription();
+  }, [id]);
 
-    try {
-      await createSubscription(requestData).unwrap();
+  const onSubmit = useCallback(
+    async (values: CreateSubscriptionRequest) => {
+      try {
+        if (id) {
+          await updateSubscription({
+            id,
+            updateSubscriptionRequest: {
+              amount: values.amount,
+              timeToPay: values.timeToPay,
+            },
+          }).unwrap();
+        } else {
+          await createSubscription({
+            serviceId: values.serviceId,
+            amount: values.amount,
+            timeToPay: values.timeToPay,
+          }).unwrap();
+        }
 
-      message.destroy();
-      message.success('Подписка успешно добавлена!');
-      navigate('/home');
-    } catch (err: unknown) {
-      console.error(err);
+        message.destroy();
+        message.success('Подписка успешно добавлена!');
+        navigate('/home');
+      } catch (err: unknown) {
+        console.error(err);
+        message.error('Ошибка при сохранении!');
+      }
+    },
+    [id],
+  );
+
+  const handleDelete = useCallback(async () => {
+    if (id) {
+      try {
+        await deleteSubscription(id).unwrap();
+
+        message.destroy();
+        message.success('Подписка успешно удалена!');
+        navigate('/home');
+      } catch (err: unknown) {
+        console.error(err);
+        message.error('Ошибка при удалении!');
+      }
     }
-  };
+  }, [id]);
 
-  if (isLoading) {
+  if (isLoadingServices) {
     return (
       <div className={styles.initContainer}>
         <Spin size="large" indicator={<LoadingOutlined spin />} />
@@ -73,6 +137,7 @@ export const SubscriptionForm: FC<Props> = ({ id }) => {
               showSearch
               value={field.value}
               onChange={field.onChange}
+              disabled={!!id}
             >
               {services.map((service) => (
                 <Select.Option key={service.serviceId} value={service.serviceId}>
@@ -136,11 +201,11 @@ export const SubscriptionForm: FC<Props> = ({ id }) => {
 
       <div className={styles.actions}>
         {id && (
-          <Button size="large" danger htmlType="button">
+          <Button size="large" danger htmlType="button" onClick={handleDelete}>
             Удалить
           </Button>
         )}
-        <Button size="large" type="primary" htmlType="submit">
+        <Button size="large" type="primary" htmlType="submit" loading={isLoadingRequest}>
           Сохранить
         </Button>
       </div>
