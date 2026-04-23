@@ -4,13 +4,10 @@ interface Props {
   name: string;
   size?: { width: number; height: number };
   className?: string;
+  color?: string;
 }
 
-export const Icon: FC<Props> = ({
-  name,
-  size = { width: 24, height: 24 },
-  className = '',
-}: Props) => {
+export const Icon: FC<Props> = ({ name, size = { width: 24, height: 24 }, className = '' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

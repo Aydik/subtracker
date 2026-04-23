@@ -1,28 +1,35 @@
 .subscriptionCard {
-  height: 80px;
+  min-height: 80px;
   display: flex;
   align-items: center;
+  padding: 0.5rem 0;
 
-  &__info{
-    margin-left: 0.875rem;
+  &__info {
+    margin-left: 1rem;
     display: flex;
+    flex: 1;
     flex-direction: column;
   }
 
   &__name {
     font-size: 1rem;
     font-weight: 500;
+    margin-bottom: 0.25rem;
+    color: var(--text-primary);
   }
 
   &__charge {
     font-size: 0.875rem;
     line-height: 1rem;
-    color: var(--color-light-gray);
+    color: var(--text-tertiary);
   }
 
   &__price {
     margin-left: auto;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 500;
+    margin-right: 0.5rem;
+    white-space: nowrap;
+    color: var(--text-primary);
   }
 }

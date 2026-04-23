@@ -1,13 +1,15 @@
 .caption{
-  margin: 0 0.5rem 1rem;
+  margin: 0 0.5rem 1.5rem;
 }
 
 .greeting{
   margin: 0;
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 5vw, 2rem);
   line-height: 1em;
+  word-break: break-word;
 }
 
 .total{
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 4vw, 1.25rem);
+
 }

@@ -12,10 +12,19 @@ body {
   position: relative;
   min-height: 100vh;
   background: var(--bg-gradient);
-  background-color: black;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
 }
 
-@mixin glass-effect{
+h1, h2, h3, h4, h5, h6, p, span, label, .ant-typography {
+  color: var(--text-primary);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-tertiary) !important;
+}
+
+@mixin glass-effect {
   border: var(--border-glass);
   background: var(--glass-bg);
   backdrop-filter: var(--glass-backdrop-filter);
@@ -40,6 +49,10 @@ body {
   .ant-form-item-label {
     display: block !important;
     text-align: left !important;
+
+    label {
+      color: var(--text-primary) !important;
+    }
   }
 
   .ant-form-item-control {
@@ -52,13 +65,17 @@ body {
   .ant-picker-dropdown .ant-picker-date-panel .ant-picker-content th,
   .ant-picker-cell,
   .ant-picker-now-btn,
-  .ant-picker-header button{
-    color: white !important;
+  .ant-picker-header button {
+    color: var(--text-primary) !important;
   }
 
   .ant-select-dropdown {
-    background-color: rgba(var(--color-gray-rgb));
+    background-color: var(--color-gray);
     border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .ant-select-item-option-content {
+    color: var(--text-primary);
   }
 
   .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
@@ -83,13 +100,13 @@ body {
   }
 
   .ant-select-selection-placeholder,
-  .ant-picker-input input::placeholder, {
+  .ant-picker-input input::placeholder {
     color: var(--color-light-gray) !important;
   }
 
   .ant-select-arrow,
   .ant-picker-suffix {
-    color: white !important;
+    color: var(--text-primary) !important;
   }
 
   .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner {
@@ -98,7 +115,177 @@ body {
   }
 
   .ant-picker-dropdown .ant-picker-panel,
-  .ant-picker-panel-container{
+  .ant-picker-panel-container {
     background: var(--color-gray) !important;
+  }
+
+  .ant-message {
+    z-index: 1000;
+
+    .ant-message-notice-content {
+      background: var(--color-gray);
+      border: var(--border-glass);
+      backdrop-filter: var(--glass-backdrop-filter);
+      color: var(--text-primary);
+      border-radius: 12px;
+      padding: 12px 20px;
+    }
+
+    .ant-message-success .ant-message-notice-content {
+      border-left: 4px solid #3ABB5D;
+    }
+
+    .ant-message-error .ant-message-notice-content {
+      border-left: 4px solid #fd3133;
+    }
+
+    .ant-message-info .ant-message-notice-content {
+      border-left: 4px solid var(--color-primary);
+    }
+  }
+
+  .ant-btn-background-ghost {
+    border-color: var(--ghost-border-color) !important;
+    color: var(--ghost-text-color) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+
+    &:hover {
+      border-color: var(--color-primary) !important;
+      color: var(--color-primary) !important;
+    }
+  }
+
+  .ant-btn-primary {
+    color: #000000 !important;
+
+    span {
+      color: #000000 !important;
+    }
+  }
+
+  .categoryButton {
+    padding: 0.4rem 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background: var(--color-light-gray);
+    color: #000000;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(var(--color-light-gray-rgb), 0.8);
+    }
+  }
+
+  .categoryButton_active {
+    background: var(--color-primary) !important;
+    color: #000000 !important;
+
+    &:hover {
+      background: var(--color-primary-hover) !important;
+    }
+  }
+
+  .oAuth__button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  .navButton svg,
+  .homeButton svg {
+    transition: fill 0.2s ease;
+  }
+
+  [data-theme="light"] {
+    .ant-select-dropdown {
+      background-color: white;
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .ant-select-item-option-content {
+      color: #1a1a1a;
+    }
+
+    .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+      background-color: var(--color-primary) !important;
+      color: black !important;
+    }
+
+    .ant-picker-dropdown .ant-picker-panel,
+    .ant-picker-panel-container {
+      background: white !important;
+    }
+
+    .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner {
+      background-color: var(--color-primary) !important;
+      color: black !important;
+    }
+
+    .ant-picker-dropdown .ant-picker-header,
+    .ant-picker-dropdown .ant-picker-date-panel .ant-picker-content th,
+    .ant-picker-cell,
+    .ant-picker-now-btn,
+    .ant-picker-header button {
+      color: #1a1a1a !important;
+    }
+
+    .ant-picker-outlined,
+    .ant-picker-outlined:hover,
+    .ant-picker-outlined:focus-within {
+      background: white;
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .ant-message-notice-content {
+      background: white !important;
+      color: #1a1a1a !important;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .ant-btn-background-ghost {
+      border-color: #1a1a1a !important;
+      color: #1a1a1a !important;
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+
+    .navButton svg,
+    .homeButton svg {
+      fill: #000000;
+    }
+
+    .oAuth__button {
+      background: white !important;
+      border: 1px solid rgba(0, 0, 0, 0.1) !important;
+
+      &:hover {
+        background: #f5f5f5 !important;
+      }
+    }
+  }
+
+  [data-theme="dark"] {
+    .navButton svg,
+    .homeButton svg {
+      fill: #ffffff;
+    }
+
+    .oAuth__button {
+      background: rgba(255, 255, 255, 0.1) !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.2) !important;
+      }
+    }
   }
 }

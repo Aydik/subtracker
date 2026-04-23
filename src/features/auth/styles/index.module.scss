@@ -1,26 +1,30 @@
-@import '@app/styles' ;
+@import '@app/styles';
 
 .form {
   box-sizing: border-box;
-  padding: 2.5rem 2rem;
+  padding: 1.5rem;
   width: 100%;
   max-width: 450px;
   border-radius: 20px;
   @include glass-effect;
+
+  @media (min-width: 480px) {
+    padding: 2rem;
+  }
 }
 
 .title {
   margin: 0 0 1.25rem;
-  color: white;
+  color: var(--text-primary);
   text-align: center;
-  font-size: 2.5rem;
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
   font-weight: bold;
 }
 
 .fields {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .actions {
@@ -31,13 +35,11 @@
 }
 
 .link {
-  color: var(--color-primary);
   display: block;
   text-decoration: none;
   text-align: center;
 
-  &:hover {
-    color: var(--color-primary-hover);
-    text-decoration: underline;
+  .ant-btn {
+    width: 100%;
   }
 }

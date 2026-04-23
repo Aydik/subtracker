@@ -92,7 +92,9 @@ export const LoginForm: FC = () => {
           Войти
         </Button>
         <Link to="/auth/register" className={styles.link}>
-          Создать аккаунт
+          <Button type="default" ghost block>
+            Создать аккаунт
+          </Button>
         </Link>
       </div>
     </Form>

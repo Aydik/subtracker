@@ -23,6 +23,51 @@
   --border-glass: 2px solid rgba(255, 255, 255, 0.2);
 
   // backgrounds
+  --bg-color: #000000;
   --bg-gradient: radial-gradient(circle 50vw at 90% 10%, rgba(var(--color-primary-rgb), 0.5), transparent),
   radial-gradient(circle 60vh at 5% 100%, rgba(var(--color-primary-rgb), 0.3), transparent);
+
+  // text colors (dark theme default)
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  --text-tertiary: #cccac3;
+
+  // button ghost border color
+  --ghost-border-color: #ffffff;
+  --ghost-text-color: #ffffff;
+}
+
+// light theme
+[data-theme="light"] {
+  // colors
+  --color-gray: #f0f0f0;
+  --color-gray--hover: #e0e0e0;
+  --color-light-gray: #999999;
+
+  // colors rgb
+  --color-gray-rgb: 240, 240, 240;
+  --color-light-gray-rgb: 153, 153, 153;
+
+  // glass effect
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-backdrop-filter: blur(20px);
+  --glass-box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+
+  // border
+  --border-default: 1px solid rgb(200, 200, 200);
+  --border-glass: 1px solid rgba(0, 0, 0, 0.1);
+
+  // backgrounds
+  --bg-color: #f5f5f5;
+  --bg-gradient: radial-gradient(circle 50vw at 90% 10%, rgba(248, 216, 28, 0.1), transparent),
+  radial-gradient(circle 60vh at 5% 100%, rgba(248, 216, 28, 0.05), transparent);
+
+  // text colors for light theme
+  --text-primary: #1a1a1a;
+  --text-secondary: #4a4a4a;
+  --text-tertiary: #888888;
+
+  // button ghost border color for light theme
+  --ghost-border-color: #1a1a1a;
+  --ghost-text-color: #1a1a1a;
 }

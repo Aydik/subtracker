@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import styles from './index.module.scss';
 import { UserCard } from '@entities/User';
 import { LogoutButton } from '@features/auth';
+import { ToggleThemeButton } from '@shared/theme/ui/ToggleThemeButton.tsx';
 
 const ProfilePage: FC = () => {
   const handleConfigure = () => {
@@ -17,6 +18,11 @@ const ProfilePage: FC = () => {
       <UserCard />
 
       <div className={styles.settingsSection}>
+        <div className={styles.themeToggle}>
+          <span className={styles.themeLabel}>Тема оформления</span>
+          <ToggleThemeButton />
+        </div>
+
         <div className={styles.settingItem}>
           <span className={styles.settingLabel}>Способы входа</span>
           <button className={styles.configureButton} onClick={handleConfigure}>

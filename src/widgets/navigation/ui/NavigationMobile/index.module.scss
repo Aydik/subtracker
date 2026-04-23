@@ -9,4 +9,16 @@
   all: unset;
   padding: 1rem;
   cursor: pointer;
+
+  svg {
+    fill: var(--text-primary);
+    stroke: none;
+  }
+}
+
+[data-theme="light"] {
+  .navButton svg {
+    fill: #000000;
+    stroke: none;
+  }
 }

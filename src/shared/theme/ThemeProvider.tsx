@@ -15,6 +15,14 @@ export const ThemeProvider = ({ children }: Props) => {
 
   useEffect(() => {
     localStorage.setItem('app_theme', theme);
+
+    if (theme === 'dark') {
+      document.body.setAttribute('data-theme', 'dark');
+      document.body.classList.remove('light-theme');
+    } else {
+      document.body.setAttribute('data-theme', 'light');
+      document.body.classList.add('light-theme');
+    }
   }, [theme]);
 
   const currentThemeConfig =
