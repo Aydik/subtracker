@@ -25,4 +25,18 @@
   // backgrounds
   --bg-gradient: radial-gradient(circle 50vw at 90% 10%, rgba(var(--color-primary-rgb), 0.5), transparent),
   radial-gradient(circle 60vh at 5% 100%, rgba(var(--color-primary-rgb), 0.3), transparent);
+
+  [data-theme="light"] {
+    --color-gray: #f0f0f0;
+    --color-gray-rgb: 240, 240, 240;
+    --color-light-gray: #666666;
+    --glass-bg: rgba(0, 0, 0, 0.05);
+    --border-glass: 2px solid rgba(0, 0, 0, 0.1);
+  }
+
+  body.light-theme {
+    background: radial-gradient(circle 50vw at 90% 10%, rgba(248, 216, 28, 0.15), transparent),
+    radial-gradient(circle 60vh at 5% 100%, rgba(248, 216, 28, 0.1), transparent);
+    background-color: #f5f5f5;
+  }
 }

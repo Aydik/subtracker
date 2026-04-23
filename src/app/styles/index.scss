@@ -52,7 +52,7 @@ body {
   .ant-picker-dropdown .ant-picker-date-panel .ant-picker-content th,
   .ant-picker-cell,
   .ant-picker-now-btn,
-  .ant-picker-header button{
+  .ant-picker-header button {
     color: white !important;
   }
 
@@ -98,7 +98,39 @@ body {
   }
 
   .ant-picker-dropdown .ant-picker-panel,
-  .ant-picker-panel-container{
+  .ant-picker-panel-container {
     background: var(--color-gray) !important;
   }
+
+  .ant-message {
+    z-index: 1000;
+
+    .ant-message-notice-content {
+      background: var(--color-gray);
+      border: var(--border-glass);
+      backdrop-filter: var(--glass-backdrop-filter);
+      color: white;
+      border-radius: 12px;
+      padding: 12px 20px;
+    }
+
+    .ant-message-success {
+      .ant-message-notice-content {
+        border-left: 4px solid #3ABB5D;
+      }
+    }
+
+    .ant-message-error {
+      .ant-message-notice-content {
+        border-left: 4px solid #fd3133;
+      }
+    }
+
+    .ant-message-info {
+      .ant-message-notice-content {
+        border-left: 4px solid var(--color-primary);
+      }
+    }
+  }
+
 }
