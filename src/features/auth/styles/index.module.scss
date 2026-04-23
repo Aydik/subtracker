@@ -1,4 +1,4 @@
-@import '@app/styles' ;
+@import '@app/styles';
 
 .form {
   box-sizing: border-box;
@@ -15,9 +15,9 @@
 
 .title {
   margin: 0 0 1.25rem;
-  color: white;
+  color: var(--text-primary);
   text-align: center;
-  font-size: 2.5rem;
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
   font-weight: bold;
 }
 
@@ -35,13 +35,11 @@
 }
 
 .link {
-  color: var(--color-primary);
   display: block;
   text-decoration: none;
   text-align: center;
 
-  &:hover {
-    color: var(--color-primary-hover);
-    text-decoration: underline;
+  .ant-btn {
+    width: 100%;
   }
 }

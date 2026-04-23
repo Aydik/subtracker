@@ -1,7 +1,5 @@
 @import '@app/styles';
 
-
-
 .channelItem {
   @include glass-effect;
   display: flex;
@@ -18,5 +16,5 @@
 
 .channelName {
   font-size: 1rem;
-  color: white;
+  color: var(--text-primary);;
 }

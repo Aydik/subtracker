@@ -47,9 +47,7 @@ export const Subscriptions: FC = () => {
         <Spin />
       ) : error ? (
         'Ошибка'
-      ) : !subscriptions || subscriptions?.length === 0 ? (
-        'Пусто'
-      ) : (
+      ) : !subscriptions || subscriptions?.length === 0 ? null : (
         <ul className={styles.subscriptions__list}>
           {subscriptions.map((subscription, index) => (
             <li key={index}>

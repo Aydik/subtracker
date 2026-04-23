@@ -1,12 +1,19 @@
 import { Switch } from 'antd';
-import { useTheme } from '../../theme';
+import { useTheme } from '@shared/theme';
+import { useEffect, useState } from 'react';
 
 export const ToggleThemeButton = () => {
   const { theme, setTheme } = useTheme();
+  const [checked, setChecked] = useState(theme === 'dark');
+
+  useEffect(() => {
+    setChecked(theme === 'dark');
+  }, [theme]);
 
   const toggle = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
   };
 
-  return <Switch onChange={toggle} />;
+  return <Switch checked={checked} onChange={toggle} />;
 };

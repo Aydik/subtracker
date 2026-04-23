@@ -135,7 +135,9 @@ export const RegisterForm: FC = () => {
           Создать аккаунт
         </Button>
         <Link to="/auth/login" className={styles.link}>
-          Уже есть аккаунт? Войти
+          <Button type="default" ghost block>
+            Уже есть аккаунт? Войти
+          </Button>
         </Link>
       </div>
     </Form>

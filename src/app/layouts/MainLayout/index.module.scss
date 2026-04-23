@@ -29,11 +29,18 @@
 }
 
 .homeButton {
-  background-color: white;
-  color: black;
+  background: var(--glass-bg);
+  color: var(--text-primary);
+  border: var(--border-glass);
+
+  svg {
+    fill: var(--text-primary);
+    stroke: none;
+  }
 }
 
 .title {
   font-size: 1.5rem;
   line-height: 1.125em;
+  color: var(--text-primary);
 }
