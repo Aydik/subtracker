@@ -1,0 +1,40 @@
+.navigationDesktop {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navButton {
+  all: unset;
+  padding: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.8;
+  transition: 0.2s;
+  color: var(--text-primary);
+
+  &__label {
+    font-size: 18px;
+    line-height: 20px;
+    color: var(--text-primary);
+  }
+
+  svg {
+    fill: var(--text-primary);
+    stroke: none;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+[data-theme="light"] {
+  .navButton svg {
+    fill: #000000;
+    stroke: none;
+  }
+}

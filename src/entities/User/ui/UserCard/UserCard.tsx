@@ -1,0 +1,17 @@
+import { type FC } from 'react';
+import styles from './index.module.scss';
+import { useAppSelector } from '@src/store/hooks.ts';
+
+export const UserCard: FC = () => {
+  const user = useAppSelector((state) => state.user.user);
+
+  return (
+    <div className={styles.userCard}>
+      <div className={styles.avatar}>{user?.username?.charAt(0).toUpperCase()}</div>
+      <div className={styles.details}>
+        <h2 className={styles.name}>{user?.username}</h2>
+        <p className={styles.email}>{user?.email}</p>
+      </div>
+    </div>
+  );
+};
