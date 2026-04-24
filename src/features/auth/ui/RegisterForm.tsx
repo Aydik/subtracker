@@ -10,12 +10,12 @@ import { registerUserSchema } from '@features/auth/validationSchema.ts';
 import type { ApiErrorResponse } from '@shared/types/apiTypes.ts';
 import { useRegisterMutation } from '@src/store/api/services/userService.ts';
 
-export interface RegisterFormValues {
+export type RegisterFormValues = {
   username: string;
   email: string;
   password: string;
   confirmPassword: string;
-}
+};
 
 export const RegisterForm: FC = () => {
   const { message } = App.useApp();

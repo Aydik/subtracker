@@ -1,1 +1,5 @@
-﻿export { default as AuthLayout } from './AuthLayout';
+﻿import { AuthLayout } from './AuthLayout';
+
+export default AuthLayout;
+export { AuthLayout };
+export type { AuthLayoutProps } from './AuthLayout';

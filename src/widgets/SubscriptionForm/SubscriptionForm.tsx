@@ -1,6 +1,6 @@
 import { type FC, useCallback, useEffect, useMemo } from 'react';
 import { Form, Select, DatePicker, Button, Spin, App, Row, Col, Input } from 'antd';
-import styles from './index.module.scss';
+import styles from './SubscriptionForm.module.scss';
 import { LoadingOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
@@ -19,11 +19,11 @@ import { CURRENCY } from '@shared/types/Currency.ts';
 import { toISOString } from '@shared/utils/formatDate.ts';
 import dayjs from 'dayjs';
 
-interface Props {
+export type SubscriptionFormProps = {
   id?: string;
-}
+};
 
-export const SubscriptionForm: FC<Props> = ({ id }) => {
+export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
   const { message } = App.useApp();
 
   const navigate = useNavigate();

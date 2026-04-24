@@ -10,24 +10,24 @@ import type { AxiosError } from 'axios';
 import type { ApiErrorResponse } from '@shared/types/apiTypes.ts';
 import { useLoginMutation } from '@src/store/api/services/userService.ts';
 
-export interface LoginFormValues {
+export type LoginFormProps = {
   email: string;
   password: string;
-}
+};
 
 export const LoginForm: FC = () => {
   const { message } = App.useApp();
 
   const navigate = useNavigate();
 
-  const { control, handleSubmit, setError } = useForm<LoginFormValues>({
+  const { control, handleSubmit, setError } = useForm<LoginFormProps>({
     resolver: yupResolver(loginUserSchema),
     mode: 'onChange',
   });
 
   const [login, { isLoading }] = useLoginMutation();
 
-  const onSubmit = async (values: LoginFormValues) => {
+  const onSubmit = async (values: LoginFormProps) => {
     const requestData: UserLoginRequest = {
       email: values.email,
       password: values.password,

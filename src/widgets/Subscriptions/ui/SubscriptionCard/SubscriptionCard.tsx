@@ -1,5 +1,5 @@
 import { type FC } from 'react';
-import styles from './index.module.scss';
+import styles from './SubscriptionCard.module.scss';
 import { AsyncImage } from '@shared/ui/AsyncImage';
 import type { SubscriptionResponse } from '@src/api/models';
 import { isoToRussianDate } from '@shared/utils/formatDate.ts';
@@ -7,9 +7,9 @@ import { EditOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
-interface SubscriptionCardProps {
+export type SubscriptionCardProps = {
   subscription: SubscriptionResponse;
-}
+};
 
 export const SubscriptionCard: FC<SubscriptionCardProps> = ({ subscription }) => {
   const navigate = useNavigate();

@@ -1,16 +1,16 @@
 import { type FC, useState } from 'react';
-import styles from './index.module.scss';
+import styles from './AsyncImage.module.scss';
 import { Spin } from 'antd';
 import clsx from 'clsx';
 import { LoadingOutlined } from '@ant-design/icons';
 
-interface Props {
+export type AsyncImageProps = {
   src: string;
   alt: string;
   className?: string;
-}
+};
 
-export const AsyncImage: FC<Props> = ({ src, alt, className = '' }) => {
+export const AsyncImage: FC<AsyncImageProps> = ({ src, alt, className = '' }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 

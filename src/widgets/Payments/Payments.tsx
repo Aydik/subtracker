@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import styles from './index.module.scss';
+import styles from './Payments.module.scss';
 import { PaymentCard } from '@entities/Notification';
 import { mockPayments } from '@widgets/Payments/constants';
 

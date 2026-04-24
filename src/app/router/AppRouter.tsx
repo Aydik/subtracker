@@ -2,7 +2,7 @@ import { type FC, lazy, Suspense } from 'react';
 import { useRoutes } from 'react-router-dom';
 import type { RouteObject } from 'react-router-dom';
 import { PageLoader } from '@shared/ui/PageLoader';
-import UserLayout from '@app/layouts/UserLayout';
+import { UserLayout } from '@app/layouts/UserLayout';
 
 const IndexPage = lazy(() => import('@pages/IndexPage'));
 const AuthLayout = lazy(() => import('@app/layouts/AuthLayout'));

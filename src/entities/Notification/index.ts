@@ -13,6 +13,6 @@ export type {
   Reminder,
   ReminderDays,
 } from './types';
-export { NotificationChannel } from './ui/NotificationChannel';
-export { ReminderItem } from './ui/ReminderItem';
-export { PaymentCard } from './ui/PaymentCard';
+export { NotificationChannel } from './ui/NotificationChannel/NotificationChannel.tsx';
+export { ReminderItem } from './ui/ReminderItem/ReminderItem.tsx';
+export { PaymentCard } from './ui/PaymentCard/PaymentCard.tsx';

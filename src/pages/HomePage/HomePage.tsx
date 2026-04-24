@@ -1,5 +1,5 @@
 import { type FC } from 'react';
-import styles from './index.module.scss';
+import styles from './HomePage.module.scss';
 import { Subscriptions } from '@widgets/Subscriptions';
 import { useAppSelector } from '@src/store/hooks.ts';
 import { CURRENCY } from '@shared/types/Currency.ts';

@@ -1,15 +1,18 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
-import styles from './index.module.scss';
+import styles from './SubscriptionCategories.module.scss';
 import clsx from 'clsx';
 import { useCategories } from '@app/context/CategoriesContext.tsx';
 import { CATEGORIES_LOCALIZATION } from '@shared/types/Categories.ts';
 
-interface Props {
+export type SubscriptionCategoriesProps = {
   selectedCategory: string;
   setSelectedCategory: Dispatch<SetStateAction<string>>;
-}
+};
 
-export const SubscriptionCategories: FC<Props> = ({ selectedCategory, setSelectedCategory }) => {
+export const SubscriptionCategories: FC<SubscriptionCategoriesProps> = ({
+  selectedCategory,
+  setSelectedCategory,
+}) => {
   const { categories } = useCategories();
 
   return (

@@ -1,14 +1,14 @@
 import type { FC } from 'react';
-import styles from './index.module.scss';
+import styles from './ToggleSwitch.module.scss';
 
-interface ToggleSwitchProps {
+export type ToggleSwitchProps = {
   id: string;
   checked: boolean;
   onChange: (checked: boolean) => void;
   label?: string;
   ariaLabel?: string;
   disabled?: boolean;
-}
+};
 
 export const ToggleSwitch: FC<ToggleSwitchProps> = ({
   id,

@@ -1,1 +1,5 @@
-﻿export { default as UserLayout } from './UserLayout';
+﻿import UserLayout from './UserLayout';
+
+export default UserLayout;
+export { UserLayout };
+export type { UserLayoutProps } from './UserLayout';

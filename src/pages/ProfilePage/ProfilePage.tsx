@@ -1,10 +1,10 @@
 import type { FC } from 'react';
-import styles from './index.module.scss';
+import styles from './ProfilePage.module.scss';
 import { UserCard } from '@entities/User';
 import { LogoutButton } from '@features/auth';
 import { ToggleThemeButton } from '@shared/theme/ui/ToggleThemeButton.tsx';
 
-const ProfilePage: FC = () => {
+export const ProfilePage: FC = () => {
   const handleConfigure = () => {
     console.log('Настроить способы входа');
   };

@@ -1,1 +1,5 @@
-﻿export { default as HomeLayout } from './HomeLayout';
+﻿import HomeLayout from './HomeLayout';
+
+export default HomeLayout;
+export { HomeLayout };
+export type { HomeLayoutProps } from './HomeLayout';

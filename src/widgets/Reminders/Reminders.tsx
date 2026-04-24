@@ -1,5 +1,5 @@
 import { type FC, useState } from 'react';
-import styles from './index.module.scss';
+import styles from './Reminders.module.scss';
 import { ReminderItem } from '@entities/Notification';
 import { mockReminders } from '@widgets/Payments/constants';
 

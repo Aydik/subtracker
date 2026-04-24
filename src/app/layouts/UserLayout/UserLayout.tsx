@@ -3,7 +3,11 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { App, Spin } from 'antd';
 import { useLazyGetCurrentUserProfileQuery } from '@src/store/api/services/userService.ts';
 
-const UserLayout: FC = () => {
+export type UserLayoutProps = {
+  children?: React.ReactNode;
+};
+
+export const UserLayout: FC<UserLayoutProps> = () => {
   const messageShown = useRef(false);
   const navigate = useNavigate();
   const { message } = App.useApp();

@@ -1,10 +1,14 @@
 import { type FC, useEffect, useRef, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import styles from './index.module.scss';
+import styles from './AuthLayout.module.scss';
 import { App, Spin } from 'antd';
 import { useLazyGetCurrentUserProfileQuery } from '@src/store/api/services/userService.ts';
 
-const AuthLayout: FC = () => {
+export type AuthLayoutProps = {
+  children?: React.ReactNode;
+};
+
+export const AuthLayout: FC<AuthLayoutProps> = () => {
   const messageShown = useRef(false);
   const navigate = useNavigate();
   const { message } = App.useApp();
@@ -34,5 +38,3 @@ const AuthLayout: FC = () => {
     </div>
   );
 };
-
-export default AuthLayout;

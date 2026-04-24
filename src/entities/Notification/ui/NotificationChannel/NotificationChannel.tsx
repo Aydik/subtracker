@@ -1,14 +1,14 @@
 import type { FC } from 'react';
 import { CHANNEL_LOCALIZATION, type NotificationChannelType } from '@entities/Notification';
-import styles from './index.module.scss';
+import styles from './NotificationChannel.module.scss';
 import { ToggleSwitch } from '@shared/ui/ToggleSwitch';
 
-interface Props {
+export type NotificationChannelProps = {
   channel: NotificationChannelType;
   onChange: (id: string, enabled: boolean) => void;
-}
+};
 
-export const NotificationChannel: FC<Props> = ({ channel, onChange }) => {
+export const NotificationChannel: FC<NotificationChannelProps> = ({ channel, onChange }) => {
   return (
     <div className={styles.channelItem}>
       <span className={styles.channelName}>{CHANNEL_LOCALIZATION.push}</span>

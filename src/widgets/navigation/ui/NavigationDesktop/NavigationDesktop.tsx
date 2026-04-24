@@ -1,15 +1,15 @@
 import type { FC } from 'react';
-import styles from './index.module.scss';
+import styles from './NavigationDesktop.module.scss';
 import { Icon } from '@shared/ui/Icon';
 import { type NavigateFunction } from 'react-router-dom';
 import type { NavItem } from '@widgets/navigation';
 
-interface Props {
+export type NavigationDesktopProps = {
   navItems: NavItem[];
   navigate: NavigateFunction;
-}
+};
 
-export const NavigationDesktop: FC<Props> = ({ navItems, navigate }) => {
+export const NavigationDesktop: FC<NavigationDesktopProps> = ({ navItems, navigate }) => {
   return (
     <nav className={styles.navigationDesktop}>
       {navItems.map((item) => (

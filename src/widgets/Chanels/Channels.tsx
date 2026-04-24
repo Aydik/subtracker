@@ -1,5 +1,5 @@
 import { type FC, useState } from 'react';
-import styles from './index.module.scss';
+import styles from './Channels.module.scss';
 import { NotificationChannel } from '@entities/Notification';
 import { mockChannels } from '@widgets/Payments/constants';
 

@@ -1,5 +1,5 @@
 import { type FC } from 'react';
-import styles from './index.module.scss';
+import styles from './UserCard.module.scss';
 import { useAppSelector } from '@src/store/hooks.ts';
 
 export const UserCard: FC = () => {

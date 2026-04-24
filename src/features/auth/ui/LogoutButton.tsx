@@ -4,11 +4,11 @@ import { LogoutOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { useLogoutMutation } from '@src/store/api/services/userService.ts';
 
-interface Props {
+export type LogoutButtonProps = {
   className?: string;
-}
+};
 
-export const LogoutButton: FC<Props> = ({ className = '' }) => {
+export const LogoutButton: FC<LogoutButtonProps> = ({ className = '' }) => {
   const { message } = App.useApp();
 
   const navigate = useNavigate();

@@ -1,12 +1,12 @@
 import type { FC } from 'react';
-import styles from './index.module.scss';
+import styles from './ReminderItem.module.scss';
 import type { Reminder } from '../../types';
 import { ToggleSwitch } from '@shared/ui/ToggleSwitch';
 
-interface ReminderItemProps {
+export type ReminderItemProps = {
   reminder: Reminder;
   onToggle: (id: string, enabled: boolean) => void;
-}
+};
 
 export const ReminderItem: FC<ReminderItemProps> = ({ reminder, onToggle }) => {
   const getDaysText = (days: number): string => {

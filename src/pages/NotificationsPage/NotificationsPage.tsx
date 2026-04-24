@@ -1,8 +1,8 @@
 import type { FC } from 'react';
-import styles from './index.module.scss';
-import { Payments } from '@widgets/Payments';
-import { Channels } from '@widgets/Chanels';
-import { Reminders } from '@widgets/Reminders';
+import styles from './NotificationsPage.module.scss';
+import { Payments } from '@widgets/Payments/Payments.tsx';
+import { Channels } from '@widgets/Chanels/Channels.tsx';
+import { Reminders } from '@widgets/Reminders/Reminders.tsx';
 
 export const NotificationsPage: FC = () => {
   return (
@@ -21,5 +21,3 @@ export const NotificationsPage: FC = () => {
     </div>
   );
 };
-
-export default NotificationsPage;

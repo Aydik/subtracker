@@ -1,5 +1,5 @@
 import { type FC, useMemo } from 'react';
-import styles from './index.module.scss';
+import styles from './IndexPage.module.scss';
 import Marquee from 'react-fast-marquee';
 import { Button, Layout } from 'antd';
 import { Icon } from '@shared/ui/Icon';
@@ -9,7 +9,7 @@ import { AsyncImage } from '@shared/ui/AsyncImage';
 import { useServices } from '@app/context/ServicesContext.tsx';
 import type { ServiceResponse } from '@src/api/models';
 
-const IndexPage: FC = () => {
+export const IndexPage: FC = () => {
   const navigate = useNavigate();
 
   const { services: servicesData } = useServices();
@@ -110,5 +110,3 @@ const IndexPage: FC = () => {
     </Layout.Content>
   );
 };
-
-export default IndexPage;

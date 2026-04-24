@@ -1,9 +1,13 @@
 import type { FC } from 'react';
 import { Outlet } from 'react-router-dom';
-import styles from './index.module.scss';
+import styles from './HomeLayout.module.scss';
 import { Navigation } from '@widgets/navigation';
 
-const HomeLayout: FC = () => {
+export type HomeLayoutProps = {
+  children?: React.ReactNode;
+};
+
+export const HomeLayout: FC<HomeLayoutProps> = () => {
   return (
     <div className={styles.homeLayout}>
       <div className={styles.navDesktopContainer}>

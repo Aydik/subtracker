@@ -1,11 +1,15 @@
 import type { FC } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import styles from './index.module.scss';
+import styles from './MainLayout.module.scss';
 import { Button } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { getPageTitle } from '@widgets/navigation';
 
-const MainLayout: FC = () => {
+export type MainLayoutProps = {
+  children?: React.ReactNode;
+};
+
+export const MainLayout: FC<MainLayoutProps> = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const title = getPageTitle(location.pathname);
