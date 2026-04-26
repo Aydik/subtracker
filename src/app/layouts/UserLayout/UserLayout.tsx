@@ -21,7 +21,6 @@ export const UserLayout: FC<UserLayoutProps> = () => {
       .unwrap()
       .then(() => setIsLoading(false))
       .catch(() => {
-        console.log('catch');
         if (!messageShown.current) {
           message.info('Пройдите аутентификацию');
           messageShown.current = true;
