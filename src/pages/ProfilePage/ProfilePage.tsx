@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import styles from './ProfilePage.module.scss';
 import { UserCard } from '@entities/User';
 import { LogoutButton } from '@features/auth';
-import { ToggleThemeButton } from '@shared/theme/ui/ToggleThemeButton.tsx';
+import { ToggleThemeButton } from '@shared/theme';
 
 export const ProfilePage: FC = () => {
   const handleConfigure = () => {

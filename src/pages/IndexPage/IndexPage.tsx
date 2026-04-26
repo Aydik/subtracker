@@ -2,7 +2,7 @@ import { type FC, useMemo } from 'react';
 import styles from './IndexPage.module.scss';
 import Marquee from 'react-fast-marquee';
 import { Button, Layout } from 'antd';
-import { Icon } from '@shared/ui/Icon';
+import { Icon } from '@shared/ui/Icon/Icon.tsx';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import { AsyncImage } from '@shared/ui/AsyncImage';

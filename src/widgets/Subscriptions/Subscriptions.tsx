@@ -1,7 +1,7 @@
 import { type FC, useEffect, useState } from 'react';
 import styles from './Subscriptions.module.scss';
-import { SubscriptionCard } from './SubscriptionCard';
-import { SubscriptionCategories } from './SubscriptionCategories';
+import { SubscriptionCard } from './ui/SubscriptionCard';
+import { SubscriptionCategories } from './ui/SubscriptionCategories';
 import { Button, Spin } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';

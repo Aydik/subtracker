@@ -10,7 +10,7 @@ interface Props {
 
 export const ThemeProvider = ({ children }: Props) => {
   const [theme, setTheme] = useState<Theme>(() => {
-    return (localStorage.getItem('app_theme') as Theme) || 'light';
+    return (localStorage.getItem('app_theme') as Theme) || 'dark';
   });
 
   useEffect(() => {
