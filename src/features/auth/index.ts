@@ -1,3 +1,3 @@
-export { LoginForm } from './ui/LoginForm';
-export { RegisterForm } from './ui/RegisterForm';
-export { LogoutButton } from './ui/LogoutButton';
+export { LoginForm } from './LoginForm.tsx';
+export { RegisterForm } from './RegisterForm.tsx';
+export { LogoutButton } from './LogoutButton.tsx';
