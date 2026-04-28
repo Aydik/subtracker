@@ -27,7 +27,7 @@ export default defineConfig({
       '/api': {
         changeOrigin: true,
         secure: false,
-        target: 'http://localhost:8080',
+        target: 'http://217.149.29.76',
       },
     },
     strictPort: true,

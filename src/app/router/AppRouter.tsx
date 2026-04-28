@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 
+import { Empty } from 'antd';
 import { useRoutes } from 'react-router-dom';
 
 import { PageLoader } from '@shared/ui/PageLoader';
@@ -104,7 +105,7 @@ const routeConfig: RouteObject[] = [
             path: '/calendar',
             element: (
               <Suspense fallback={<PageLoader />}>
-                <SubscriptionPage />
+                <Empty description="В разработке..." image={Empty.PRESENTED_IMAGE_SIMPLE} />
               </Suspense>
             ),
           },
