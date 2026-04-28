@@ -8,11 +8,7 @@ import type { FC } from 'react';
 
 import styles from './MainLayout.module.scss';
 
-export type MainLayoutProps = {
-  children?: React.ReactNode;
-};
-
-export const MainLayout: FC<MainLayoutProps> = () => {
+export const MainLayout: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const title = getPageTitle(location.pathname);

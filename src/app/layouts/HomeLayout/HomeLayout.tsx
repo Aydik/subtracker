@@ -6,11 +6,7 @@ import type { FC } from 'react';
 
 import styles from './HomeLayout.module.scss';
 
-export type HomeLayoutProps = {
-  children?: React.ReactNode;
-};
-
-export const HomeLayout: FC<HomeLayoutProps> = () => {
+export const HomeLayout: FC = () => {
   return (
     <div className={styles.homeLayout}>
       <div className={styles.navDesktopContainer}>
