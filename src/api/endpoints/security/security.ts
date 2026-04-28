@@ -5,14 +5,14 @@
  * User Service API
  * OpenAPI spec version: 1.0
  */
+import { customAxios } from '../../axiosInstance';
+
 import type {
   AuthResponse,
   RefreshTokenRequest,
   UserLoginRequest,
   UserRegistrationRequest,
 } from '../../models';
-
-import { customAxios } from '../../axiosInstance';
 
 export const getSecurity = () => {
   /**

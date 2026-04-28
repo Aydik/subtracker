@@ -1,6 +1,9 @@
-import { createContext, useContext, type ReactNode, type FC } from 'react';
-import type { CategoryResponse } from '@src/api/models';
+import { createContext, useContext } from 'react';
+
 import { useGetCategoriesQuery } from '@src/store/api/services/subscriptionService.ts';
+
+import type { CategoryResponse } from '@src/api/models';
+import type { ReactNode, FC } from 'react';
 
 interface CategoriesContextValue {
   categories: CategoryResponse[];
@@ -10,11 +13,11 @@ interface CategoriesContextValue {
 
 const CategoriesContext = createContext<CategoriesContextValue | null>(null);
 
-interface Props {
+type CategoriesProvider = {
   children: ReactNode;
-}
+};
 
-export const CategoriesProvider: FC<Props> = ({ children }) => {
+export const CategoriesProvider: FC<CategoriesProvider> = ({ children }) => {
   const { data: categories, isLoading, error } = useGetCategoriesQuery({});
 
   return (

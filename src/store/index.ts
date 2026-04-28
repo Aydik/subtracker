@@ -1,7 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from './slices/userSlice.ts';
-import analyticsReducer from './slices/analyticsSlice.ts';
+
 import { BaseApi } from '@src/store/api/baseApi.ts';
+
+import analyticsReducer from './slices/analyticsSlice.ts';
+import userReducer from './slices/userSlice.ts';
 
 export const store = configureStore({
   reducer: {

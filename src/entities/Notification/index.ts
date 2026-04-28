@@ -1,3 +1,6 @@
+export { NotificationChannel } from './ui/NotificationChannel';
+export { ReminderItem } from './ui/ReminderItem';
+export { PaymentCard } from './ui/PaymentCard';
 export {
   PAYMENT_STATUSES,
   REMINDER_DAYS,
@@ -13,6 +16,3 @@ export type {
   Reminder,
   ReminderDays,
 } from './types';
-export { NotificationChannel } from './ui/NotificationChannel';
-export { ReminderItem } from './ui/ReminderItem';
-export { PaymentCard } from './ui/PaymentCard';

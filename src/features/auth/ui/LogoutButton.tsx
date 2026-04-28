@@ -1,14 +1,16 @@
-import type { FC } from 'react';
-import { App, Button } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
+import { App, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
+
 import { useLogoutMutation } from '@src/store/api/services/userService.ts';
 
-interface Props {
-  className?: string;
-}
+import type { FC } from 'react';
 
-export const LogoutButton: FC<Props> = ({ className = '' }) => {
+export type LogoutButtonProps = {
+  className?: string;
+};
+
+export const LogoutButton: FC<LogoutButtonProps> = ({ className = '' }) => {
   const { message } = App.useApp();
 
   const navigate = useNavigate();

@@ -1,8 +1,12 @@
+import { useEffect, useState } from 'react';
+
 import { ConfigProvider, theme as antdTheme } from 'antd';
-import { type ReactNode, useEffect, useState } from 'react';
-import { ThemeContext } from './context/ThemeContext';
-import type { Theme } from './types';
+
 import { darkTheme, lightTheme } from './config/themeConfig';
+import { ThemeContext } from './context/ThemeContext';
+
+import type { Theme } from './types';
+import type { ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
@@ -10,7 +14,7 @@ interface Props {
 
 export const ThemeProvider = ({ children }: Props) => {
   const [theme, setTheme] = useState<Theme>(() => {
-    return (localStorage.getItem('app_theme') as Theme) || 'light';
+    return (localStorage.getItem('app_theme') as Theme) || 'dark';
   });
 
   useEffect(() => {

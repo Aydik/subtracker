@@ -1,33 +1,36 @@
-import type { FC } from 'react';
-import { App, Button, Form, Input } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
-import styles from '../styles/index.module.scss';
-import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { App, Button, Form, Input } from 'antd';
+import { Controller, useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+
 import { loginUserSchema } from '@features/auth/validationSchema.ts';
-import type { UserLoginRequest } from '@src/api/models';
-import type { AxiosError } from 'axios';
-import type { ApiErrorResponse } from '@shared/types/apiTypes.ts';
 import { useLoginMutation } from '@src/store/api/services/userService.ts';
 
-export interface LoginFormValues {
+import type { ApiErrorResponse } from '@shared/types/apiTypes.ts';
+import type { UserLoginRequest } from '@src/api/models';
+import type { AxiosError } from 'axios';
+import type { FC } from 'react';
+
+import styles from './styles.module.scss';
+
+export type LoginFormProps = {
   email: string;
   password: string;
-}
+};
 
 export const LoginForm: FC = () => {
   const { message } = App.useApp();
 
   const navigate = useNavigate();
 
-  const { control, handleSubmit, setError } = useForm<LoginFormValues>({
+  const { control, handleSubmit, setError } = useForm<LoginFormProps>({
     resolver: yupResolver(loginUserSchema),
     mode: 'onChange',
   });
 
   const [login, { isLoading }] = useLoginMutation();
 
-  const onSubmit = async (values: LoginFormValues) => {
+  const onSubmit = async (values: LoginFormProps) => {
     const requestData: UserLoginRequest = {
       email: values.email,
       password: values.password,

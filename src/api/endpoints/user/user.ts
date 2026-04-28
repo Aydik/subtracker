@@ -5,9 +5,9 @@
  * User Service API
  * OpenAPI spec version: 1.0
  */
-import type { CurrencyRequest, ProfileResponse } from '../../models';
-
 import { customAxios } from '../../axiosInstance';
+
+import type { CurrencyRequest, ProfileResponse } from '../../models';
 
 export const getUser = () => {
   /**

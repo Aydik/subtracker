@@ -6,8 +6,8 @@
  * OpenAPI spec version: 1.0
  */
 import type { PageableObject } from './pageableObject';
-import type { SubscriptionResponse } from './subscriptionResponse';
 import type { SortObject } from './sortObject';
+import type { SubscriptionResponse } from './subscriptionResponse';
 
 export interface PageSubscriptionResponse {
   totalPages?: number;

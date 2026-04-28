@@ -1,23 +1,30 @@
-import { type FC, lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
+
+import { Empty } from 'antd';
 import { useRoutes } from 'react-router-dom';
-import type { RouteObject } from 'react-router-dom';
+
 import { PageLoader } from '@shared/ui/PageLoader';
-import UserLayout from '@app/layouts/UserLayout';
+
+import type { FC } from 'react';
+import type { RouteObject } from 'react-router-dom';
+
+const AuthLayout = lazy(() => import('@app/layouts/AuthLayout'));
+const UserLayout = lazy(() => import('@app/layouts/UserLayout'));
+const HomeLayout = lazy(() => import('@app/layouts/HomeLayout'));
+const MainLayout = lazy(() => import('@app/layouts/MainLayout'));
 
 const IndexPage = lazy(() => import('@pages/IndexPage'));
-const AuthLayout = lazy(() => import('@app/layouts/AuthLayout'));
+const HomePage = lazy(() => import('@pages/HomePage'));
+const SubscriptionPage = lazy(() => import('@pages/SubscriptionPage'));
+const ProfilePage = lazy(() => import('@pages/ProfilePage'));
+const NotificationsPage = lazy(() => import('@pages/NotificationsPage'));
+
 const LoginForm = lazy(() =>
   import('@features/auth').then((module) => ({ default: module.LoginForm })),
 );
 const RegisterForm = lazy(() =>
   import('@features/auth').then((module) => ({ default: module.RegisterForm })),
 );
-const HomeLayout = lazy(() => import('@app/layouts/HomeLayout'));
-const HomePage = lazy(() => import('@pages/HomePage'));
-const MainLayout = lazy(() => import('@app/layouts/MainLayout'));
-const SubscriptionPage = lazy(() => import('@pages/SubscriptionPage'));
-const ProfilePage = lazy(() => import('@pages/ProfilePage'));
-const NotificationsPage = lazy(() => import('@pages/NotificationsPage'));
 
 const routeConfig: RouteObject[] = [
   {
@@ -98,7 +105,7 @@ const routeConfig: RouteObject[] = [
             path: '/calendar',
             element: (
               <Suspense fallback={<PageLoader />}>
-                <SubscriptionPage />
+                <Empty description="В разработке..." image={Empty.PRESENTED_IMAGE_SIMPLE} />
               </Suspense>
             ),
           },

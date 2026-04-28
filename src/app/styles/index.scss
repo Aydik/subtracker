@@ -1,11 +1,11 @@
-@use "normalize";
-@use "font";
-@use "variables";
+@use 'normalize';
+@use 'font';
+@use 'variables';
 
 * {
   margin: 0;
   padding: 0;
-  font-family: "Tinkoff Sans", sans-serif;
+  font-family: 'Tinkoff Sans', sans-serif;
 }
 
 body {
@@ -16,11 +16,21 @@ body {
   color: var(--text-primary);
 }
 
-h1, h2, h3, h4, h5, h6, p, span, label, .ant-typography {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+label,
+.ant-typography {
   color: var(--text-primary);
 }
 
-input::placeholder, textarea::placeholder {
+input::placeholder,
+textarea::placeholder {
   color: var(--text-tertiary) !important;
 }
 
@@ -91,7 +101,8 @@ input::placeholder, textarea::placeholder {
   }
 
   .ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector,
-  .ant-select-outlined.ant-select-status-error:not(.ant-select-customize-input) .ant-select-selector,
+  .ant-select-outlined.ant-select-status-error:not(.ant-select-customize-input)
+    .ant-select-selector,
   .ant-picker-outlined,
   .ant-picker-outlined:hover,
   .ant-picker-outlined:focus-within {
@@ -132,7 +143,7 @@ input::placeholder, textarea::placeholder {
     }
 
     .ant-message-success .ant-message-notice-content {
-      border-left: 4px solid #3ABB5D;
+      border-left: 4px solid #3abb5d;
     }
 
     .ant-message-error .ant-message-notice-content {
@@ -205,7 +216,7 @@ input::placeholder, textarea::placeholder {
     transition: fill 0.2s ease;
   }
 
-  [data-theme="light"] {
+  [data-theme='light'] {
     .ant-select-dropdown {
       background-color: white;
       border-color: rgba(0, 0, 0, 0.1);
@@ -273,7 +284,7 @@ input::placeholder, textarea::placeholder {
     }
   }
 
-  [data-theme="dark"] {
+  [data-theme='dark'] {
     .navButton svg,
     .homeButton svg {
       fill: #ffffff;

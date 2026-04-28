@@ -9,7 +9,6 @@
 export type ProfileResponseCurrency =
   (typeof ProfileResponseCurrency)[keyof typeof ProfileResponseCurrency];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ProfileResponseCurrency = {
   RUB: 'RUB',
   USD: 'USD',

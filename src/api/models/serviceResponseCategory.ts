@@ -12,7 +12,6 @@
 export type ServiceResponseCategory =
   (typeof ServiceResponseCategory)[keyof typeof ServiceResponseCategory];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ServiceResponseCategory = {
   STREAMING_VIDEO: 'STREAMING_VIDEO',
   STREAMING_MUSIC: 'STREAMING_MUSIC',

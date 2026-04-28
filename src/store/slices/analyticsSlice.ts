@@ -1,4 +1,6 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+
+import type { PayloadAction } from '@reduxjs/toolkit';
 import type {
   AnalyticsSummaryResponse,
   CategoryAnalyticsResponse,
@@ -25,7 +27,7 @@ export const analyticsSlice = createSlice({
   reducers: {
     setAnalytics: (state, action: PayloadAction<AnalyticsSummaryResponse>) => {
       state.totalSubscriptions = action.payload.totalSubscriptions || 0;
-      state.totalAmount = action.payload.totalSubscriptions || 0;
+      state.totalAmount = action.payload.totalAmount || 0;
       state.categories = action.payload.categories || [];
       state.upcomingCharges = action.payload.upcomingCharges;
     },

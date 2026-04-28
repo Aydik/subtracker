@@ -1,13 +1,19 @@
-import { type FC, useEffect, useState } from 'react';
-import styles from './Subscriptions.module.scss';
-import { SubscriptionCard } from './ui/SubscriptionCard';
-import { SubscriptionCategories } from '@widgets/Subscriptions/ui/SubscriptionCategories';
-import { Button, Spin } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
 import { PlusOutlined } from '@ant-design/icons';
-import { useLazyGetSubscriptionsQuery } from '@src/store/api/services/subscriptionService.ts';
-import type { SubscriptionResponse } from '@src/api/models';
+import { Button, Empty, Spin } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
 import { useCategories } from '@app/context/CategoriesContext.tsx';
+import { useLazyGetSubscriptionsQuery } from '@src/store/api/services/subscriptionService.ts';
+
+import { SubscriptionCard } from './ui/SubscriptionCard';
+import { SubscriptionCategories } from './ui/SubscriptionCategories';
+
+import type { SubscriptionResponse } from '@src/api/models';
+import type { FC } from 'react';
+
+import styles from './Subscriptions.module.scss';
 
 export const Subscriptions: FC = () => {
   const navigate = useNavigate();
@@ -47,7 +53,9 @@ export const Subscriptions: FC = () => {
         <Spin />
       ) : error ? (
         'Ошибка'
-      ) : !subscriptions || subscriptions?.length === 0 ? null : (
+      ) : !subscriptions || subscriptions?.length === 0 ? (
+        <Empty description="Ничего не найдено" image={Empty.PRESENTED_IMAGE_SIMPLE} />
+      ) : (
         <ul className={styles.subscriptions__list}>
           {subscriptions.map((subscription, index) => (
             <li key={index}>

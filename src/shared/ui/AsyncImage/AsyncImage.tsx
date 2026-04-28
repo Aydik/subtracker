@@ -1,0 +1,55 @@
+import { useState } from 'react';
+
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
+import clsx from 'clsx';
+
+import type { FC } from 'react';
+
+import styles from './AsyncImage.module.scss';
+
+export type AsyncImageProps = {
+  src: string;
+  alt: string;
+  className?: string;
+};
+
+export const AsyncImage: FC<AsyncImageProps> = ({ src, alt, className = '' }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  const handleLoad = () => {
+    setIsLoading(false);
+  };
+
+  const handleError = () => {
+    setIsLoading(false);
+    setHasError(true);
+  };
+
+  const fallback = (
+    <div className={clsx(styles.fallback, className)}>{alt.charAt(0).toUpperCase()}</div>
+  );
+  const loader = (
+    <div className={clsx(styles.loader, className)}>
+      <Spin indicator={<LoadingOutlined spin />} />
+    </div>
+  );
+
+  if (!src || hasError) {
+    return fallback;
+  }
+
+  return (
+    <div>
+      {isLoading && loader}
+      <img
+        src={src}
+        alt={alt}
+        className={clsx(styles.image, className)}
+        onLoad={handleLoad}
+        onError={handleError}
+      />
+    </div>
+  );
+};
