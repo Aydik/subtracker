@@ -1,13 +1,18 @@
-import { type FC, useMemo } from 'react';
-import styles from './IndexPage.module.scss';
-import Marquee from 'react-fast-marquee';
+import { useMemo } from 'react';
+
 import { Button, Layout } from 'antd';
-import { Icon } from '@shared/ui/Icon/Icon.tsx';
-import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
-import { AsyncImage } from '@shared/ui/AsyncImage';
+import Marquee from 'react-fast-marquee';
+import { useNavigate } from 'react-router-dom';
+
 import { useServices } from '@app/context/ServicesContext.tsx';
+import { AsyncImage } from '@shared/ui/AsyncImage';
+import { Icon } from '@shared/ui/Icon/Icon.tsx';
+
 import type { ServiceResponse } from '@src/api/models';
+import type { FC } from 'react';
+
+import styles from './IndexPage.module.scss';
 
 export const IndexPage: FC = () => {
   const navigate = useNavigate();

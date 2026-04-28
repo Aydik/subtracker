@@ -1,7 +1,11 @@
-import { type FC, useState } from 'react';
-import styles from './Reminders.module.scss';
+import { useState } from 'react';
+
 import { ReminderItem } from '@entities/Notification';
 import { mockReminders } from '@widgets/Payments/constants';
+
+import type { FC } from 'react';
+
+import styles from './Reminders.module.scss';
 
 export const Reminders: FC = () => {
   const [reminders, setReminders] = useState(mockReminders);

@@ -1,7 +1,10 @@
-import type { FC } from 'react';
 import { Outlet } from 'react-router-dom';
-import styles from './HomeLayout.module.scss';
+
 import { Navigation } from '@widgets/navigation';
+
+import type { FC } from 'react';
+
+import styles from './HomeLayout.module.scss';
 
 export type HomeLayoutProps = {
   children?: React.ReactNode;

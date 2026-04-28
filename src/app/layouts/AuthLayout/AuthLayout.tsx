@@ -1,14 +1,15 @@
-import { type FC, useEffect, useRef, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
-import styles from './AuthLayout.module.scss';
+import { useEffect, useRef, useState } from 'react';
+
 import { App, Spin } from 'antd';
+import { Outlet, useNavigate } from 'react-router-dom';
+
 import { useLazyGetCurrentUserProfileQuery } from '@src/store/api/services/userService.ts';
 
-export type AuthLayoutProps = {
-  children?: React.ReactNode;
-};
+import type { FC } from 'react';
 
-export const AuthLayout: FC<AuthLayoutProps> = () => {
+import styles from './AuthLayout.module.scss';
+
+export const AuthLayout: FC = () => {
   const messageShown = useRef(false);
   const navigate = useNavigate();
   const { message } = App.useApp();

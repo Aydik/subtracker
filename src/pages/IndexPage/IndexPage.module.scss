@@ -118,18 +118,24 @@
 
   &_left {
     left: 0;
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%,
-            rgba(0, 0, 0, 0.4) 30%,
-            rgba(0, 0, 0, 0.1) 70%,
-            transparent 100%);
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.4) 30%,
+      rgba(0, 0, 0, 0.1) 70%,
+      transparent 100%
+    );
   }
 
   &_right {
     right: 0;
-    background: linear-gradient(to left, rgba(0, 0, 0, 0.8) 0%,
-            rgba(0, 0, 0, 0.4) 30%,
-            rgba(0, 0, 0, 0.1) 70%,
-            transparent 100%);
+    background: linear-gradient(
+      to left,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.4) 30%,
+      rgba(0, 0, 0, 0.1) 70%,
+      transparent 100%
+    );
   }
 
   @media (max-width: 768px) {
@@ -137,14 +143,14 @@
   }
 }
 
-[data-theme="light"] {
+[data-theme='light'] {
   .oAuth__button {
     border: 1px solid #1a1a1a !important;
   }
 }
 
 // Темная тема - белая рамка
-[data-theme="dark"] {
+[data-theme='dark'] {
   .oAuth__button {
     border: 1px solid #ffffff !important;
   }

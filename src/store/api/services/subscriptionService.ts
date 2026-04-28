@@ -1,5 +1,6 @@
-import { BaseApi } from '@src/store/api/baseApi.ts';
 import { getSubscriptions } from '@src/api/endpoints/subscriptions/subscriptions.ts';
+import { BaseApi } from '@src/store/api/baseApi.ts';
+
 import type {
   CreateSubscriptionRequest,
   GetServicesParams,

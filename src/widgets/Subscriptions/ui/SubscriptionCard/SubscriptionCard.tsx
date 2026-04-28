@@ -1,11 +1,14 @@
-import { type FC } from 'react';
-import styles from './SubscriptionCard.module.scss';
-import { AsyncImage } from '@shared/ui/AsyncImage';
-import type { SubscriptionResponse } from '@src/api/models';
-import { isoToRussianDate } from '@shared/utils/formatDate.ts';
 import { EditOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
+
+import { AsyncImage } from '@shared/ui/AsyncImage';
+import { isoToRussianDate } from '@shared/utils/formatDate.ts';
+
+import type { SubscriptionResponse } from '@src/api/models';
+import type { FC } from 'react';
+
+import styles from './SubscriptionCard.module.scss';
 
 export type SubscriptionCardProps = {
   subscription: SubscriptionResponse;

@@ -1,4 +1,4 @@
-@import "@app/styles";
+@import '@app/styles';
 
 .payments {
   @include glass-effect;
@@ -21,7 +21,7 @@
     flex-direction: column;
   }
 
-  &__divider{
+  &__divider {
     height: 1px;
     width: 100%;
     margin: 0.5rem 0;

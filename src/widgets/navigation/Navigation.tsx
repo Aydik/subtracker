@@ -1,8 +1,10 @@
-import type { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { NavigationMobile } from './ui/NavigationMobile';
-import { NavigationDesktop } from './ui/NavigationDesktop';
+
 import { NAV_ITEMS } from './constants';
+import { NavigationDesktop } from './ui/NavigationDesktop';
+import { NavigationMobile } from './ui/NavigationMobile';
+
+import type { FC } from 'react';
 
 export type NavigationProps = {
   breakpoint?: 'desktop' | 'mobile';

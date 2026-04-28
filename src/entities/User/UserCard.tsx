@@ -1,6 +1,8 @@
-import { type FC } from 'react';
-import styles from './UserCard.module.scss';
 import { useAppSelector } from '@src/store/hooks.ts';
+
+import type { FC } from 'react';
+
+import styles from './UserCard.module.scss';
 
 export const UserCard: FC = () => {
   const user = useAppSelector((state) => state.user.user);

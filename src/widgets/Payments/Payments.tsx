@@ -1,7 +1,9 @@
-import type { FC } from 'react';
-import styles from './Payments.module.scss';
 import { PaymentCard } from '@entities/Notification';
 import { mockPayments } from '@widgets/Payments/constants';
+
+import type { FC } from 'react';
+
+import styles from './Payments.module.scss';
 
 export const Payments: FC = () => {
   return (

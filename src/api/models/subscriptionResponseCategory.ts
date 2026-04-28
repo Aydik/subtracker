@@ -12,7 +12,6 @@
 export type SubscriptionResponseCategory =
   (typeof SubscriptionResponseCategory)[keyof typeof SubscriptionResponseCategory];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const SubscriptionResponseCategory = {
   STREAMING_VIDEO: 'STREAMING_VIDEO',
   STREAMING_MUSIC: 'STREAMING_MUSIC',

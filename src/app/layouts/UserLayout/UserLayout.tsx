@@ -1,13 +1,13 @@
-import { type FC, useEffect, useRef, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+
 import { App, Spin } from 'antd';
+import { Outlet, useNavigate } from 'react-router-dom';
+
 import { useLazyGetCurrentUserProfileQuery } from '@src/store/api/services/userService.ts';
 
-export type UserLayoutProps = {
-  children?: React.ReactNode;
-};
+import type { FC } from 'react';
 
-export const UserLayout: FC<UserLayoutProps> = () => {
+export const UserLayout: FC = () => {
   const messageShown = useRef(false);
   const navigate = useNavigate();
   const { message } = App.useApp();

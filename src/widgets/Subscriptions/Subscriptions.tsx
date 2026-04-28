@@ -1,13 +1,19 @@
-import { type FC, useEffect, useState } from 'react';
-import styles from './Subscriptions.module.scss';
-import { SubscriptionCard } from './ui/SubscriptionCard';
-import { SubscriptionCategories } from './ui/SubscriptionCategories';
+import { useEffect, useState } from 'react';
+
+import { PlusOutlined } from '@ant-design/icons';
 import { Button, Spin } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { PlusOutlined } from '@ant-design/icons';
-import { useLazyGetSubscriptionsQuery } from '@src/store/api/services/subscriptionService.ts';
-import type { SubscriptionResponse } from '@src/api/models';
+
 import { useCategories } from '@app/context/CategoriesContext.tsx';
+import { useLazyGetSubscriptionsQuery } from '@src/store/api/services/subscriptionService.ts';
+
+import { SubscriptionCard } from './ui/SubscriptionCard';
+import { SubscriptionCategories } from './ui/SubscriptionCategories';
+
+import type { SubscriptionResponse } from '@src/api/models';
+import type { FC } from 'react';
+
+import styles from './Subscriptions.module.scss';
 
 export const Subscriptions: FC = () => {
   const navigate = useNavigate();

@@ -5,6 +5,8 @@
  * Subscription Service API
  * OpenAPI spec version: 1.0
  */
+import { customAxios } from '../../axiosInstance';
+
 import type {
   CategoryResponse,
   CreateSubscriptionRequest,
@@ -17,8 +19,6 @@ import type {
   UpdateSubscriptionRequest,
   UploadCustomLogoBody,
 } from '../../models';
-
-import { customAxios } from '../../axiosInstance';
 
 export const getSubscriptions = () => {
   /**

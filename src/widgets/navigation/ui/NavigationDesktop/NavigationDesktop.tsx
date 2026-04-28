@@ -1,8 +1,10 @@
-import type { FC } from 'react';
-import styles from './NavigationDesktop.module.scss';
 import { Icon } from '@shared/ui/Icon/Icon.tsx';
-import { type NavigateFunction } from 'react-router-dom';
+
 import type { NavItem } from '@widgets/navigation';
+import type { FC } from 'react';
+import type { NavigateFunction } from 'react-router-dom';
+
+import styles from './NavigationDesktop.module.scss';
 
 export type NavigationDesktopProps = {
   navItems: NavItem[];

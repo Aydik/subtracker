@@ -1,7 +1,9 @@
-import type { FC } from 'react';
-import styles from './ReminderItem.module.scss';
-import type { Reminder } from './types';
 import { ToggleSwitch } from '@shared/ui/ToggleSwitch';
+
+import type { Reminder } from './types';
+import type { FC } from 'react';
+
+import styles from './ReminderItem.module.scss';
 
 export type ReminderItemProps = {
   reminder: Reminder;

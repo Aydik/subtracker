@@ -1,8 +1,11 @@
-import type { Dispatch, FC, SetStateAction } from 'react';
-import styles from './SubscriptionCategories.module.scss';
 import clsx from 'clsx';
+
 import { useCategories } from '@app/context/CategoriesContext.tsx';
 import { CATEGORIES_LOCALIZATION } from '@shared/types/Categories.ts';
+
+import type { Dispatch, FC, SetStateAction } from 'react';
+
+import styles from './SubscriptionCategories.module.scss';
 
 export type SubscriptionCategoriesProps = {
   selectedCategory: string;

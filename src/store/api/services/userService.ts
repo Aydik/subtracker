@@ -1,7 +1,8 @@
-import { BaseApi } from '@src/store/api/baseApi.ts';
 import { getSecurity } from '@src/api/endpoints/security/security.ts';
 import { getUser } from '@src/api/endpoints/user/user.ts';
+import { BaseApi } from '@src/store/api/baseApi.ts';
 import { logout, setCurrentUser } from '@src/store/slices/userSlice.ts';
+
 import type { UserLoginRequest, UserRegistrationRequest } from '@src/api/models';
 
 const securityApi = getSecurity();

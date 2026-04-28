@@ -1,8 +1,12 @@
-import { type FC, useState } from 'react';
-import styles from './AsyncImage.module.scss';
+import { useState } from 'react';
+
+import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 import clsx from 'clsx';
-import { LoadingOutlined } from '@ant-design/icons';
+
+import type { FC } from 'react';
+
+import styles from './AsyncImage.module.scss';
 
 export type AsyncImageProps = {
   src: string;

@@ -1,4 +1,4 @@
-@mixin image{
+@mixin image {
   width: 60px;
   height: 60px;
   display: flex;
@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.fallback{
+.fallback {
   @include image;
   border-radius: 50%;
   background-color: var(--color-gray);
@@ -15,10 +15,10 @@
   font-weight: 600;
 }
 
-.loader{
+.loader {
   @include image;
 }
 
-.image{
+.image {
   @include image;
 }

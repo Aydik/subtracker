@@ -1,14 +1,17 @@
-import type { FC } from 'react';
-import type { AxiosError } from 'axios';
-import { App, Button, Form, Input } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
-import styles from './styles.module.scss';
-import type { UserRegistrationRequest } from '@src/api/models';
-import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { App, Button, Form, Input } from 'antd';
+import { Controller, useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+
 import { registerUserSchema } from '@features/auth/validationSchema.ts';
-import type { ApiErrorResponse } from '@shared/types/apiTypes.ts';
 import { useRegisterMutation } from '@src/store/api/services/userService.ts';
+
+import type { ApiErrorResponse } from '@shared/types/apiTypes.ts';
+import type { UserRegistrationRequest } from '@src/api/models';
+import type { AxiosError } from 'axios';
+import type { FC } from 'react';
+
+import styles from './styles.module.scss';
 
 export type RegisterFormValues = {
   username: string;

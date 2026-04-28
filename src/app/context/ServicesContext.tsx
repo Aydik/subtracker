@@ -1,6 +1,9 @@
-import { createContext, useContext, type ReactNode, type FC } from 'react';
+import { createContext, useContext } from 'react';
+
 import { useGetServicesQuery } from '@src/store/api/services/subscriptionService.ts';
+
 import type { ServiceResponse } from '@src/api/models';
+import type { ReactNode, FC } from 'react';
 
 interface ServicesContextValue {
   services: ServiceResponse[];

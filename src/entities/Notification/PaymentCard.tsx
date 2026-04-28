@@ -1,7 +1,11 @@
-import styles from './PaymentCard.module.scss';
-import { PAYMENT_STATUS_LOCALIZATION, type PaymentNotification } from './types';
-import type { FC } from 'react';
 import { AsyncImage } from '@shared/ui/AsyncImage';
+
+import { PAYMENT_STATUS_LOCALIZATION } from './types';
+
+import type { PaymentNotification } from './types';
+import type { FC } from 'react';
+
+import styles from './PaymentCard.module.scss';
 
 export type PaymentCardProps = {
   payment: PaymentNotification;

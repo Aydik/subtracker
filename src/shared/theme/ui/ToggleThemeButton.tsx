@@ -1,6 +1,8 @@
-import { Switch } from 'antd';
-import { useTheme } from '@shared/theme';
 import { useEffect, useState } from 'react';
+
+import { Switch } from 'antd';
+
+import { useTheme } from '@shared/theme';
 
 export const ToggleThemeButton = () => {
   const { theme, setTheme } = useTheme();

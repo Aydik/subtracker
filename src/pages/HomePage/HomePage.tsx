@@ -1,9 +1,11 @@
-import { type FC } from 'react';
-import styles from './HomePage.module.scss';
-import { Subscriptions } from '@widgets/Subscriptions';
-import { useAppSelector } from '@src/store/hooks.ts';
 import { CURRENCY } from '@shared/types/Currency.ts';
 import { useGetAnalyticsQuery } from '@src/store/api/services/analyticsService.ts';
+import { useAppSelector } from '@src/store/hooks.ts';
+import { Subscriptions } from '@widgets/Subscriptions';
+
+import type { FC } from 'react';
+
+import styles from './HomePage.module.scss';
 
 const HomePage: FC = () => {
   const username = useAppSelector((state) => state.user?.user?.username);

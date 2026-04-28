@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+
 import styles from './ToggleSwitch.module.scss';
 
 export type ToggleSwitchProps = {

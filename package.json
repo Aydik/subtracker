@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
+    "lint": "eslint . --ext .ts,.tsx --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix --no-error-on-unmatched-pattern",
+    "format": "prettier --write \"src/**/*.{ts,tsx,scss,json}\"",
     "preview": "vite preview",
     "generate": "npx rimraf src/api/endpoints src/api/models && orval --config www/orval.config.cjs && prettier --write \"src/api/**/*.{ts,tsx}\""
   },
@@ -17,6 +19,7 @@
     "@types/node": "^24.2.0",
     "antd": "^5.29.3",
     "clsx": "^2.1.1",
+    "eslint-plugin-import": "^2.32.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-fast-marquee": "^1.6.5",

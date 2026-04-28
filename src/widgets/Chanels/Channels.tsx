@@ -1,7 +1,11 @@
-import { type FC, useState } from 'react';
-import styles from './Channels.module.scss';
+import { useState } from 'react';
+
 import { NotificationChannel } from '@entities/Notification';
 import { mockChannels } from '@widgets/Payments/constants';
+
+import type { FC } from 'react';
+
+import styles from './Channels.module.scss';
 
 export const Channels: FC = () => {
   const [channels, setChannels] = useState(mockChannels);

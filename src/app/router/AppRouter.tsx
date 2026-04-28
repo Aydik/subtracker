@@ -1,7 +1,11 @@
-import { type FC, lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
+
 import { useRoutes } from 'react-router-dom';
-import type { RouteObject } from 'react-router-dom';
+
 import { PageLoader } from '@shared/ui/PageLoader';
+
+import type { FC } from 'react';
+import type { RouteObject } from 'react-router-dom';
 
 const AuthLayout = lazy(() => import('@app/layouts/AuthLayout'));
 const UserLayout = lazy(() => import('@app/layouts/UserLayout'));

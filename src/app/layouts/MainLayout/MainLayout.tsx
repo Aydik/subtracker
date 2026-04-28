@@ -1,9 +1,12 @@
-import type { FC } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import styles from './MainLayout.module.scss';
-import { Button } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+
 import { getPageTitle } from '@widgets/navigation';
+
+import type { FC } from 'react';
+
+import styles from './MainLayout.module.scss';
 
 export type MainLayoutProps = {
   children?: React.ReactNode;
