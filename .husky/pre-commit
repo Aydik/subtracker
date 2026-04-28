@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Type-check..."
+npm run typecheck || { echo "❌ Ошибки типов. Коммит отменён."; exit 1; }
+
+echo "🧹 ESLint (автофикс)..."
+npm run lint:fix || { echo "❌ Неисправимые ошибки ESLint. Коммит отменён."; exit 1; }
+
+echo "✨ Prettier..."
+npm run format || { echo "❌ Ошибка форматирования. Коммит отменён."; exit 1; }

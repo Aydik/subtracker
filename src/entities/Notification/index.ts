@@ -1,9 +1,6 @@
-export { NotificationChannel } from './NotificationChannel';
-export type { NotificationChannelProps } from './NotificationChannel';
-export { ReminderItem } from './ReminderItem';
-export type { ReminderItemProps } from './ReminderItem';
-export { PaymentCard } from './PaymentCard';
-export type { PaymentCardProps } from './PaymentCard';
+export { NotificationChannel } from './ui/NotificationChannel';
+export { ReminderItem } from './ui/ReminderItem';
+export { PaymentCard } from './ui/PaymentCard';
 export {
   PAYMENT_STATUSES,
   REMINDER_DAYS,

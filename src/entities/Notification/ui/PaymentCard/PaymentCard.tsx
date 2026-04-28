@@ -1,8 +1,8 @@
 import { AsyncImage } from '@shared/ui/AsyncImage';
 
-import { PAYMENT_STATUS_LOCALIZATION } from './types';
+import { PAYMENT_STATUS_LOCALIZATION } from '../../types.ts';
 
-import type { PaymentNotification } from './types';
+import type { PaymentNotification } from '../../types.ts';
 import type { FC } from 'react';
 
 import styles from './PaymentCard.module.scss';

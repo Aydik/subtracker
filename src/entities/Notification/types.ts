@@ -1,4 +1,9 @@
-import type { Service } from '@entities/Service';
+interface Service {
+  id: string;
+  name: string;
+  imageUrl: string;
+  category: string;
+}
 
 export const REMINDER_DAYS = [1, 3, 7] as const;
 export type ReminderDays = (typeof REMINDER_DAYS)[number];
