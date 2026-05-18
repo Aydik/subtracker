@@ -2,24 +2,28 @@ import { useCallback, useEffect, useMemo } from 'react';
 
 import { LoadingOutlined } from '@ant-design/icons';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Form, Select, DatePicker, Button, Spin, App, Row, Col, Input } from 'antd';
+import { Form, Select, DatePicker, Button, Spin, App, Row, Col, Input, Checkbox } from 'antd';
 import dayjs from 'dayjs';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
+import { useCategories } from '@app/context/CategoriesContext.tsx';
 import { useServices } from '@app/context/ServicesContext.tsx';
+import { CATEGORIES_LOCALIZATION } from '@shared/types/Categories.ts';
 import { CURRENCY } from '@shared/types/Currency.ts';
 import { toISOString } from '@shared/utils/formatDate.ts';
 import {
+  useCreateCustomSubscriptionMutation,
   useCreateSubscriptionMutation,
   useDeleteSubscriptionMutation,
   useLazyGetSubscriptionByIdQuery,
   useUpdateSubscriptionMutation,
+  useUploadCustomLogoMutation,
 } from '@src/store/api/services/subscriptionService.ts';
 import { useAppSelector } from '@src/store/hooks.ts';
-import { subscriptionSchema } from '@widgets/SubscriptionForm/validationSchema.ts';
+import { getSubscriptionSchema } from '@widgets/SubscriptionForm/validationSchema.ts';
 
-import type { CreateSubscriptionRequest } from '@src/api/models';
+import type { SubscriptionFormValues } from '@widgets/SubscriptionForm/validationSchema.ts';
 import type { FC } from 'react';
 
 import styles from './SubscriptionForm.module.scss';
@@ -34,21 +38,27 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
   const navigate = useNavigate();
 
   const { services, isLoading: isLoadingServices } = useServices();
+  const { categories, isLoading: isLoadingCategories } = useCategories();
   const currency = useAppSelector((state) => state.user.user?.currency);
 
-  const { control, handleSubmit, setValue } = useForm<CreateSubscriptionRequest>({
-    resolver: yupResolver(subscriptionSchema),
+  const { control, handleSubmit, setValue, watch } = useForm<SubscriptionFormValues>({
+    resolver: yupResolver(getSubscriptionSchema(!id)),
     mode: 'onChange',
   });
 
+  const { isCustom } = watch();
+
   const [getSubscriptionById] = useLazyGetSubscriptionByIdQuery();
   const [createSubscription, { isLoading: isLoadingCreate }] = useCreateSubscriptionMutation();
+  const [createCustomSubscription, { isLoading: isLoadingCreateCustom }] =
+    useCreateCustomSubscriptionMutation();
+  const [uploadCustomLogo, { isLoading: isLoadingUpload }] = useUploadCustomLogoMutation();
   const [updateSubscription, { isLoading: isLoadingUpdate }] = useUpdateSubscriptionMutation();
   const [deleteSubscription] = useDeleteSubscriptionMutation();
 
   const isLoadingRequest = useMemo(
-    () => isLoadingCreate || isLoadingUpdate,
-    [isLoadingCreate, isLoadingUpdate],
+    () => isLoadingCreate || isLoadingUpdate || isLoadingCreateCustom || isLoadingUpload,
+    [isLoadingCreate, isLoadingCreateCustom, isLoadingUpdate, isLoadingUpload],
   );
 
   useEffect(() => {
@@ -56,13 +66,8 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
       if (id) {
         const data = await getSubscriptionById(id).unwrap();
 
-        if (data?.serviceName && services) {
-          const serviceId = services.find(
-            (service) => service.serviceName === data?.serviceName,
-          )?.serviceId;
-          if (serviceId) {
-            setValue('serviceId', serviceId);
-          }
+        if (data?.serviceName) {
+          setValue('serviceName', data?.serviceName);
         }
         if (data?.amount) {
           setValue('amount', data?.amount);
@@ -70,13 +75,19 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
         if (data?.timeToPay) {
           setValue('timeToPay', data?.timeToPay);
         }
+        if (data?.isMonth) {
+          setValue('isMonth', data?.isMonth);
+        }
+        if (data?.paymentMethod) {
+          setValue('paymentMethod', data?.paymentMethod);
+        }
       }
     };
     fetchSubscription();
   }, [id]);
 
   const onSubmit = useCallback(
-    async (values: CreateSubscriptionRequest) => {
+    async (values: SubscriptionFormValues) => {
       try {
         if (id) {
           await updateSubscription({
@@ -84,14 +95,30 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
             updateSubscriptionRequest: {
               amount: values.amount,
               timeToPay: values.timeToPay,
+              isMonth: values.isMonth,
+              paymentMethod: values.paymentMethod,
             },
           }).unwrap();
         } else {
-          await createSubscription({
-            serviceId: values.serviceId,
-            amount: values.amount,
-            timeToPay: values.timeToPay,
-          }).unwrap();
+          if (!values.isCustom && values.serviceId) {
+            await createSubscription({
+              amount: values.amount,
+              timeToPay: values.timeToPay,
+              isMonth: values.isMonth,
+              paymentMethod: values.paymentMethod,
+              serviceId: values.serviceId,
+            }).unwrap();
+          }
+          if (values.isCustom && values.serviceName && values.categoryId) {
+            await createCustomSubscription({
+              amount: values.amount,
+              timeToPay: values.timeToPay,
+              isMonth: values.isMonth,
+              paymentMethod: values.paymentMethod,
+              serviceName: values.serviceName,
+              categoryId: values.categoryId,
+            }).unwrap();
+          }
         }
 
         message.destroy();
@@ -120,7 +147,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
     }
   }, [id]);
 
-  if (isLoadingServices) {
+  if (isLoadingServices || isLoadingCategories) {
     return (
       <div className={styles.initContainer}>
         <Spin size="large" indicator={<LoadingOutlined spin />} />
@@ -131,28 +158,94 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
 
   return (
     <Form onFinish={handleSubmit(onSubmit)} className={styles.form}>
-      <Controller
-        name="serviceId"
-        control={control}
-        render={({ field, fieldState: { error } }) => (
-          <Form.Item label="Сервис" validateStatus={error ? 'error' : ''} help={error?.message}>
-            <Select
-              size="large"
-              placeholder="Netflix, Spotify..."
-              showSearch
-              value={field.value}
-              onChange={field.onChange}
-              disabled={!!id}
+      {isCustom || !!id ? (
+        <Controller
+          name="serviceName"
+          control={control}
+          render={({ field, fieldState: { error } }) => (
+            <Form.Item
+              label="Название сервиса"
+              validateStatus={error ? 'error' : ''}
+              help={error?.message}
+              style={{ height: 72 }}
             >
-              {services.map((service) => (
-                <Select.Option key={service.serviceId} value={service.serviceId}>
-                  {service.serviceName}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item>
-        )}
-      />
+              <Input
+                size="large"
+                value={field.value}
+                onChange={field.onChange}
+                placeholder="Введите название сервиса"
+                disabled={!!id}
+              />
+            </Form.Item>
+          )}
+        />
+      ) : (
+        <Controller
+          name="serviceId"
+          control={control}
+          render={({ field, fieldState: { error } }) => (
+            <Form.Item label="Сервис" validateStatus={error ? 'error' : ''} help={error?.message}>
+              <Select
+                size="large"
+                placeholder="Netflix, Spotify..."
+                showSearch
+                value={field.value}
+                onChange={field.onChange}
+              >
+                {services.map((service) => (
+                  <Select.Option key={service.serviceId} value={service.serviceId}>
+                    {service.serviceName}
+                  </Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
+          )}
+        />
+      )}
+
+      {!id && (
+        <Controller
+          name="isCustom"
+          control={control}
+          render={({ field }) => (
+            <Checkbox
+              style={{ height: 32, alignItems: 'center' }}
+              checked={field.value}
+              onChange={field.onChange}
+            >
+              Кастомная подписка
+            </Checkbox>
+          )}
+        />
+      )}
+
+      {isCustom && (
+        <Controller
+          name="categoryId"
+          control={control}
+          render={({ field, fieldState: { error } }) => (
+            <Form.Item
+              label="Категория"
+              validateStatus={error ? 'error' : ''}
+              help={error?.message}
+            >
+              <Select
+                size="large"
+                placeholder="Видео, Музыка..."
+                showSearch
+                value={field.value}
+                onChange={field.onChange}
+              >
+                {categories.map((category) => (
+                  <Select.Option key={category.categoryId} value={category.categoryId}>
+                    {CATEGORIES_LOCALIZATION[category.name || 'OTHER']}
+                  </Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
+          )}
+        />
+      )}
 
       <Row gutter={16}>
         <Col span={12}>
@@ -171,6 +264,9 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
                   format="DD.MM.YYYY"
                   value={field.value ? dayjs(field.value) : null}
                   onChange={(value) => field.onChange(toISOString(value))}
+                  disabledDate={(current) => {
+                    return current && current < dayjs().startOf('day');
+                  }}
                 />
               </Form.Item>
             )}
@@ -203,6 +299,25 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
           />
         </Col>
       </Row>
+
+      <Controller
+        name="paymentMethod"
+        control={control}
+        render={({ field, fieldState: { error } }) => (
+          <Form.Item
+            label="Способ оплаты"
+            validateStatus={error ? 'error' : ''}
+            help={error?.message}
+          >
+            <Input
+              size="large"
+              value={field.value}
+              onChange={field.onChange}
+              placeholder="Введите способ оплаты"
+            />
+          </Form.Item>
+        )}
+      />
 
       <div className={styles.actions}>
         {id && (

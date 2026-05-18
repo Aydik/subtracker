@@ -14,6 +14,10 @@ export interface CreateSubscriptionRequest {
   serviceId: string;
   /** Цена подписки */
   amount: number;
+  /** Флаг ежемесячной подписки. true — подписка автоматически продлевается каждый месяц, false — подписка будет удалена в день списания */
+  isMonth: boolean;
   /** Время платы по подписке */
   timeToPay: string;
+  /** Способ оплаты подписки */
+  paymentMethod?: string;
 }

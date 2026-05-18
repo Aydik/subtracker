@@ -3,9 +3,11 @@ import { BaseApi } from '@src/store/api/baseApi.ts';
 
 import type {
   CreateSubscriptionRequest,
+  CustomSubscriptionRequest,
   GetServicesParams,
   GetSubscriptionsParams,
   UpdateSubscriptionRequest,
+  UploadCustomLogoBody,
 } from '@src/api/models';
 
 const subscriptionsApi = getSubscriptions();
@@ -40,6 +42,36 @@ export const subscriptionService = BaseApi.injectEndpoints({
       queryFn: async (request: CreateSubscriptionRequest) => {
         try {
           const data = await subscriptionsApi.createSubscription(request);
+
+          return { data };
+        } catch (error) {
+          return { error };
+        }
+      },
+    }),
+
+    createCustomSubscription: build.mutation({
+      queryFn: async (request: CustomSubscriptionRequest) => {
+        try {
+          const data = await subscriptionsApi.createCustomSubscription(request);
+
+          return { data };
+        } catch (error) {
+          return { error };
+        }
+      },
+    }),
+
+    uploadCustomLogo: build.mutation({
+      queryFn: async (request: {
+        subscriptionId: string;
+        uploadCustomLogoBody: UploadCustomLogoBody;
+      }) => {
+        try {
+          const data = await subscriptionsApi.uploadCustomLogo(
+            request.subscriptionId,
+            request.uploadCustomLogoBody,
+          );
 
           return { data };
         } catch (error) {
@@ -106,6 +138,8 @@ export const {
   useLazyGetSubscriptionsQuery,
   useLazyGetSubscriptionByIdQuery,
   useCreateSubscriptionMutation,
+  useCreateCustomSubscriptionMutation,
+  useUploadCustomLogoMutation,
   useDeleteSubscriptionMutation,
   useUpdateSubscriptionMutation,
 } = subscriptionService;

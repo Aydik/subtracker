@@ -12,6 +12,7 @@
 export type CategoryAnalyticsResponseCategory =
   (typeof CategoryAnalyticsResponseCategory)[keyof typeof CategoryAnalyticsResponseCategory];
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const CategoryAnalyticsResponseCategory = {
   STREAMING_VIDEO: 'STREAMING_VIDEO',
   STREAMING_MUSIC: 'STREAMING_MUSIC',
