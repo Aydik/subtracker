@@ -1,8 +1,4 @@
-import type {
-  NotificationChannelType,
-  PaymentNotification,
-  Reminder,
-} from '@entities/Notification';
+import type { PaymentNotification } from '@entities/Notification';
 
 export const mockPayments: PaymentNotification[] = [
   {
@@ -46,19 +42,5 @@ export const mockPayments: PaymentNotification[] = [
     },
     description: 'Уже списано',
     status: 'completed',
-  },
-];
-
-export const mockReminders: Reminder[] = [
-  { id: '1', daysBefore: 1, isEnabled: true },
-  { id: '2', daysBefore: 3, isEnabled: true },
-  { id: '3', daysBefore: 7, isEnabled: false },
-];
-
-export const mockChannels: NotificationChannelType[] = [
-  {
-    id: '1',
-    name: 'push',
-    isEnabled: true,
   },
 ];

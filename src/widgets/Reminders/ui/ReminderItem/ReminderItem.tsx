@@ -5,9 +5,9 @@ import type { FC } from 'react';
 
 import styles from './ReminderItem.module.scss';
 
-export type ReminderItemProps = {
+type ReminderItemProps = {
   reminder: Reminder;
-  onToggle: (id: string, enabled: boolean) => void;
+  onToggle: (days: number, enabled: boolean) => Promise<void>;
 };
 
 export const ReminderItem: FC<ReminderItemProps> = ({ reminder, onToggle }) => {
@@ -24,9 +24,9 @@ export const ReminderItem: FC<ReminderItemProps> = ({ reminder, onToggle }) => {
       </span>
 
       <ToggleSwitch
-        id={`reminder-${reminder.id}`}
+        id={`reminder-${reminder.daysBefore}`}
         checked={reminder.isEnabled}
-        onChange={(checked) => onToggle(reminder.id, checked)}
+        onChange={(checked) => onToggle(reminder.daysBefore, checked)}
         ariaLabel={`Напоминание за ${reminder.daysBefore} дней`}
       />
     </div>
