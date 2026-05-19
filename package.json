@@ -20,6 +20,7 @@
     "@reduxjs/toolkit": "^2.11.2",
     "@types/node": "^24.2.0",
     "antd": "^5.29.3",
+    "antd-img-crop": "^4.30.0",
     "clsx": "^2.1.1",
     "eslint-plugin-import": "^2.32.0",
     "react": "^19.1.0",

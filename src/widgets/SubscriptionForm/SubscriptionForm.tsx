@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { LoadingOutlined } from '@ant-design/icons';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -22,9 +22,11 @@ import {
   useUploadCustomLogoMutation,
 } from '@src/store/api/services/subscriptionService.ts';
 import { useAppSelector } from '@src/store/hooks.ts';
+import { UploadImage } from '@widgets/SubscriptionForm/ui/UploadImage';
 import { getSubscriptionSchema } from '@widgets/SubscriptionForm/validationSchema.ts';
 
 import type { SubscriptionFormValues } from '@widgets/SubscriptionForm/validationSchema.ts';
+import type { UploadFile } from 'antd';
 import type { FC } from 'react';
 
 import styles from './SubscriptionForm.module.scss';
@@ -37,6 +39,8 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
   const { message } = App.useApp();
 
   const navigate = useNavigate();
+
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const { services, isLoading: isLoadingServices } = useServices();
   const { categories, isLoading: isLoadingCategories } = useCategories();
@@ -113,7 +117,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
             }).unwrap();
           }
           if (values.isCustom && values.serviceName && values.categoryId) {
-            await createCustomSubscription({
+            const res = await createCustomSubscription({
               amount: values.amount,
               timeToPay: values.timeToPay,
               isMonth: values.isMonth,
@@ -121,6 +125,17 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
               serviceName: values.serviceName,
               categoryId: values.categoryId,
             }).unwrap();
+
+            // Загружаем изображение
+            const file = fileList[0]?.originFileObj;
+            if (file && res?.subscriptionId) {
+              await uploadCustomLogo({
+                subscriptionId: res.subscriptionId,
+                uploadCustomLogoBody: {
+                  logo: file,
+                },
+              });
+            }
           }
         }
 
@@ -132,7 +147,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
         message.error('Ошибка при сохранении!');
       }
     },
-    [id],
+    [id, fileList],
   );
 
   const handleDelete = useCallback(async () => {
@@ -194,6 +209,9 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
                 showSearch
                 value={field.value}
                 onChange={field.onChange}
+                filterOption={(input, option) =>
+                  (option?.children ?? '').toString().toLowerCase().includes(input.toLowerCase())
+                }
               >
                 {services.map((service) => (
                   <Select.Option key={service.serviceId} value={service.serviceId}>
@@ -234,6 +252,9 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
                 showSearch
                 value={field.value}
                 onChange={field.onChange}
+                filterOption={(input, option) =>
+                  (option?.children ?? '').toString().toLowerCase().includes(input.toLowerCase())
+                }
               >
                 {categories.map((category) => (
                   <Select.Option key={category.categoryId} value={category.categoryId}>
@@ -348,6 +369,12 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
           </Form.Item>
         )}
       />
+
+      {isCustom && !id && (
+        <Form.Item label="Изображение">
+          <UploadImage fileList={fileList} setFileList={setFileList} />
+        </Form.Item>
+      )}
 
       <div className={styles.actions}>
         {id && (
