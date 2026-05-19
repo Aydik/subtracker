@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Form, Select, DatePicker, Button, Spin, App, Row, Col, Input, Checkbox } from 'antd';
+import clsx from 'clsx';
 import dayjs from 'dayjs';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -43,6 +44,10 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
 
   const { control, handleSubmit, setValue, watch } = useForm<SubscriptionFormValues>({
     resolver: yupResolver(getSubscriptionSchema(!id)),
+    defaultValues: {
+      isMonth: true,
+      isCustom: false,
+    },
     mode: 'onChange',
   });
 
@@ -75,9 +80,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
         if (data?.timeToPay) {
           setValue('timeToPay', data?.timeToPay);
         }
-        if (data?.isMonth) {
-          setValue('isMonth', data?.isMonth);
-        }
+        setValue('isMonth', !!data?.isMonth);
         if (data?.paymentMethod) {
           setValue('paymentMethod', data?.paymentMethod);
         }
@@ -208,11 +211,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
           name="isCustom"
           control={control}
           render={({ field }) => (
-            <Checkbox
-              style={{ height: 32, alignItems: 'center' }}
-              checked={field.value}
-              onChange={field.onChange}
-            >
+            <Checkbox className={styles.checkbox} checked={field.value} onChange={field.onChange}>
               Кастомная подписка
             </Checkbox>
           )}
@@ -299,6 +298,37 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
           />
         </Col>
       </Row>
+
+      <Controller
+        name="isMonth"
+        control={control}
+        render={({ field, fieldState: { error } }) => (
+          <Form.Item
+            label="Тип списания"
+            validateStatus={error ? 'error' : ''}
+            help={error?.message}
+          >
+            <div className={styles.isMonthContainer}>
+              {[
+                { label: 'Единоразово', value: false },
+                { label: 'Ежемесячно', value: true },
+              ].map((button) => (
+                <button
+                  key={button.label}
+                  type="button"
+                  className={clsx(
+                    styles.isMonthButton,
+                    field.value === button.value ? styles.isMonthButton_active : undefined,
+                  )}
+                  onClick={() => field.onChange(button.value)}
+                >
+                  {button.label}
+                </button>
+              ))}
+            </div>
+          </Form.Item>
+        )}
+      />
 
       <Controller
         name="paymentMethod"
