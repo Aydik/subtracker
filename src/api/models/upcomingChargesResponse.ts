@@ -14,4 +14,12 @@ export interface UpcomingChargesResponse {
   nextWeek?: number;
   /** Сумма списаний в ближайшие 30 дней */
   nextMonth?: number;
+  /** Количество активных подписок */
+  activeSubscriptionsCount?: number;
+  /** Количество подписок к оплате на этой неделе */
+  subscriptionsToPayThisWeekCount?: number;
+  /** Количество подписок к оплате в этом месяце */
+  subscriptionsToPayThisMonthCount?: number;
+  /** Сумма оплат по подпискам за этот месяц */
+  totalAmountToPayThisMonth?: number;
 }

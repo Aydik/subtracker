@@ -5,11 +5,38 @@
  * User Service API
  * OpenAPI spec version: 1.0
  */
+import type {
+  CurrencyRequest,
+  NotificationSettingsRequest,
+  NotificationSettingsResponse,
+  ProfileResponse,
+} from '../../models';
+
 import { customAxios } from '../../axiosInstance';
 
-import type { CurrencyRequest, ProfileResponse } from '../../models';
-
 export const getUser = () => {
+  /**
+   * Получить текущие настройки напоминаний об оплате подписок
+   * @summary Получить настройки напоминаний
+   */
+  const getNotificationSettings = () => {
+    return customAxios<NotificationSettingsResponse>({
+      url: `/api/users/me/notifications`,
+      method: 'GET',
+    });
+  };
+  /**
+   * Установить флаги уведомлений об оплате подписок (за 1/3/7 дней)
+   * @summary Обновить настройки напоминаний
+   */
+  const updateNotificationSettings = (notificationSettingsRequest: NotificationSettingsRequest) => {
+    return customAxios<NotificationSettingsResponse>({
+      url: `/api/users/me/notifications`,
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      data: notificationSettingsRequest,
+    });
+  };
   /**
    * Изменить валюту в настройках профиля текущего пользователя
    * @summary Изменить валюту
@@ -29,8 +56,19 @@ export const getUser = () => {
   const getCurrentUserProfile = () => {
     return customAxios<ProfileResponse>({ url: `/api/users/me`, method: 'GET' });
   };
-  return { changeCurrency, getCurrentUserProfile };
+  return {
+    getNotificationSettings,
+    updateNotificationSettings,
+    changeCurrency,
+    getCurrentUserProfile,
+  };
 };
+export type GetNotificationSettingsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getUser>['getNotificationSettings']>>
+>;
+export type UpdateNotificationSettingsResult = NonNullable<
+  Awaited<ReturnType<ReturnType<typeof getUser>['updateNotificationSettings']>>
+>;
 export type ChangeCurrencyResult = NonNullable<
   Awaited<ReturnType<ReturnType<typeof getUser>['changeCurrency']>>
 >;

@@ -5,9 +5,9 @@
  * Analytics Service API
  * OpenAPI spec version: 1.0
  */
-import { customAxios } from '../../axiosInstance';
-
 import type { AnalyticsSummaryResponse } from '../../models';
+
+import { customAxios } from '../../axiosInstance';
 
 export const getAnalytics = () => {
   /**

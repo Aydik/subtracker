@@ -12,6 +12,7 @@
 export type CurrencyRequestCurrency =
   (typeof CurrencyRequestCurrency)[keyof typeof CurrencyRequestCurrency];
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const CurrencyRequestCurrency = {
   RUB: 'RUB',
   USD: 'USD',

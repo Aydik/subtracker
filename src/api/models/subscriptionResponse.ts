@@ -19,8 +19,12 @@ export interface SubscriptionResponse {
   amount?: number;
   /** Время платы по подписке */
   timeToPay?: string;
+  /** Флаг ежемесячной подписки. true — подписка автоматически продлевается каждый месяц, false — подписка будет удалена в день списания */
+  isMonth?: boolean;
   /** Ссылка на лого подписки, по которой можно получить фото из облачного хранилища */
   logoUrl?: string;
   /** Категория сервиса */
   category?: SubscriptionResponseCategory;
+  /** Способ оплаты подписки */
+  paymentMethod?: string;
 }

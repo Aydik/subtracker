@@ -18,6 +18,8 @@ export * from './currencyRequestCurrency';
 export * from './customSubscriptionRequest';
 export * from './getServicesParams';
 export * from './getSubscriptionsParams';
+export * from './notificationSettingsRequest';
+export * from './notificationSettingsResponse';
 export * from './pageServiceResponse';
 export * from './pageSubscriptionResponse';
 export * from './pageable';

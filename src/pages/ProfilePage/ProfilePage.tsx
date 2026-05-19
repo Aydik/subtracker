@@ -21,7 +21,7 @@ export const ProfilePage: FC = () => {
 
       <div className={styles.settingsSection}>
         <div className={styles.themeToggle}>
-          <span className={styles.themeLabel}>Тема оформления</span>
+          <span className={styles.themeLabel}>Темная тема</span>
           <ToggleThemeButton />
         </div>
 
