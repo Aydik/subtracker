@@ -1,7 +1,7 @@
-import { CHANNEL_LOCALIZATION } from '@entities/Notification';
 import { ToggleSwitch } from '@shared/ui/ToggleSwitch';
+import { CHANNEL_LOCALIZATION } from '@widgets/Chanels/types.ts';
 
-import type { NotificationChannelType } from '@entities/Notification';
+import type { NotificationChannelType } from '@widgets/Chanels/types.ts';
 import type { FC } from 'react';
 
 import styles from './NotificationChannel.module.scss';
@@ -17,9 +17,9 @@ export const NotificationChannel: FC<NotificationChannelProps> = ({ channel, onC
       <span className={styles.channelName}>{CHANNEL_LOCALIZATION.push}</span>
 
       <ToggleSwitch
-        id={`channel-${channel.id}`}
+        id={`channel-${channel.name}`}
         checked={channel.isEnabled}
-        onChange={(checked) => onChange(channel.id, checked)}
+        onChange={(checked) => onChange(channel.name, checked)}
         ariaLabel={`Переключить ${CHANNEL_LOCALIZATION.push}`}
       />
     </div>
