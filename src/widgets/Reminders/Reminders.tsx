@@ -77,7 +77,7 @@ export const Reminders: FC = () => {
   );
 
   return (
-    <div className={styles.reminders}>
+    <div className={`${styles.reminders} custom-scroll`}>
       {reminders.map((reminder) => (
         <ReminderItem
           key={reminder.daysBefore}

@@ -42,7 +42,7 @@ export const Payments: FC = () => {
           <p>Ближайшее время не будет списаний</p>
         </div>
       ) : (
-        <ul className={styles.payments__list}>
+        <ul className={`${styles.payments__list} custom-scroll`}>
           {payments.map((payment, index) => (
             <li key={payment.subscription.subscriptionId}>
               {index !== 0 && <div className={styles.payments__divider} />}

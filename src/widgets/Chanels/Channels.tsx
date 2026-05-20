@@ -25,7 +25,7 @@ export const Channels: FC = () => {
   };
 
   return (
-    <div className={styles.channels}>
+    <div className={`${styles.channels} custom-scroll`}>
       {channels.map((channel) => (
         <NotificationChannel key={channel.name} channel={channel} onChange={handleChannelToggle} />
       ))}

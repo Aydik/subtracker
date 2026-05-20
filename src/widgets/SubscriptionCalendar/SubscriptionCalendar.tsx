@@ -98,7 +98,7 @@ export const SubscriptionCalendar: FC<SubscriptionCalendarProps> = ({ subscripti
         width={400}
       >
         <List
-          className={styles.modalList}
+          className={`${styles.modalList} custom-scroll`}
           dataSource={selectedSubscriptions}
           renderItem={(subscription) => (
             <List.Item className={styles.modalListItem}>
