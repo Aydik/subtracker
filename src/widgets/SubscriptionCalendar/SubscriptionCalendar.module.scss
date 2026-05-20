@@ -174,60 +174,6 @@
   }
 }
 
-.iconWrapper {
-  cursor: pointer;
-  transition: transform 0.2s ease;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-}
-
-.iconImage {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  object-fit: cover;
-  background: var(--color-gray);
-
-  @media (max-width: 768px) {
-    width: 24px;
-    height: 24px;
-    border-radius: 6px;
-  }
-
-  @media (max-width: 480px) {
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
-  }
-}
-
-.iconFallback {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  background: var(--color-gray);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-primary);
-
-  @media (max-width: 768px) {
-    width: 24px;
-    height: 24px;
-    font-size: 10px;
-  }
-
-  @media (max-width: 480px) {
-    width: 20px;
-    height: 20px;
-    font-size: 8px;
-  }
-}
-
 .moreBadge {
   width: 28px;
   height: 28px;
@@ -256,22 +202,33 @@
 [data-theme='light'] {
   .calendar :global {
     .ant-picker-cell {
-      border: 1px solid rgba(0, 0, 0, 0.08);
+      border: 1px solid #ccc !important;
     }
 
     .ant-picker-calendar-column-header {
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+      border: none !important;
+      border-bottom: 2px solid #bbb !important;
+    }
+
+    table tr th {
+      border: none !important;
+      border-bottom: 1px solid #bbb !important;
+    }
+
+    table tr td {
+      border: 1px solid #ccc !important;
     }
   }
 
   .iconFallback {
     background: #f0f0f0;
     color: #1a1a1a;
+    border: 1px solid #ddd;
   }
 
   .moreBadge {
     background: #e0e0e0;
     color: #1a1a1a;
+    border: 1px solid #bbb;
   }
 }
