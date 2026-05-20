@@ -19,12 +19,6 @@ export const Statistics: FC<StatisticsProps> = ({ analytics }) => {
       highlight: false,
     },
     {
-      label: 'Сумма в месяц',
-      value: totalAmount ?? 0,
-      unit: '₽',
-      highlight: true,
-    },
-    {
       label: 'На этой неделе',
       value: stats?.subscriptionsToPayThisWeekCount ?? 0,
       unit: '',
@@ -35,6 +29,13 @@ export const Statistics: FC<StatisticsProps> = ({ analytics }) => {
       value: stats?.subscriptionsToPayThisMonthCount ?? 0,
       unit: '',
       highlight: false,
+    },
+
+    {
+      label: 'Сумма в месяц',
+      value: totalAmount ?? 0,
+      unit: '₽',
+      highlight: true,
     },
     {
       label: 'К оплате на этой неделе',
