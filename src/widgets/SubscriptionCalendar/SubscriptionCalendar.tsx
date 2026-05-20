@@ -1,6 +1,6 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
-import { Calendar, Tooltip } from 'antd';
+import { Calendar, Tooltip, Modal, List } from 'antd';
 import dayjs from 'dayjs';
 
 import type { SubscriptionResponse } from '@src/api/models';
@@ -14,6 +14,10 @@ interface SubscriptionCalendarProps {
 }
 
 export const SubscriptionCalendar: FC<SubscriptionCalendarProps> = ({ subscriptions = [] }) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedSubscriptions, setSelectedSubscriptions] = useState<SubscriptionResponse[]>([]);
+  const [selectedDate, setSelectedDate] = useState<string>('');
+
   const dateMap = useMemo(() => {
     const map: Record<string, SubscriptionResponse[]> = {};
 
@@ -27,6 +31,12 @@ export const SubscriptionCalendar: FC<SubscriptionCalendarProps> = ({ subscripti
 
     return map;
   }, [subscriptions]);
+
+  const handleOpenModal = (items: SubscriptionResponse[], date: string) => {
+    setSelectedSubscriptions(items);
+    setSelectedDate(date);
+    setModalVisible(true);
+  };
 
   const getIconElement = (sub: SubscriptionResponse) => {
     const firstLetter = sub.serviceName?.charAt(0).toUpperCase() || '?';
@@ -60,7 +70,17 @@ export const SubscriptionCalendar: FC<SubscriptionCalendarProps> = ({ subscripti
           </Tooltip>
         ))}
 
-        {remainingCount > 0 && <div className={styles.moreBadge}>+{remainingCount}</div>}
+        {remainingCount > 0 && (
+          <div
+            className={styles.moreBadge}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleOpenModal(items, key);
+            }}
+          >
+            +{remainingCount}
+          </div>
+        )}
       </div>
     );
   };
@@ -68,6 +88,34 @@ export const SubscriptionCalendar: FC<SubscriptionCalendarProps> = ({ subscripti
   return (
     <div className={styles.calendar}>
       <Calendar cellRender={dateCellRender} />
+
+      <Modal
+        title={`Подписки на ${dayjs(selectedDate).format('DD MMMM YYYY')}`}
+        open={modalVisible}
+        onCancel={() => setModalVisible(false)}
+        footer={null}
+        className={styles.subscriptionsModal}
+        width={400}
+      >
+        <List
+          className={styles.modalList}
+          dataSource={selectedSubscriptions}
+          renderItem={(subscription) => (
+            <List.Item className={styles.modalListItem}>
+              <div className={styles.modalItemContent}>
+                <div className={styles.modalItemIcon}>{getIconElement(subscription)}</div>
+                <div className={styles.modalItemInfo}>
+                  <div className={styles.modalItemName}>{subscription.serviceName}</div>
+                  <div className={styles.modalItemDetails}>
+                    {subscription.amount} ₽ - {subscription.paymentMethod || 'Способ не указан'}
+                  </div>
+                </div>
+              </div>
+            </List.Item>
+          )}
+          locale={{ emptyText: 'Нет подписок' }}
+        />
+      </Modal>
     </div>
   );
 };
