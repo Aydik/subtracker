@@ -11,8 +11,8 @@ export const UserCard: FC = () => {
     <div className={styles.userCard}>
       <div className={styles.avatar}>{user?.username?.charAt(0).toUpperCase()}</div>
       <div className={styles.details}>
-        <h2 className={styles.name}>{user?.username}</h2>
-        <p className={styles.email}>{user?.email}</p>
+        <h2 className={`${styles.name} text-ellipsis`}>{user?.username}</h2>
+        <p className={`${styles.email} text-ellipsis`}>{user?.email}</p>
       </div>
     </div>
   );

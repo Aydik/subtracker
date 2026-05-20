@@ -38,6 +38,17 @@ export const SubscriptionCalendar: FC<SubscriptionCalendarProps> = ({ subscripti
     setModalVisible(true);
   };
 
+  const handleKeyDown = (
+    event: React.KeyboardEvent,
+    items: SubscriptionResponse[],
+    date: string,
+  ) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleOpenModal(items, date);
+    }
+  };
+
   const getIconElement = (sub: SubscriptionResponse) => {
     const firstLetter = sub.serviceName?.charAt(0).toUpperCase() || '?';
 
@@ -73,10 +84,13 @@ export const SubscriptionCalendar: FC<SubscriptionCalendarProps> = ({ subscripti
         {remainingCount > 0 && (
           <div
             className={styles.moreBadge}
+            role="button"
+            tabIndex={0}
             onClick={(e) => {
               e.stopPropagation();
               handleOpenModal(items, key);
             }}
+            onKeyDown={(e) => handleKeyDown(e, items, key)}
           >
             +{remainingCount}
           </div>
@@ -105,7 +119,9 @@ export const SubscriptionCalendar: FC<SubscriptionCalendarProps> = ({ subscripti
               <div className={styles.modalItemContent}>
                 <div className={styles.modalItemIcon}>{getIconElement(subscription)}</div>
                 <div className={styles.modalItemInfo}>
-                  <div className={styles.modalItemName}>{subscription.serviceName}</div>
+                  <div className={`${styles.modalItemName} text-ellipsis`}>
+                    {subscription.serviceName}
+                  </div>
                   <div className={styles.modalItemDetails}>
                     {subscription.amount} ₽ - {subscription.paymentMethod || 'Способ не указан'}
                   </div>

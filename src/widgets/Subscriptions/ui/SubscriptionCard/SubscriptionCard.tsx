@@ -22,7 +22,9 @@ export const SubscriptionCard: FC<SubscriptionCardProps> = ({ subscription }) =>
       <AsyncImage src={subscription.logoUrl || ''} alt={subscription.serviceName || ''} />
 
       <div className={styles.subscriptionCard__info}>
-        <p className={styles.subscriptionCard__name}>{subscription.serviceName}</p>
+        <p className={`${styles.subscriptionCard__name} text-ellipsis`}>
+          {subscription.serviceName}
+        </p>
         <p className={styles.subscriptionCard__charge}>
           Следующее списание: <br />
           {isoToRussianDate(subscription.timeToPay)}

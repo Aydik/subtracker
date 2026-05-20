@@ -199,6 +199,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
             >
               <Input
                 size="large"
+                className="text-ellipsis"
                 value={field.value}
                 onChange={field.onChange}
                 placeholder="Введите название сервиса"
