@@ -3,11 +3,11 @@ import { useMemo } from 'react';
 import { Calendar, Tooltip } from 'antd';
 import dayjs from 'dayjs';
 
-import { AsyncImage } from '@shared/ui/AsyncImage';
-
 import type { SubscriptionResponse } from '@src/api/models';
 import type { Dayjs } from 'dayjs';
 import type { FC } from 'react';
+
+import styles from './SubscriptionCalendar.module.scss';
 
 interface SubscriptionCalendarProps {
   subscriptions?: SubscriptionResponse[];
@@ -28,6 +28,16 @@ export const SubscriptionCalendar: FC<SubscriptionCalendarProps> = ({ subscripti
     return map;
   }, [subscriptions]);
 
+  const getIconElement = (sub: SubscriptionResponse) => {
+    const firstLetter = sub.serviceName?.charAt(0).toUpperCase() || '?';
+
+    return sub.logoUrl ? (
+      <img src={sub.logoUrl} alt={sub.serviceName || ''} className={styles.iconImage} />
+    ) : (
+      <div className={styles.iconFallback}>{firstLetter}</div>
+    );
+  };
+
   const dateCellRender = (date: Dayjs) => {
     const key = date.format('YYYY-MM-DD');
     const items = dateMap[key];
@@ -38,59 +48,26 @@ export const SubscriptionCalendar: FC<SubscriptionCalendarProps> = ({ subscripti
     const remainingCount = items.length - MAX_VISIBLE;
 
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: 4,
-          justifyContent: 'center',
-          marginTop: 6,
-        }}
-      >
+      <div className={styles.subscriptionsIcons}>
         {visibleItems.map((sub) => (
           <Tooltip
             key={sub.subscriptionId}
             title={sub.serviceName || 'Оплата подписки'}
             placement="top"
+            mouseEnterDelay={0.3}
           >
-            <AsyncImage src={sub.logoUrl || ''} alt={sub.serviceName || ''} />
-            {/*<img*/}
-            {/*  src={sub.logoUrl}*/}
-            {/*  alt={sub.serviceName || ''}*/}
-            {/*  style={{*/}
-            {/*    width: 28,*/}
-            {/*    height: 28,*/}
-            {/*    borderRadius: 6,*/}
-            {/*    objectFit: 'cover',*/}
-            {/*    border: '1px solid #f0f0f0',*/}
-            {/*    cursor: 'pointer',*/}
-            {/*  }}*/}
-            {/*/>*/}
+            <div className={styles.iconWrapper}>{getIconElement(sub)}</div>
           </Tooltip>
         ))}
 
-        {remainingCount > 0 && (
-          <div
-            style={{
-              width: 28,
-              height: 28,
-              borderRadius: 6,
-              background: '#f5f5f5',
-              color: '#888',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 11,
-              fontWeight: 500,
-              cursor: 'default',
-            }}
-          >
-            +{remainingCount}
-          </div>
-        )}
+        {remainingCount > 0 && <div className={styles.moreBadge}>+{remainingCount}</div>}
       </div>
     );
   };
 
-  return <Calendar cellRender={dateCellRender} />;
+  return (
+    <div className={styles.calendar}>
+      <Calendar cellRender={dateCellRender} />
+    </div>
+  );
 };
