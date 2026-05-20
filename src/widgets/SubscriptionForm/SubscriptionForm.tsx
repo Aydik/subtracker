@@ -135,7 +135,6 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
               categoryId: values.categoryId,
             }).unwrap();
 
-            // Загружаем изображение
             const file = fileList[0]?.originFileObj;
             if (file && res?.subscriptionId) {
               await uploadCustomLogo({
@@ -196,7 +195,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
               label="Название сервиса"
               validateStatus={error ? 'error' : ''}
               help={error?.message}
-              style={{ height: 72 }}
+              className={styles.formItemFixedHeight}
             >
               <Input
                 size="large"
@@ -291,7 +290,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
               >
                 <DatePicker
                   size="large"
-                  style={{ width: '100%' }}
+                  className={styles.fullWidth}
                   format="DD.MM.YYYY"
                   value={field.value ? dayjs(field.value) : null}
                   onChange={(value) => field.onChange(toISOString(value))}
@@ -315,7 +314,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
               >
                 <Input
                   size="large"
-                  style={{ width: '100%' }}
+                  className={styles.fullWidth}
                   suffix={CURRENCY[currency || 'RUB']}
                   maxLength={5}
                   placeholder="0"
