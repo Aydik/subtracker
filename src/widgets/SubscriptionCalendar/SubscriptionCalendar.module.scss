@@ -296,7 +296,122 @@
 
     .ant-modal-body {
       padding: 16px 20px;
+      max-height: 70vh;
+      overflow-y: auto;
     }
+
+    .ant-modal-body::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .ant-modal-body::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+    }
+
+    .ant-modal-body::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 10px;
+    }
+
+    .ant-modal-body::-webkit-scrollbar-thumb:hover {
+      background: var(--color-primary);
+    }
+  }
+}
+
+.modalList {
+  :global {
+    .ant-list-items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+}
+
+.modalListItem {
+  padding: 0 !important;
+  border: none !important;
+  width: 100%;
+  max-width: 100%;
+}
+
+.modalItemContent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.modalItemIcon {
+  flex-shrink: 0;
+}
+
+.modalItemInfo {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.modalItemName {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modalItemDetails {
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-theme='light'] {
+  .subscriptionsModal :global {
+    .ant-modal-header {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .ant-modal-body::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .ant-modal-body::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .ant-modal-body::-webkit-scrollbar-thumb:hover {
+      background: var(--color-primary);
+    }
+  }
+
+  .modalItemContent {
+    background: rgba(0, 0, 0, 0.03);
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.06);
+    }
+  }
+
+  .modalItemName {
+    color: #1a1a1a;
   }
 }
 
@@ -347,11 +462,13 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .modalItemDetails {
   font-size: 13px;
   color: var(--text-secondary);
+  white-space: nowrap;
 }
 
 .moreBadge {

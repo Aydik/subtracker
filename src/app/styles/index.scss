@@ -47,6 +47,14 @@ textarea::placeholder {
   max-width: 800px;
 }
 
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  max-width: 100%;
+}
+
 .custom-scroll {
   overflow-y: auto;
   max-height: 400px;
