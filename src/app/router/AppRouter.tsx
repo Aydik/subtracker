@@ -1,6 +1,5 @@
 import { lazy, Suspense } from 'react';
 
-import { Empty } from 'antd';
 import { useRoutes } from 'react-router-dom';
 
 import { PageLoader } from '@shared/ui/PageLoader';
@@ -18,6 +17,7 @@ const HomePage = lazy(() => import('@pages/HomePage'));
 const SubscriptionPage = lazy(() => import('@pages/SubscriptionPage'));
 const ProfilePage = lazy(() => import('@pages/ProfilePage'));
 const NotificationsPage = lazy(() => import('@pages/NotificationsPage'));
+const CalendarPage = lazy(() => import('@pages/CalendarPage'));
 
 const LoginForm = lazy(() =>
   import('@features/auth').then((module) => ({ default: module.LoginForm })),
@@ -105,7 +105,7 @@ const routeConfig: RouteObject[] = [
             path: '/calendar',
             element: (
               <Suspense fallback={<PageLoader />}>
-                <Empty description="В разработке..." image={Empty.PRESENTED_IMAGE_SIMPLE} />
+                <CalendarPage />
               </Suspense>
             ),
           },
