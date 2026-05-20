@@ -92,6 +92,10 @@ textarea::placeholder {
     background-color: var(--color-primary) !important;
     color: black !important;
     font-weight: 500 !important;
+
+    .ant-select-item-option-content {
+      color: black !important;
+    }
   }
 
   .ant-btn-color-dangerous.ant-btn-variant-outlined {
