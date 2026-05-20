@@ -135,6 +135,7 @@ export const subscriptionService = BaseApi.injectEndpoints({
 export const {
   useGetCategoriesQuery,
   useGetServicesQuery,
+  useGetSubscriptionsQuery,
   useLazyGetSubscriptionsQuery,
   useLazyGetSubscriptionByIdQuery,
   useCreateSubscriptionMutation,

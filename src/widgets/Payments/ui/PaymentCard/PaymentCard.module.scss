@@ -22,6 +22,10 @@
 .paymentTitle {
   font-size: 1rem;
   font-weight: 500;
+
+  &_date {
+    font-size: 1.25rem;
+  }
 }
 
 .paymentDescription {
@@ -45,23 +49,23 @@
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-.completed {
+.notify1 {
   background: rgba(58, 187, 93, 0.2);
   color: #3abb5d;
 }
 
-.pending {
+.notify3 {
   background: rgba(248, 216, 28, 0.2);
   color: var(--color-primary);
 }
 
-.upcoming {
+.notify7 {
   background: rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.8);
 }
 
 [data-theme='light'] {
-  .upcoming {
+  .notify7 {
     background: rgba(128, 128, 128, 0.1);
     color: #666666;
   }

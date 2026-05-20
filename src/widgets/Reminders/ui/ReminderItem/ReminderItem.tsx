@@ -1,4 +1,5 @@
 import { ToggleSwitch } from '@shared/ui/ToggleSwitch';
+import { pluralizeDays } from '@shared/utils/formatDate.ts';
 
 import type { Reminder } from '../../types.ts';
 import type { FC } from 'react';
@@ -11,16 +12,10 @@ type ReminderItemProps = {
 };
 
 export const ReminderItem: FC<ReminderItemProps> = ({ reminder, onToggle }) => {
-  const getDaysText = (days: number): string => {
-    if (days === 1) return 'день';
-    if (days >= 2 && days <= 4) return 'дня';
-    return 'дней';
-  };
-
   return (
     <div className={styles.reminderItem}>
       <span className={styles.reminderText}>
-        За {reminder.daysBefore} {getDaysText(reminder.daysBefore)} до списания
+        За {pluralizeDays(reminder.daysBefore)} до списания
       </span>
 
       <ToggleSwitch

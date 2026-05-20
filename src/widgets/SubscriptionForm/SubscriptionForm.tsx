@@ -285,7 +285,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
             control={control}
             render={({ field, fieldState: { error } }) => (
               <Form.Item
-                label="Дата следующего списания"
+                label="Дата списания"
                 validateStatus={error ? 'error' : ''}
                 help={error?.message}
               >
