@@ -22,4 +22,4 @@ export const analyticsService = BaseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAnalyticsQuery } = analyticsService;
+export const { useGetAnalyticsQuery, useLazyGetAnalyticsQuery } = analyticsService;

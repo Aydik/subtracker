@@ -1,0 +1,541 @@
+@import '@app/styles';
+
+.calendar {
+  :global {
+    .ant-picker-calendar {
+      background: transparent;
+    }
+
+    .ant-picker-calendar-header {
+      padding: 12px 0;
+      margin-bottom: 16px;
+
+      .ant-picker-calendar-mode-switch {
+        display: none;
+      }
+
+      .ant-picker-calendar-year-select,
+      .ant-picker-calendar-month-select {
+        .ant-select-selector {
+          background: var(--glass-bg);
+          border: var(--border-glass);
+          border-radius: 12px;
+          color: var(--text-primary);
+
+          &:hover {
+            border-color: var(--color-primary);
+          }
+        }
+      }
+
+      .ant-picker-calendar-month-select {
+        margin-left: 8px;
+      }
+    }
+
+    .ant-picker-calendar-full {
+      .ant-picker-panel {
+        background: transparent;
+
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        .ant-picker-cell {
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          padding: 0;
+          vertical-align: top;
+          position: relative;
+
+          .ant-picker-cell-inner {
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 90px;
+            padding: 8px 6px;
+            margin: 0;
+            background: transparent;
+            border: none;
+            width: 100%;
+            height: 100%;
+            position: relative;
+
+            @media (max-width: 768px) {
+              min-height: 70px;
+              padding: 6px 4px;
+            }
+
+            @media (max-width: 480px) {
+              min-height: 60px;
+              padding: 4px 2px;
+            }
+          }
+
+          &:hover {
+            .ant-picker-cell-inner {
+              background: rgba(var(--color-primary-rgb), 0.08);
+            }
+          }
+
+          &.ant-picker-cell-today {
+            .ant-picker-cell-inner {
+              position: relative;
+            }
+          }
+
+          &.ant-picker-cell-selected {
+            background: var(--color-primary) !important;
+            border-radius: 1rem;
+
+            .ant-picker-cell-inner {
+              background: transparent !important;
+            }
+
+            .ant-picker-calendar-date-value {
+              color: #000000 !important;
+            }
+          }
+
+          &.ant-picker-cell-in-view {
+            .ant-picker-cell-inner {
+              color: var(--text-primary);
+            }
+          }
+
+          &.ant-picker-cell-not-in-view {
+            opacity: 0.4;
+          }
+        }
+
+        .ant-picker-calendar-column-header {
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+          padding: 12px 0;
+          text-align: center;
+
+          .ant-picker-calendar-column-header-inner {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-primary);
+            text-align: center;
+            display: block;
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date {
+      margin: 0;
+    }
+
+    .ant-picker-calendar-date-value {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      display: block;
+      text-align: center;
+      transition: color 0.2s ease;
+
+      @media (max-width: 768px) {
+        font-size: 14px;
+        margin-bottom: 6px;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 12px;
+        margin-bottom: 4px;
+      }
+    }
+
+    .ant-picker-calendar-date-content {
+      height: auto !important;
+      min-height: 32px;
+      width: 100%;
+      overflow: visible !important;
+
+      @media (max-width: 768px) {
+        min-height: 28px;
+      }
+
+      @media (max-width: 480px) {
+        min-height: 24px;
+      }
+    }
+  }
+}
+
+.subscriptionsIcons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+  overflow: visible !important;
+
+  @media (max-width: 480px) {
+    gap: 2px;
+  }
+}
+
+.iconWrapper {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  display: inline-flex;
+  flex-shrink: 0;
+  overflow: visible;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.iconImage {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: var(--color-gray);
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+  }
+
+  @media (max-width: 480px) {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+  }
+}
+
+.iconFallback {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--color-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  @media (max-width: 480px) {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+    border-radius: 6px;
+  }
+}
+
+.moreBadge {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--color-light-gray);
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 500;
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+  }
+
+  @media (max-width: 480px) {
+    width: 20px;
+    height: 20px;
+    font-size: 8px;
+  }
+}
+
+.subscriptionsModal {
+  :global {
+    .ant-modal-content {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-backdrop-filter);
+      border: var(--border-glass);
+      border-radius: 20px;
+      box-shadow: var(--glass-box-shadow);
+    }
+
+    .ant-modal-header {
+      background: transparent;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px 20px 0 0;
+      padding: 16px 20px;
+    }
+
+    .ant-modal-title {
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    .ant-modal-close {
+      color: var(--text-primary);
+
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
+
+    .ant-modal-body {
+      padding: 16px 20px;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+
+    .ant-modal-body::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .ant-modal-body::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+    }
+
+    .ant-modal-body::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 10px;
+    }
+
+    .ant-modal-body::-webkit-scrollbar-thumb:hover {
+      background: var(--color-primary);
+    }
+  }
+}
+
+.modalList {
+  :global {
+    .ant-list-items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+}
+
+.modalListItem {
+  padding: 0 !important;
+  border: none !important;
+  width: 100%;
+  max-width: 100%;
+}
+
+.modalItemContent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.modalItemIcon {
+  flex-shrink: 0;
+}
+
+.modalItemInfo {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.modalItemName {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modalItemDetails {
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-theme='light'] {
+  .subscriptionsModal :global {
+    .ant-modal-header {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .ant-modal-body::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .ant-modal-body::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .ant-modal-body::-webkit-scrollbar-thumb:hover {
+      background: var(--color-primary);
+    }
+  }
+
+  .modalItemContent {
+    background: rgba(0, 0, 0, 0.03);
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.06);
+    }
+  }
+
+  .modalItemName {
+    color: #1a1a1a;
+  }
+}
+
+.modalList {
+  :global {
+    .ant-list-items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+}
+
+.modalListItem {
+  padding: 0 !important;
+  border: none !important;
+}
+
+.modalItemContent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.modalItemIcon {
+  flex-shrink: 0;
+}
+
+.modalItemInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.modalItemName {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.modalItemDetails {
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.moreBadge {
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--color-primary);
+    transform: scale(1.05);
+  }
+}
+
+[data-theme='light'] {
+  .subscriptionsModal :global {
+    .ant-modal-header {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .modalItemContent {
+    background: rgba(0, 0, 0, 0.03);
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.06);
+    }
+  }
+
+  .modalItemName {
+    color: #1a1a1a;
+  }
+
+  .calendar :global {
+    .ant-picker-cell {
+      border: 1px solid #ccc !important;
+    }
+
+    .ant-picker-calendar-column-header {
+      border: none !important;
+      border-bottom: 2px solid #bbb !important;
+    }
+
+    table tr th {
+      border: none !important;
+      border-bottom: 1px solid #bbb !important;
+    }
+
+    table tr td {
+      border: 1px solid #ccc !important;
+    }
+  }
+
+  .iconFallback {
+    background: #f0f0f0;
+    color: #1a1a1a;
+    border: 1px solid #ddd;
+  }
+
+  .moreBadge {
+    background: #e0e0e0;
+    color: #1a1a1a;
+    border: 1px solid #bbb;
+  }
+}

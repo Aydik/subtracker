@@ -9,6 +9,7 @@
     display: flex;
     flex: 1;
     flex-direction: column;
+    min-width: 0;
   }
 
   &__name {
@@ -16,6 +17,7 @@
     font-weight: 500;
     margin-bottom: 0.25rem;
     color: var(--text-primary);
+    max-width: 100%;
   }
 
   &__charge {

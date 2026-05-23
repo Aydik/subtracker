@@ -6,6 +6,7 @@ import { Form, Select, DatePicker, Button, Spin, App, Row, Col, Input, Checkbox 
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import { Controller, useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { useCategories } from '@app/context/CategoriesContext.tsx';
@@ -22,6 +23,7 @@ import {
   useUploadCustomLogoMutation,
 } from '@src/store/api/services/subscriptionService.ts';
 import { useAppSelector } from '@src/store/hooks.ts';
+import { editAnalytics } from '@src/store/slices/analyticsSlice.ts';
 import { UploadImage } from '@widgets/SubscriptionForm/ui/UploadImage';
 import { getSubscriptionSchema } from '@widgets/SubscriptionForm/validationSchema.ts';
 
@@ -40,7 +42,11 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
 
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+
   const [fileList, setFileList] = useState<UploadFile[]>([]);
+
+  const [prevAmount, setPrevAmount] = useState<number>(0);
 
   const { services, isLoading: isLoadingServices } = useServices();
   const { categories, isLoading: isLoadingCategories } = useCategories();
@@ -80,6 +86,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
         }
         if (data?.amount) {
           setValue('amount', data?.amount);
+          setPrevAmount(data?.amount);
         }
         if (data?.timeToPay) {
           setValue('timeToPay', data?.timeToPay);
@@ -106,6 +113,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
               paymentMethod: values.paymentMethod,
             },
           }).unwrap();
+          dispatch(editAnalytics({ count: 0, amount: values.amount - prevAmount }));
         } else {
           if (!values.isCustom && values.serviceId) {
             await createSubscription({
@@ -115,6 +123,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
               paymentMethod: values.paymentMethod,
               serviceId: values.serviceId,
             }).unwrap();
+            dispatch(editAnalytics({ count: 1, amount: values.amount }));
           }
           if (values.isCustom && values.serviceName && values.categoryId) {
             const res = await createCustomSubscription({
@@ -126,7 +135,6 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
               categoryId: values.categoryId,
             }).unwrap();
 
-            // Загружаем изображение
             const file = fileList[0]?.originFileObj;
             if (file && res?.subscriptionId) {
               await uploadCustomLogo({
@@ -136,6 +144,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
                 },
               });
             }
+            dispatch(editAnalytics({ count: 1, amount: values.amount }));
           }
         }
 
@@ -147,13 +156,14 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
         message.error('Ошибка при сохранении!');
       }
     },
-    [id, fileList],
+    [id, fileList, prevAmount],
   );
 
   const handleDelete = useCallback(async () => {
     if (id) {
       try {
         await deleteSubscription(id).unwrap();
+        dispatch(editAnalytics({ count: -1, amount: -prevAmount }));
 
         message.destroy();
         message.success('Подписка успешно удалена!');
@@ -163,7 +173,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
         message.error('Ошибка при удалении!');
       }
     }
-  }, [id]);
+  }, [id, prevAmount]);
 
   if (isLoadingServices || isLoadingCategories) {
     return (
@@ -185,10 +195,11 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
               label="Название сервиса"
               validateStatus={error ? 'error' : ''}
               help={error?.message}
-              style={{ height: 72 }}
+              className={styles.formItemFixedHeight}
             >
               <Input
                 size="large"
+                className="text-ellipsis"
                 value={field.value}
                 onChange={field.onChange}
                 placeholder="Введите название сервиса"
@@ -274,13 +285,13 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
             control={control}
             render={({ field, fieldState: { error } }) => (
               <Form.Item
-                label="Дата следующего списания"
+                label="Дата списания"
                 validateStatus={error ? 'error' : ''}
                 help={error?.message}
               >
                 <DatePicker
                   size="large"
-                  style={{ width: '100%' }}
+                  className={styles.fullWidth}
                   format="DD.MM.YYYY"
                   value={field.value ? dayjs(field.value) : null}
                   onChange={(value) => field.onChange(toISOString(value))}
@@ -304,7 +315,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
               >
                 <Input
                   size="large"
-                  style={{ width: '100%' }}
+                  className={styles.fullWidth}
                   suffix={CURRENCY[currency || 'RUB']}
                   maxLength={5}
                   placeholder="0"

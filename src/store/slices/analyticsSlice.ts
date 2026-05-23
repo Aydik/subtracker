@@ -31,8 +31,13 @@ export const analyticsSlice = createSlice({
       state.categories = action.payload.categories || [];
       state.upcomingCharges = action.payload.upcomingCharges;
     },
+
+    editAnalytics: (state, action: PayloadAction<{ count: number; amount: number }>) => {
+      state.totalSubscriptions += action.payload.count || 0;
+      state.totalAmount += action.payload.amount || 0;
+    },
   },
 });
 
-export const { setAnalytics } = analyticsSlice.actions;
+export const { setAnalytics, editAnalytics } = analyticsSlice.actions;
 export default analyticsSlice.reducer;

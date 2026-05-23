@@ -1,27 +1,33 @@
 import { useState } from 'react';
 
-import { NotificationChannel } from '@entities/Notification';
-import { mockChannels } from '@widgets/Payments/constants';
+import { NOTIFICATION_CHANNELS } from '@widgets/Chanels/types.ts';
+import { NotificationChannel } from '@widgets/Chanels/ui/NotificationChannel';
 
+import type { NotificationChannelType } from '@widgets/Chanels/types.ts';
 import type { FC } from 'react';
 
 import styles from './Channels.module.scss';
 
 export const Channels: FC = () => {
-  const [channels, setChannels] = useState(mockChannels);
+  const [channels, setChannels] = useState<NotificationChannelType[]>(
+    NOTIFICATION_CHANNELS.map((name) => ({
+      name,
+      isEnabled: false,
+    })),
+  );
 
-  const handleChannelToggle = (id: string, enabled: boolean) => {
+  const handleChannelToggle = (name: string, enabled: boolean) => {
     setChannels((prevChannels) =>
       prevChannels.map((channel) =>
-        channel.id === id ? { ...channel, isEnabled: enabled } : channel,
+        channel.name === name ? { ...channel, isEnabled: enabled } : channel,
       ),
     );
   };
 
   return (
-    <div className={styles.channels}>
+    <div className={`${styles.channels} custom-scroll`}>
       {channels.map((channel) => (
-        <NotificationChannel key={channel.id} channel={channel} onChange={handleChannelToggle} />
+        <NotificationChannel key={channel.name} channel={channel} onChange={handleChannelToggle} />
       ))}
     </div>
   );
