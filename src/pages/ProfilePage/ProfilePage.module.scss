@@ -1,0 +1,70 @@
+@import '@app/styles';
+
+.profilePage {
+  border: var(--border-glass);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-backdrop-filter);
+  box-shadow: var(--glass-box-shadow);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.settingItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+.settingLabel {
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.configureButton {
+  font-size: 1.25rem;
+  color: var(--color-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-primary-hover);
+  }
+}
+
+.logoutButton {
+  align-self: center;
+  width: 100%;
+  max-width: 250px;
+}
+
+.themeToggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.themeLabel {
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+[data-theme='light'] {
+  .settingItem {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .themeToggle {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}

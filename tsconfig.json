@@ -14,25 +14,25 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "src/*": [
+      "@src/*": [
         "./src/*"
       ],
-      "app/*": [
+      "@app/*": [
         "./src/app/*"
       ],
-      "pages/*": [
+      "@pages/*": [
         "./src/pages/*"
       ],
-      "widgets/*": [
+      "@widgets/*": [
         "./src/widgets/*"
       ],
-      "features/*": [
+      "@features/*": [
         "./src/features/*"
       ],
-      "entities/*": [
+      "@entities/*": [
         "./src/entities/*"
       ],
-      "shared/*": [
+      "@shared/*": [
         "./src/shared/*"
       ]
     }
