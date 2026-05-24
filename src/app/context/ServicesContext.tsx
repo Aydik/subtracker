@@ -22,7 +22,7 @@ export const ServicesProvider: FC<Props> = ({ children }) => {
     data: services,
     isLoading,
     error,
-  } = useGetServicesQuery({ pageable: { size: 1000, page: 0 } });
+  } = useGetServicesQuery({ pageable: { size: 1000, page: 0 }, isDefault: true });
 
   return (
     <ServicesContext.Provider value={{ services: services?.content || [], isLoading, error }}>

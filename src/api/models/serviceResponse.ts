@@ -19,4 +19,6 @@ export interface ServiceResponse {
   logoUrl?: string;
   /** Категория сервиса */
   category?: ServiceResponseCategory;
+  /** Является ли сервис дефолтным (true) или кастомным пользовательским (false) */
+  isDefault?: boolean;
 }
