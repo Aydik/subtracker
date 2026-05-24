@@ -165,6 +165,7 @@ textarea::placeholder {
   .ant-picker-outlined:focus-within {
     background: rgba(var(--color-gray-rgb), 0.5);
     border-color: rgba(255, 255, 255, 0.2);
+    width: 100%;
   }
 
   .ant-select-selection-placeholder,

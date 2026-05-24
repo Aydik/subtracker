@@ -56,14 +56,22 @@ export const Subscriptions: FC = () => {
       ) : !subscriptions || subscriptions?.length === 0 ? (
         <Empty description="Ничего не найдено" image={Empty.PRESENTED_IMAGE_SIMPLE} />
       ) : (
-        <ul className={`${styles.subscriptions__list} custom-scroll`}>
-          {subscriptions.map((subscription, index) => (
-            <li key={index}>
-              {index !== 0 && <div className={styles.subscriptions__divider} />}
-              <SubscriptionCard subscription={subscription} />
-            </li>
-          ))}
-        </ul>
+        <div className={styles.subscriptions__listWrapper}>
+          {subscriptions && subscriptions.length > 3 && (
+            <div className={styles.subscriptions__fadeTop} />
+          )}
+          <ul className={`${styles.subscriptions__list} custom-scroll`}>
+            {subscriptions.map((subscription, index) => (
+              <li key={index}>
+                {index !== 0 && <div className={styles.subscriptions__divider} />}
+                <SubscriptionCard subscription={subscription} />
+              </li>
+            ))}
+          </ul>
+          {subscriptions && subscriptions.length > 3 && (
+            <div className={styles.subscriptions__fadeBottom} />
+          )}
+        </div>
       )}
       <Button
         className={styles.addButton}

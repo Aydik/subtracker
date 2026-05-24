@@ -1,6 +1,7 @@
 .indexPage {
   box-sizing: border-box;
   position: relative;
+  min-height: 100vh;
 }
 
 .content {
@@ -10,7 +11,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 100vh;
+  min-height: 100vh;
   padding: 20px 0 40px;
 }
 
@@ -119,22 +120,22 @@
   &_left {
     left: 0;
     background: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0.8) 0%,
-      rgba(0, 0, 0, 0.4) 30%,
-      rgba(0, 0, 0, 0.1) 70%,
-      transparent 100%
+                    to right,
+                    rgba(0, 0, 0, 0.8) 0%,
+                    rgba(0, 0, 0, 0.4) 30%,
+                    rgba(0, 0, 0, 0.1) 70%,
+                    transparent 100%
     );
   }
 
   &_right {
     right: 0;
     background: linear-gradient(
-      to left,
-      rgba(0, 0, 0, 0.8) 0%,
-      rgba(0, 0, 0, 0.4) 30%,
-      rgba(0, 0, 0, 0.1) 70%,
-      transparent 100%
+                    to left,
+                    rgba(0, 0, 0, 0.8) 0%,
+                    rgba(0, 0, 0, 0.4) 30%,
+                    rgba(0, 0, 0, 0.1) 70%,
+                    transparent 100%
     );
   }
 
@@ -147,11 +148,21 @@
   .oAuth__button {
     border: 1px solid #1a1a1a !important;
   }
+
+  .border {
+    display: none;
+  }
 }
 
-// Темная тема - белая рамка
 [data-theme='dark'] {
   .oAuth__button {
     border: 1px solid #ffffff !important;
+  }
+}
+
+@supports (padding: max(0px)) {
+  .content {
+    padding-top: max(20px, env(safe-area-inset-top));
+    padding-bottom: max(40px, env(safe-area-inset-bottom));
   }
 }

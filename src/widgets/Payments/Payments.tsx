@@ -42,14 +42,18 @@ export const Payments: FC = () => {
           <p>Ближайшее время не будет списаний</p>
         </div>
       ) : (
-        <ul className={`${styles.payments__list} custom-scroll`}>
-          {payments.map((payment, index) => (
-            <li key={payment.subscription.subscriptionId}>
-              {index !== 0 && <div className={styles.payments__divider} />}
-              <PaymentCard subscription={payment.subscription} notifyDays={payment.notifyDays} />
-            </li>
-          ))}
-        </ul>
+        <div className={styles.payments__listWrapper}>
+          {payments && payments.length > 3 && <div className={styles.payments__fadeTop} />}
+          <ul className={`${styles.payments__list} custom-scroll`}>
+            {payments.map((payment, index) => (
+              <li key={payment.subscription.subscriptionId}>
+                {index !== 0 && <div className={styles.payments__divider} />}
+                <PaymentCard subscription={payment.subscription} notifyDays={payment.notifyDays} />
+              </li>
+            ))}
+          </ul>
+          {payments && payments.length > 3 && <div className={styles.payments__fadeBottom} />}
+        </div>
       )}
     </section>
   );
