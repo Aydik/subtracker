@@ -27,7 +27,7 @@ export default defineConfig({
       '/api': {
         changeOrigin: true,
         secure: false,
-        target: 'http://217.149.29.76',
+        target: 'https://wonderful-wander.ru',
       },
     },
     strictPort: true,
