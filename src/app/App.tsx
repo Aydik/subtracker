@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { App as AntdApp, ConfigProvider } from 'antd';
 import ruRU from 'antd/locale/ru_RU';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 import { CategoriesProvider } from '@app/context/CategoriesContext.tsx';
 import { ServicesProvider } from '@app/context/ServicesContext.tsx';
@@ -30,9 +30,9 @@ function App() {
           <ThemeProvider>
             <ConfigProvider locale={ruRU}>
               <AntdApp>
-                <BrowserRouter basename="/subtracker/">
+                <HashRouter>
                   <AppRouter />
-                </BrowserRouter>
+                </HashRouter>
               </AntdApp>
             </ConfigProvider>
           </ThemeProvider>
