@@ -1,7 +1,7 @@
 import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 
 import { useCategories } from '@app/context/CategoriesContext.tsx';
-import { CATEGORIES_LOCALIZATION } from '@shared/types/Categories.ts';
 
 import type { Dispatch, FC, SetStateAction } from 'react';
 
@@ -16,6 +16,8 @@ export const SubscriptionCategories: FC<SubscriptionCategoriesProps> = ({
   selectedCategory,
   setSelectedCategory,
 }) => {
+  const { t } = useTranslation();
+
   const { categories } = useCategories();
 
   return (
@@ -29,7 +31,7 @@ export const SubscriptionCategories: FC<SubscriptionCategoriesProps> = ({
           )}
           onClick={() => category.name && setSelectedCategory(category.name)}
         >
-          {CATEGORIES_LOCALIZATION[category.name || 'OTHER']}
+          {t(`categories.${category.name || 'OTHER'}`)}
         </button>
       ))}
     </div>

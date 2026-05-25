@@ -1,5 +1,6 @@
 import { SmileOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 import { compareDate, daysFromToday } from '@shared/utils/formatDate.ts';
 import { useGetSubscriptionsQuery } from '@src/store/api/services/subscriptionService.ts';
@@ -10,6 +11,8 @@ import type { FC } from 'react';
 import styles from './Payments.module.scss';
 
 export const Payments: FC = () => {
+  const { t } = useTranslation();
+
   const { data, isLoading, error } = useGetSubscriptionsQuery({
     categoryId: undefined,
     pageable: { size: 1000, page: 0 },
@@ -31,15 +34,15 @@ export const Payments: FC = () => {
 
   return (
     <section className={styles.payments}>
-      <h2 className={styles.payments__title}>Ближайшие платежи</h2>
+      <h2 className={styles.payments__title}>{t('notifications.nearbyPayments')}</h2>
       {isLoading ? (
         <Spin />
       ) : error ? (
-        'Ошибка'
+        t('common.error')
       ) : !payments || payments?.length === 0 ? (
         <div className={styles.empty}>
           <SmileOutlined className={styles.empty__icon} />
-          <p>Ближайшее время не будет списаний</p>
+          <p>{t('notifications.noUpcomingPayments')}</p>
         </div>
       ) : (
         <div className={styles.payments__listWrapper}>

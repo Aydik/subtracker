@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { App, Button, Form, Input } from 'antd';
 import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { loginUserSchema } from '@features/auth/validationSchema.ts';
@@ -19,8 +20,8 @@ export type LoginFormProps = {
 };
 
 export const LoginForm: FC = () => {
+  const { t } = useTranslation();
   const { message } = App.useApp();
-
   const navigate = useNavigate();
 
   const { control, handleSubmit, setError } = useForm<LoginFormProps>({
@@ -38,9 +39,8 @@ export const LoginForm: FC = () => {
 
     try {
       await login(requestData).unwrap();
-
       message.destroy();
-      message.success('Вы успешно вошли в аккаунт!');
+      message.success(t('auth.loginSuccess'));
       navigate('/home');
     } catch (err: unknown) {
       const axiosError = err as AxiosError<ApiErrorResponse>;
@@ -48,28 +48,32 @@ export const LoginForm: FC = () => {
 
       if (error === 'Forbidden') {
         setError('password', {
-          message: 'Неверный email или пароль',
+          message: t('auth.invalidCredentials'),
         });
       } else {
         message.destroy();
-        message.error('Ошибка авторизации');
+        message.error(t('auth.loginError'));
       }
     }
   };
 
   return (
     <Form onFinish={handleSubmit(onSubmit)} className={styles.form} size="large">
-      <h1 className={styles.title}>Вход</h1>
+      <h1 className={styles.title}>{t('auth.loginTitle')}</h1>
       <div className={styles.fields}>
         <Controller
           name="email"
           control={control}
           render={({ field, fieldState: { error } }) => (
-            <Form.Item label="Почта" validateStatus={error ? 'error' : ''} help={error?.message}>
+            <Form.Item
+              label={t('auth.email')}
+              validateStatus={error ? 'error' : ''}
+              help={error?.message}
+            >
               <Input
                 value={field.value}
                 onChange={field.onChange}
-                placeholder="Введите вашу почту"
+                placeholder={t('auth.enterEmail')}
               />
             </Form.Item>
           )}
@@ -79,11 +83,15 @@ export const LoginForm: FC = () => {
           name="password"
           control={control}
           render={({ field, fieldState: { error } }) => (
-            <Form.Item label="Пароль" validateStatus={error ? 'error' : ''} help={error?.message}>
+            <Form.Item
+              label={t('auth.password')}
+              validateStatus={error ? 'error' : ''}
+              help={error?.message}
+            >
               <Input.Password
                 value={field.value}
                 onChange={field.onChange}
-                placeholder="Введите ваш пароль"
+                placeholder={t('auth.enterPassword')}
               />
             </Form.Item>
           )}
@@ -92,11 +100,11 @@ export const LoginForm: FC = () => {
 
       <div className={styles.actions}>
         <Button type="primary" htmlType="submit" loading={isLoading}>
-          Войти
+          {t('auth.login')}
         </Button>
         <Link to="/auth/register" className={styles.link}>
           <Button type="default" ghost block>
-            Создать аккаунт
+            {t('auth.dontHaveAccount')}
           </Button>
         </Link>
       </div>

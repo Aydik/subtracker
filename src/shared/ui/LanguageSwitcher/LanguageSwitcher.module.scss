@@ -1,0 +1,13 @@
+.languageButton {
+  font-size: 1.25rem;
+  color: var(--color-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: var(--color-primary-hover);
+    transform: scale(1.02);
+  }
+}

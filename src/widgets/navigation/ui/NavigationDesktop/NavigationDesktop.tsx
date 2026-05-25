@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Icon } from '@shared/ui/Icon/Icon.tsx';
 
 import type { NavItem } from '@widgets/navigation';
@@ -12,6 +14,8 @@ export type NavigationDesktopProps = {
 };
 
 export const NavigationDesktop: FC<NavigationDesktopProps> = ({ navItems, navigate }) => {
+  const { t } = useTranslation();
+
   return (
     <nav className={styles.navigationDesktop}>
       {navItems.map((item) => (
@@ -19,10 +23,10 @@ export const NavigationDesktop: FC<NavigationDesktopProps> = ({ navItems, naviga
           key={item.path}
           className={styles.navButton}
           onClick={() => navigate(item.path)}
-          title={item.label}
+          title={t(item.label)}
         >
-          <Icon name={item.icon} size={{ width: 20, height: 20 }} />
-          <span className={styles.navButton__label}>{item.label}</span>
+          <Icon name={item.icon} className={styles.navIcon} />
+          <span className={styles.navButton__label}>{t(item.label)}</span>
         </button>
       ))}
     </nav>

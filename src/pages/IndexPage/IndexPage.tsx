@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { Button, Layout } from 'antd';
 import clsx from 'clsx';
 import Marquee from 'react-fast-marquee';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { useServices } from '@app/context/ServicesContext.tsx';
@@ -15,6 +16,8 @@ import type { FC } from 'react';
 import styles from './IndexPage.module.scss';
 
 export const IndexPage: FC = () => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
 
   const { services: servicesData } = useServices();
@@ -74,10 +77,10 @@ export const IndexPage: FC = () => {
               type="default"
               size="large"
             >
-              Создать аккаунт
+              {t('auth.register')}
             </Button>
             <Button key="login" onClick={() => navigate('/auth/login')} type="primary" size="large">
-              Войти
+              {t('auth.login')}
             </Button>
           </div>
           <div className={styles.divider}>
