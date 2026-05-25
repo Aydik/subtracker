@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Icon } from '@shared/ui/Icon/Icon.tsx';
 
 import type { NavItem } from '@widgets/navigation';
@@ -12,6 +14,8 @@ export type NavigationMobileProps = {
 };
 
 export const NavigationMobile: FC<NavigationMobileProps> = ({ navItems, navigate }) => {
+  const { t } = useTranslation();
+
   return (
     <nav className={styles.navigationMobile}>
       {navItems.map((item) => (
@@ -19,7 +23,7 @@ export const NavigationMobile: FC<NavigationMobileProps> = ({ navItems, navigate
           key={item.path}
           className={styles.navButton}
           onClick={() => navigate(item.path)}
-          title={item.label}
+          title={t(item.label)}
         >
           <Icon name={item.icon} />
         </button>

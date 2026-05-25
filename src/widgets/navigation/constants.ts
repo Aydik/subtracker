@@ -3,15 +3,15 @@ import { t } from 'i18next';
 import type { NavItem } from '@widgets/navigation';
 
 export const NAV_ITEMS: NavItem[] = [
-  { path: '/home', icon: 'home', label: t('navigation.home') },
-  { path: '/calendar', icon: 'calendar', label: t('navigation.calendar') },
-  { path: '/notifications', icon: 'bell', label: t('navigation.notifications') },
-  { path: '/profile', icon: 'account', label: t('navigation.profile') },
+  { path: '/home', icon: 'home', label: 'navigation.home' },
+  { path: '/calendar', icon: 'calendar', label: 'navigation.calendar' },
+  { path: '/notifications', icon: 'bell', label: 'navigation.notifications' },
+  { path: '/profile', icon: 'account', label: 'navigation.profile' },
 ];
 
 export const getPageTitle = (pathname: string): string => {
   if (pathname.startsWith('/subscription/') && pathname !== '/subscription/create') {
-    return t('subscriptions.editSubscription');
+    return 'subscriptions.editSubscription';
   }
 
   const titles: Record<string, string> = {
