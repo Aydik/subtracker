@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 
 import { Calendar, Tooltip, Modal, List } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
+import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 
 import type { SubscriptionResponse } from '@src/api/models';
@@ -70,7 +71,11 @@ export const SubscriptionCalendar: FC<SubscriptionCalendarProps> = ({ subscripti
         <div className={styles.tooltipAmount}>
           {sub.amount} {t('common.rub')}
         </div>
-        <div className={styles.tooltipDate}>{dayjs(sub.timeToPay).format('DD MMMM YYYY')}</div>
+        <div className={styles.tooltipDate}>
+          {dayjs(sub.timeToPay)
+            .locale(i18n.language === 'ru' ? 'ru' : 'en')
+            .format('DD MMMM YYYY')}
+        </div>
         {sub.paymentMethod && <div className={styles.tooltipMethod}>{sub.paymentMethod}</div>}
       </div>
     );
@@ -152,7 +157,9 @@ export const SubscriptionCalendar: FC<SubscriptionCalendarProps> = ({ subscripti
       />
 
       <Modal
-        title={`${t('calendar.subscriptionsOn')} ${dayjs(selectedDate).format('DD MMMM YYYY')}`}
+        title={`${t('calendar.subscriptionsOn')} ${dayjs(selectedDate)
+          .locale(i18n.language === 'ru' ? 'ru' : 'en')
+          .format('DD MMMM YYYY')}`}
         open={modalVisible}
         onCancel={() => setModalVisible(false)}
         footer={null}

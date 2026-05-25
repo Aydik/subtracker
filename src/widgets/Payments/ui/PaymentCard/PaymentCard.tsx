@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import { AsyncImage } from '@shared/ui/AsyncImage';
-import { daysFromToday, isoToRussianDate } from '@shared/utils/formatDate.ts';
+import { daysFromToday, formatDate } from '@shared/utils/formatDate.ts';
 
 import type { SubscriptionResponse } from '@src/api/models';
 import type { FC } from 'react';
@@ -14,7 +14,7 @@ export type PaymentCardProps = {
 };
 
 export const PaymentCard: FC<PaymentCardProps> = ({ subscription, notifyDays }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const days = daysFromToday(subscription.timeToPay);
 
   return (
@@ -28,7 +28,7 @@ export const PaymentCard: FC<PaymentCardProps> = ({ subscription, notifyDays }) 
         <div className={styles.paymentInfo}>
           <h3 className={styles.paymentTitle}>
             <span className={styles.paymentTitle_date}>
-              {isoToRussianDate(subscription.timeToPay)}
+              {formatDate(subscription.timeToPay, i18n.language)}
             </span>{' '}
             - {subscription.serviceName} {subscription.amount} {t('common.rub')}
           </h3>

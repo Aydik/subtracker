@@ -11,7 +11,10 @@
     "configure": "Configure",
     "rub": "₽",
     "usd": "$",
-    "eur": "€"
+    "eur": "€",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "daysCount": "In {{count}} days"
   },
   "navigation": {
     "home": "Home",

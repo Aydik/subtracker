@@ -11,7 +11,10 @@
     "configure": "Настроить",
     "rub": "₽",
     "usd": "$",
-    "eur": "€"
+    "eur": "€",
+    "today": "Сегодня",
+    "tomorrow": "Завтра",
+    "daysCount": "Через {{count}} дней"
   },
 
   "validation": {
