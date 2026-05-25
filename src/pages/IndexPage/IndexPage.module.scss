@@ -1,6 +1,7 @@
 .indexPage {
   box-sizing: border-box;
   position: relative;
+  min-height: 100vh;
 }
 
 .content {
@@ -10,7 +11,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 100vh;
+  min-height: 100vh;
   padding: 20px 0 40px;
 }
 
@@ -147,11 +148,21 @@
   .oAuth__button {
     border: 1px solid #1a1a1a !important;
   }
+
+  .border {
+    display: none;
+  }
 }
 
-// Темная тема - белая рамка
 [data-theme='dark'] {
   .oAuth__button {
     border: 1px solid #ffffff !important;
+  }
+}
+
+@supports (padding: max(0px)) {
+  .content {
+    padding-top: max(20px, env(safe-area-inset-top));
+    padding-bottom: max(40px, env(safe-area-inset-bottom));
   }
 }

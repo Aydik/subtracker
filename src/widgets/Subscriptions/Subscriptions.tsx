@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Empty, Spin } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { useCategories } from '@app/context/CategoriesContext.tsx';
@@ -16,8 +17,8 @@ import type { FC } from 'react';
 import styles from './Subscriptions.module.scss';
 
 export const Subscriptions: FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
-
   const { categories } = useCategories();
 
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
@@ -44,7 +45,7 @@ export const Subscriptions: FC = () => {
 
   return (
     <div className={styles.subscriptions}>
-      <h2 className={styles.subscriptions__title}>Мои подписки</h2>
+      <h2 className={styles.subscriptions__title}>{t('subscriptions.mySubscriptions')}</h2>
       <SubscriptionCategories
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
@@ -52,18 +53,29 @@ export const Subscriptions: FC = () => {
       {isLoading ? (
         <Spin />
       ) : error ? (
-        'Ошибка'
+        t('common.error')
       ) : !subscriptions || subscriptions?.length === 0 ? (
-        <Empty description="Ничего не найдено" image={Empty.PRESENTED_IMAGE_SIMPLE} />
+        <Empty
+          description={t('subscriptions.noSubscriptions')}
+          image={Empty.PRESENTED_IMAGE_SIMPLE}
+        />
       ) : (
-        <ul className={`${styles.subscriptions__list} custom-scroll`}>
-          {subscriptions.map((subscription, index) => (
-            <li key={index}>
-              {index !== 0 && <div className={styles.subscriptions__divider} />}
-              <SubscriptionCard subscription={subscription} />
-            </li>
-          ))}
-        </ul>
+        <div className={styles.subscriptions__listWrapper}>
+          {subscriptions && subscriptions.length > 3 && (
+            <div className={styles.subscriptions__fadeTop} />
+          )}
+          <ul className={`${styles.subscriptions__list} custom-scroll`}>
+            {subscriptions.map((subscription, index) => (
+              <li key={index}>
+                {index !== 0 && <div className={styles.subscriptions__divider} />}
+                <SubscriptionCard subscription={subscription} />
+              </li>
+            ))}
+          </ul>
+          {subscriptions && subscriptions.length > 3 && (
+            <div className={styles.subscriptions__fadeBottom} />
+          )}
+        </div>
       )}
       <Button
         className={styles.addButton}
@@ -72,7 +84,7 @@ export const Subscriptions: FC = () => {
         icon={<PlusOutlined />}
         onClick={() => navigate('/subscription/add')}
       >
-        Добавить подписку
+        {t('subscriptions.addSubscription')}
       </Button>
     </div>
   );

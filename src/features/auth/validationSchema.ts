@@ -1,29 +1,30 @@
+import { t } from 'i18next';
 import * as yup from 'yup';
 
 const passwordErrorMessages = {
-  required: 'Введите пароль',
-  length: 'Минимум 8 символов',
-  uppercase: 'Нужна хотя бы одна заглавная буква',
-  digit: 'Нужна хотя бы одна цифра',
-  matches: 'Пароль содержит недопустимые символы',
+  required: t('validation.passwordRequired'),
+  length: t('validation.passwordMinLength'),
+  uppercase: t('validation.passwordUppercase'),
+  digit: t('validation.passwordDigit'),
+  matches: t('validation.passwordInvalidChars'),
 };
 
 export const loginUserSchema = yup.object({
   email: yup
     .string()
-    .required('Введите email')
-    .email('Неверный формат email')
-    .matches(/^[^\s@]+@[^\s@]+\.[A-Za-z]+$/, 'Неверный формат email'),
+    .required(t('validation.emailRequired'))
+    .email(t('validation.emailInvalid'))
+    .matches(/^[^\s@]+@[^\s@]+\.[A-Za-z]+$/, t('validation.emailInvalid')),
   password: yup.string().required(passwordErrorMessages.required),
 });
 
 export const registerUserSchema = loginUserSchema.shape({
   username: yup
     .string()
-    .required('Введите имя пользователя')
-    .matches(/^[A-Za-z0-9]+$/, 'Только латинские буквы и цифры')
-    .min(3, 'Минимум 3 символа')
-    .max(20, 'Максимум 20 символов'),
+    .required(t('validation.usernameRequired'))
+    .matches(/^[A-Za-z0-9]+$/, t('validation.usernameLatinOnly'))
+    .min(3, t('validation.usernameMinLength'))
+    .max(20, t('validation.usernameMaxLength')),
   password: yup
     .string()
     .required(passwordErrorMessages.required)
@@ -33,6 +34,6 @@ export const registerUserSchema = loginUserSchema.shape({
     .matches(/^\S+$/, passwordErrorMessages.matches),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref('password')], 'Пароли не совпадают')
-    .required('Подтверждение пароля обязательно'),
+    .oneOf([yup.ref('password')], t('validation.passwordMismatch'))
+    .required(t('validation.confirmPasswordRequired')),
 });

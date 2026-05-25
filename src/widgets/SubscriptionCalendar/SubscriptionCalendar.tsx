@@ -1,10 +1,11 @@
 import { useMemo, useState } from 'react';
 
 import { Calendar, Tooltip, Modal, List } from 'antd';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
+import i18n from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 import type { SubscriptionResponse } from '@src/api/models';
-import type { Dayjs } from 'dayjs';
 import type { FC } from 'react';
 
 import styles from './SubscriptionCalendar.module.scss';
@@ -14,9 +15,13 @@ interface SubscriptionCalendarProps {
 }
 
 export const SubscriptionCalendar: FC<SubscriptionCalendarProps> = ({ subscriptions = [] }) => {
+  const { t } = useTranslation();
+
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedSubscriptions, setSelectedSubscriptions] = useState<SubscriptionResponse[]>([]);
   const [selectedDate, setSelectedDate] = useState<string>('');
+  const [currentDate, setCurrentDate] = useState<Dayjs>(dayjs());
+  const [selectedValue, setSelectedValue] = useState<Dayjs>(dayjs());
 
   const dateMap = useMemo(() => {
     const map: Record<string, SubscriptionResponse[]> = {};
@@ -59,7 +64,24 @@ export const SubscriptionCalendar: FC<SubscriptionCalendarProps> = ({ subscripti
     );
   };
 
-  const dateCellRender = (date: Dayjs) => {
+  const getTooltipContent = (sub: SubscriptionResponse) => {
+    return (
+      <div className={styles.tooltipContent}>
+        <div className={styles.tooltipName}>{sub.serviceName}</div>
+        <div className={styles.tooltipAmount}>
+          {sub.amount} {t('common.rub')}
+        </div>
+        <div className={styles.tooltipDate}>
+          {dayjs(sub.timeToPay)
+            .locale(i18n.language === 'ru' ? 'ru' : 'en')
+            .format('DD MMMM YYYY')}
+        </div>
+        {sub.paymentMethod && <div className={styles.tooltipMethod}>{sub.paymentMethod}</div>}
+      </div>
+    );
+  };
+
+  const renderSubscriptionsIcons = (date: Dayjs, isCurrentMonth: boolean) => {
     const key = date.format('YYYY-MM-DD');
     const items = dateMap[key];
     if (!items?.length) return null;
@@ -69,13 +91,16 @@ export const SubscriptionCalendar: FC<SubscriptionCalendarProps> = ({ subscripti
     const remainingCount = items.length - MAX_VISIBLE;
 
     return (
-      <div className={styles.subscriptionsIcons}>
+      <div
+        className={`${styles.subscriptionsIcons} ${!isCurrentMonth ? styles.notInViewIcons : ''}`}
+      >
         {visibleItems.map((sub) => (
           <Tooltip
             key={sub.subscriptionId}
-            title={sub.serviceName || 'Оплата подписки'}
+            title={getTooltipContent(sub)}
             placement="top"
             mouseEnterDelay={0.3}
+            overlayClassName={styles.customTooltip}
           >
             <div className={styles.iconWrapper}>{getIconElement(sub)}</div>
           </Tooltip>
@@ -99,12 +124,42 @@ export const SubscriptionCalendar: FC<SubscriptionCalendarProps> = ({ subscripti
     );
   };
 
+  const fullCellRender = (date: Dayjs) => {
+    const isCurrentMonth = date.month() === currentDate.month();
+    const cellClass = !isCurrentMonth ? styles.notInView : '';
+
+    return (
+      <div className={`${styles.customCell} ${cellClass}`}>
+        <div className={styles.customCellValue}>{date.date()}</div>
+        <div className={styles.customCellContent}>
+          {renderSubscriptionsIcons(date, isCurrentMonth)}
+        </div>
+      </div>
+    );
+  };
+
+  const handlePanelChange = (date: Dayjs) => {
+    setCurrentDate(date);
+  };
+
+  const handleSelect = (date: Dayjs) => {
+    setSelectedValue(date);
+    setCurrentDate(date);
+  };
+
   return (
     <div className={styles.calendar}>
-      <Calendar cellRender={dateCellRender} />
+      <Calendar
+        fullCellRender={fullCellRender}
+        value={selectedValue}
+        onSelect={handleSelect}
+        onPanelChange={handlePanelChange}
+      />
 
       <Modal
-        title={`Подписки на ${dayjs(selectedDate).format('DD MMMM YYYY')}`}
+        title={`${t('calendar.subscriptionsOn')} ${dayjs(selectedDate)
+          .locale(i18n.language === 'ru' ? 'ru' : 'en')
+          .format('DD MMMM YYYY')}`}
         open={modalVisible}
         onCancel={() => setModalVisible(false)}
         footer={null}
@@ -123,13 +178,14 @@ export const SubscriptionCalendar: FC<SubscriptionCalendarProps> = ({ subscripti
                     {subscription.serviceName}
                   </div>
                   <div className={styles.modalItemDetails}>
-                    {subscription.amount} ₽ - {subscription.paymentMethod || 'Способ не указан'}
+                    {subscription.amount} {t('common.rub')} -{' '}
+                    {subscription.paymentMethod || t('subscriptions.notSpecified')}
                   </div>
                 </div>
               </div>
             </List.Item>
           )}
-          locale={{ emptyText: 'Нет подписок' }}
+          locale={{ emptyText: t('subscriptions.noSubscriptions') }}
         />
       </Modal>
     </div>

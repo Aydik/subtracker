@@ -1,5 +1,6 @@
 import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/ru';
+import 'dayjs/locale/en';
 
 export function toISOString(date: Dayjs) {
   if (!date.isValid()) {
@@ -11,10 +12,15 @@ export function toISOString(date: Dayjs) {
 
 export function isoToRussianDate(isoValue?: string) {
   if (!isoValue) return '';
-
   const date = dayjs(isoValue).locale('ru');
   if (!date.isValid()) throw new Error(`Невалидная дата: ${isoValue}`);
+  return date.format('D MMMM');
+}
 
+export function formatDate(isoValue?: string, locale: string = 'ru') {
+  if (!isoValue) return '';
+  const date = dayjs(isoValue).locale(locale === 'ru' ? 'ru' : 'en');
+  if (!date.isValid()) throw new Error(`Невалидная дата: ${isoValue}`);
   return date.format('D MMMM');
 }
 
@@ -38,7 +44,6 @@ export function daysFromToday(targetDate: string | Date | null | undefined): num
   if (isNaN(target.getTime()) || isNaN(today.getTime())) return null;
 
   const MS_PER_DAY = 86400000;
-  // Обрезаем время до полночи UTC, чтобы часы/DST не влияли на расчёт
   const todayDay = Math.floor(today.getTime() / MS_PER_DAY);
   const targetDay = Math.floor(target.getTime() / MS_PER_DAY);
 

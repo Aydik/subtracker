@@ -1,5 +1,6 @@
 import { LogoutOutlined } from '@ant-design/icons';
 import { App, Button } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { useLogoutMutation } from '@src/store/api/services/userService.ts';
@@ -11,23 +12,21 @@ export type LogoutButtonProps = {
 };
 
 export const LogoutButton: FC<LogoutButtonProps> = ({ className = '' }) => {
+  const { t } = useTranslation();
   const { message } = App.useApp();
-
   const navigate = useNavigate();
-
   const [logout, { isLoading }] = useLogoutMutation();
 
   const handleLogout = async () => {
     try {
       await logout({}).unwrap();
-
       message.destroy();
-      message.success('Вы вышли из аккаунта!');
+      message.success(t('auth.logoutSuccess'));
       navigate('/');
     } catch (error) {
       console.log(error);
       message.destroy();
-      message.error('Ошибка выхода!');
+      message.error(t('auth.logoutError'));
     }
   };
 
@@ -39,7 +38,7 @@ export const LogoutButton: FC<LogoutButtonProps> = ({ className = '' }) => {
       onClick={handleLogout}
       loading={isLoading}
     >
-      Выйти из аккаунта
+      {t('auth.logout')}
     </Button>
   );
 };

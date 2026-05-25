@@ -1,4 +1,5 @@
 import { Spin } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 import { useGetAnalyticsQuery } from '@src/store/api/services/analyticsService.ts';
 import { useGetSubscriptionsQuery } from '@src/store/api/services/subscriptionService.ts';
@@ -8,6 +9,8 @@ import { SubscriptionCalendar } from '@widgets/SubscriptionCalendar';
 import type { FC } from 'react';
 
 export const CalendarPage: FC = () => {
+  const { t } = useTranslation();
+
   const { data: subscriptions, isLoading: isLoadingSubscriptions } = useGetSubscriptionsQuery({
     categoryId: undefined,
     pageable: { size: 1000, page: 0 },
@@ -17,7 +20,7 @@ export const CalendarPage: FC = () => {
     pageable: { size: 1000, page: 0 },
   });
 
-  if (isLoadingSubscriptions || isLoadingAnalytics) return <Spin />;
+  if (isLoadingSubscriptions || isLoadingAnalytics) return <Spin tip={t('common.loading')} />;
 
   return (
     <div>

@@ -10,5 +10,9 @@ import type { Pageable } from './pageable';
 export type GetServicesParams = {
   categoryId?: number;
   search?: string;
+  /**
+   * Если true — вернуть только дефолтные сервисы, если false — только кастомные, если не задано — все
+   */
+  isDefault?: boolean;
   pageable: Pageable;
 };
