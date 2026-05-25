@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import * as yup from 'yup';
 
 export interface SubscriptionFormValues {
@@ -19,11 +20,11 @@ export const getSubscriptionSchema = (
   yup.object({
     amount: yup
       .number()
-      .typeError('Введите корректное число')
-      .required('Введите сумму')
-      .positive('Введите положительное число')
-      .max(99999, 'Сумма не может превышать 99999'),
-    timeToPay: yup.string().required('Выберите дату'),
+      .typeError(t('validation.numberTypeError'))
+      .required(t('validation.required'))
+      .positive(t('validation.positive'))
+      .max(99999, t('validation.max', { max: 99999 })),
+    timeToPay: yup.string().required(t('validation.required')),
     isCustom: yup.boolean().required().default(false),
     paymentMethod: yup.string().optional(),
 
@@ -33,7 +34,7 @@ export const getSubscriptionSchema = (
     serviceId: isCreate
       ? yup.string().when('isCustom', {
           is: false,
-          then: (schema) => schema.required('Выберите сервис'),
+          then: (schema) => schema.required(t('validation.required')),
           otherwise: (schema) => schema.optional(),
         })
       : yup.string().optional(),
@@ -41,14 +42,14 @@ export const getSubscriptionSchema = (
     serviceName: isCreate
       ? yup.string().when('isCustom', {
           is: true,
-          then: (schema) => schema.required('Введите название сервис'),
+          then: (schema) => schema.required(t('validation.required')),
           otherwise: (schema) => schema.optional(),
         })
       : yup.string().optional(),
     categoryId: isCreate
       ? yup.number().when('isCustom', {
           is: true,
-          then: (schema) => schema.required('Выберите категорию'),
+          then: (schema) => schema.required(t('validation.required')),
           otherwise: (schema) => schema.optional(),
         })
       : yup.number().optional(),

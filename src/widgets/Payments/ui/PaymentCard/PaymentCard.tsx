@@ -1,5 +1,7 @@
+import { useTranslation } from 'react-i18next';
+
 import { AsyncImage } from '@shared/ui/AsyncImage';
-import { daysFromToday, isoToRussianDate, pluralizeDays } from '@shared/utils/formatDate.ts';
+import { daysFromToday, isoToRussianDate } from '@shared/utils/formatDate.ts';
 
 import type { SubscriptionResponse } from '@src/api/models';
 import type { FC } from 'react';
@@ -12,6 +14,7 @@ export type PaymentCardProps = {
 };
 
 export const PaymentCard: FC<PaymentCardProps> = ({ subscription, notifyDays }) => {
+  const { t } = useTranslation();
   const days = daysFromToday(subscription.timeToPay);
 
   return (
@@ -27,16 +30,21 @@ export const PaymentCard: FC<PaymentCardProps> = ({ subscription, notifyDays }) 
             <span className={styles.paymentTitle_date}>
               {isoToRussianDate(subscription.timeToPay)}
             </span>{' '}
-            - {subscription.serviceName} {subscription.amount} ₽
+            - {subscription.serviceName} {subscription.amount} {t('common.rub')}
           </h3>
           <p className={styles.paymentDescription}>
-            Способ списания: {subscription.paymentMethod || 'Не указан'}
+            {t('subscriptions.paymentMethod')}:{' '}
+            {subscription.paymentMethod || t('subscriptions.notSpecified')}
           </p>
         </div>
       </div>
       {days !== null && (
         <div className={`${styles.statusBadge} ${styles[`notify${notifyDays}`]}`}>
-          {days === 0 ? 'Сегодня' : days === 1 ? 'Завтра' : `Через ${pluralizeDays(days)}`}
+          {days === 0
+            ? t('common.today')
+            : days === 1
+              ? t('common.tomorrow')
+              : t('common.daysCount', { count: days })}
         </div>
       )}
     </div>

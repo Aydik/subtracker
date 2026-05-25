@@ -1,12 +1,17 @@
+import { useTranslation } from 'react-i18next'; // ← добавить
+
 import { UserCard } from '@entities/User';
 import { LogoutButton } from '@features/auth';
 import { ToggleThemeButton } from '@shared/theme';
+import { LanguageSwitcher } from '@shared/ui/LanguageSwitcher/LanguageSwitcher.tsx';
 
 import type { FC } from 'react';
 
 import styles from './ProfilePage.module.scss';
 
 export const ProfilePage: FC = () => {
+  const { t } = useTranslation(); // ← добавить
+
   const handleConfigure = () => {
     console.log('Настроить способы входа');
   };
@@ -21,24 +26,30 @@ export const ProfilePage: FC = () => {
 
       <div className={styles.settingsSection}>
         <div className={styles.themeToggle}>
-          <span className={styles.themeLabel}>Темная тема</span>
+          <span className={styles.themeLabel}>{t('profile.darkTheme')}</span>
           <ToggleThemeButton />
         </div>
 
         <div className={styles.settingItem}>
-          <span className={styles.settingLabel}>Способы входа</span>
+          <span className={styles.settingLabel}>{t('profile.loginMethods')}</span>
           <button className={styles.configureButton} onClick={handleConfigure}>
-            Настроить
+            {t('common.configure')}
           </button>
         </div>
 
         <div className={styles.settingItem}>
-          <span className={styles.settingLabel}>Валюта</span>
+          <span className={styles.settingLabel}>{t('profile.currency')}</span>
           <button className={styles.configureButton} onClick={handleValue}>
-            Рубли [₽]
+            {t('profile.currencyRub')}
           </button>
         </div>
+
+        <div className={styles.settingItem}>
+          <span className={styles.settingLabel}>{t('profile.language')}</span>
+          <LanguageSwitcher />
+        </div>
       </div>
+
       <LogoutButton className={styles.logoutButton} />
     </div>
   );

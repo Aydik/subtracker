@@ -1,5 +1,6 @@
 import { EditOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { AsyncImage } from '@shared/ui/AsyncImage';
@@ -15,6 +16,7 @@ export type SubscriptionCardProps = {
 };
 
 export const SubscriptionCard: FC<SubscriptionCardProps> = ({ subscription }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -26,12 +28,14 @@ export const SubscriptionCard: FC<SubscriptionCardProps> = ({ subscription }) =>
           {subscription.serviceName}
         </p>
         <p className={styles.subscriptionCard__charge}>
-          Следующее списание: <br />
+          {t('subscriptions.nextCharge')}: <br />
           {isoToRussianDate(subscription.timeToPay)}
         </p>
       </div>
 
-      <div className={styles.subscriptionCard__price}>{subscription.amount} ₽</div>
+      <div className={styles.subscriptionCard__price}>
+        {subscription.amount} {t('common.rub')}
+      </div>
       <Button
         type="text"
         icon={<EditOutlined />}

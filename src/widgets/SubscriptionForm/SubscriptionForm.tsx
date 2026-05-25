@@ -6,6 +6,7 @@ import { Form, Select, DatePicker, Button, Spin, App, Row, Col, Input, Checkbox 
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -38,6 +39,7 @@ export type SubscriptionFormProps = {
 };
 
 export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
+  const { t } = useTranslation();
   const { message } = App.useApp();
 
   const navigate = useNavigate();
@@ -149,14 +151,26 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
         }
 
         message.destroy();
-        message.success('Подписка успешно добавлена!');
+        message.success(t('subscriptions.saveSuccess'));
         navigate('/home');
       } catch (err: unknown) {
         console.error(err);
-        message.error('Ошибка при сохранении!');
+        message.error(t('subscriptions.saveError'));
       }
     },
-    [id, fileList, prevAmount],
+    [
+      id,
+      fileList,
+      prevAmount,
+      t,
+      message,
+      navigate,
+      dispatch,
+      createSubscription,
+      createCustomSubscription,
+      updateSubscription,
+      uploadCustomLogo,
+    ],
   );
 
   const handleDelete = useCallback(async () => {
@@ -166,20 +180,20 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
         dispatch(editAnalytics({ count: -1, amount: -prevAmount }));
 
         message.destroy();
-        message.success('Подписка успешно удалена!');
+        message.success(t('subscriptions.deleteSuccess'));
         navigate('/home');
       } catch (err: unknown) {
         console.error(err);
-        message.error('Ошибка при удалении!');
+        message.error(t('subscriptions.deleteError'));
       }
     }
-  }, [id, prevAmount]);
+  }, [id, prevAmount, t, message, navigate, dispatch, deleteSubscription]);
 
   if (isLoadingServices || isLoadingCategories) {
     return (
       <div className={styles.initContainer}>
         <Spin size="large" indicator={<LoadingOutlined spin />} />
-        <p>Загрузка формы</p>
+        <p>{t('subscriptions.loadingForm')}</p>
       </div>
     );
   }
@@ -192,7 +206,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
           control={control}
           render={({ field, fieldState: { error } }) => (
             <Form.Item
-              label="Название сервиса"
+              label={t('subscriptions.serviceName')}
               validateStatus={error ? 'error' : ''}
               help={error?.message}
               className={styles.formItemFixedHeight}
@@ -202,7 +216,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
                 className="text-ellipsis"
                 value={field.value}
                 onChange={field.onChange}
-                placeholder="Введите название сервиса"
+                placeholder={t('subscriptions.enterServiceName')}
                 disabled={!!id}
               />
             </Form.Item>
@@ -213,10 +227,14 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
           name="serviceId"
           control={control}
           render={({ field, fieldState: { error } }) => (
-            <Form.Item label="Сервис" validateStatus={error ? 'error' : ''} help={error?.message}>
+            <Form.Item
+              label={t('subscriptions.service')}
+              validateStatus={error ? 'error' : ''}
+              help={error?.message}
+            >
               <Select
                 size="large"
-                placeholder="Netflix, Spotify..."
+                placeholder={t('subscriptions.selectService')}
                 showSearch
                 value={field.value}
                 onChange={field.onChange}
@@ -241,7 +259,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
           control={control}
           render={({ field }) => (
             <Checkbox className={styles.checkbox} checked={field.value} onChange={field.onChange}>
-              Кастомная подписка
+              {t('subscriptions.customSubscription')}
             </Checkbox>
           )}
         />
@@ -253,13 +271,13 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
           control={control}
           render={({ field, fieldState: { error } }) => (
             <Form.Item
-              label="Категория"
+              label={t('subscriptions.category')}
               validateStatus={error ? 'error' : ''}
               help={error?.message}
             >
               <Select
                 size="large"
-                placeholder="Видео, Музыка..."
+                placeholder={t('subscriptions.selectCategory')}
                 showSearch
                 value={field.value}
                 onChange={field.onChange}
@@ -285,7 +303,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
             control={control}
             render={({ field, fieldState: { error } }) => (
               <Form.Item
-                label="Дата списания"
+                label={t('subscriptions.paymentDate')}
                 validateStatus={error ? 'error' : ''}
                 help={error?.message}
               >
@@ -309,7 +327,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
             control={control}
             render={({ field, fieldState: { error } }) => (
               <Form.Item
-                label="Сумма списания"
+                label={t('subscriptions.amount')}
                 validateStatus={error ? 'error' : ''}
                 help={error?.message}
               >
@@ -318,7 +336,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
                   className={styles.fullWidth}
                   suffix={CURRENCY[currency || 'RUB']}
                   maxLength={5}
-                  placeholder="0"
+                  placeholder={t('subscriptions.amountPlaceholder')}
                   value={field.value}
                   onChange={(e) => {
                     const cleanedValue = e.target.value?.replace(/[^\d]/g, '') || null;
@@ -336,14 +354,14 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
         control={control}
         render={({ field, fieldState: { error } }) => (
           <Form.Item
-            label="Тип списания"
+            label={t('subscriptions.chargeType')}
             validateStatus={error ? 'error' : ''}
             help={error?.message}
           >
             <div className={styles.isMonthContainer}>
               {[
-                { label: 'Единоразово', value: false },
-                { label: 'Ежемесячно', value: true },
+                { label: t('subscriptions.oneTime'), value: false },
+                { label: t('subscriptions.monthly'), value: true },
               ].map((button) => (
                 <button
                   key={button.label}
@@ -367,7 +385,7 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
         control={control}
         render={({ field, fieldState: { error } }) => (
           <Form.Item
-            label="Способ оплаты"
+            label={t('subscriptions.paymentMethod')}
             validateStatus={error ? 'error' : ''}
             help={error?.message}
           >
@@ -375,14 +393,14 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
               size="large"
               value={field.value}
               onChange={field.onChange}
-              placeholder="Введите способ оплаты"
+              placeholder={t('subscriptions.enterPaymentMethod')}
             />
           </Form.Item>
         )}
       />
 
       {isCustom && !id && (
-        <Form.Item label="Изображение">
+        <Form.Item label={t('subscriptions.logo')}>
           <UploadImage fileList={fileList} setFileList={setFileList} />
         </Form.Item>
       )}
@@ -390,11 +408,11 @@ export const SubscriptionForm: FC<SubscriptionFormProps> = ({ id }) => {
       <div className={styles.actions}>
         {id && (
           <Button size="large" danger htmlType="button" onClick={handleDelete}>
-            Удалить
+            {t('common.delete')}
           </Button>
         )}
         <Button size="large" type="primary" htmlType="submit" loading={isLoadingRequest}>
-          Сохранить
+          {t('common.save')}
         </Button>
       </div>
     </Form>

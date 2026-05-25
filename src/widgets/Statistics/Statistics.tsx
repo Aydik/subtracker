@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import type { AnalyticsSummaryResponse } from '@src/api/models';
 import type { FC } from 'react';
 
@@ -8,45 +10,45 @@ type StatisticsProps = {
 };
 
 export const Statistics: FC<StatisticsProps> = ({ analytics }) => {
+  const { t } = useTranslation();
   const stats = analytics?.upcomingCharges;
   const totalAmount = analytics?.totalAmount;
 
   const statsCards = [
     {
-      label: 'Активных подписок',
+      label: t('statistics.activeSubscriptions'),
       value: stats?.activeSubscriptionsCount ?? 0,
       unit: '',
       highlight: false,
     },
     {
-      label: 'На этой неделе',
+      label: t('statistics.monthlyAmount'),
+      value: totalAmount ?? 0,
+      unit: t('common.rub'),
+      highlight: true,
+    },
+    {
+      label: t('statistics.thisWeek'),
       value: stats?.subscriptionsToPayThisWeekCount ?? 0,
       unit: '',
       highlight: false,
     },
     {
-      label: 'В этом месяце',
+      label: t('statistics.thisMonth'),
       value: stats?.subscriptionsToPayThisMonthCount ?? 0,
       unit: '',
       highlight: false,
     },
-
     {
-      label: 'Сумма в месяц',
-      value: totalAmount ?? 0,
-      unit: '₽',
-      highlight: true,
-    },
-    {
-      label: 'К оплате на этой неделе',
+      label: t('statistics.payThisWeek'),
       value: stats?.nextWeek ?? 0,
-      unit: '₽',
+      unit: t('common.rub'),
       highlight: false,
     },
     {
-      label: 'К оплате в этом месяце',
+      label: t('statistics.payThisMonth'),
       value: stats?.nextMonth ?? 0,
-      unit: '₽',
+      unit: t('common.rub'),
       highlight: false,
     },
   ];

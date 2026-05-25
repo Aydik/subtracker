@@ -1,0 +1,152 @@
+{
+  "common": {
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "add": "Добавить",
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "back": "Назад",
+    "configure": "Настроить",
+    "rub": "₽",
+    "usd": "$",
+    "eur": "€"
+  },
+
+  "validation": {
+    "required": "Обязательное поле",
+    "numberTypeError": "Введите корректное число",
+    "positive": "Введите положительное число",
+    "max": "Значение не может превышать {{max}}",
+    "selectDate": "Выберите дату",
+    "selectService": "Выберите сервис",
+    "enterServiceName": "Введите название сервиса",
+    "selectCategory": "Выберите категорию"
+  },
+
+  "navigation": {
+    "home": "Главная",
+    "calendar": "Календарь",
+    "notifications": "Уведомления",
+    "profile": "Профиль"
+  },
+  "auth": {
+    "login": "Войти",
+    "register": "Создать аккаунт",
+    "logout": "Выйти",
+    "email": "Почта",
+    "password": "Пароль",
+    "confirmPassword": "Повторите пароль",
+    "username": "Имя пользователя",
+    "alreadyHaveAccount": "Уже есть аккаунт? Войти",
+    "dontHaveAccount": "Нет аккаунта? Создать",
+    "loginTitle": "Вход",
+    "registerTitle": "Регистрация",
+    "enterEmail": "Введите вашу почту",
+    "enterPassword": "Введите ваш пароль",
+    "enterUsername": "Введите имя пользователя",
+    "confirmPasswordPlaceholder": "Повторите ваш пароль",
+    "loginSuccess": "Вы успешно вошли в аккаунт!",
+    "registerSuccess": "Аккаунт успешно создан!",
+    "logoutSuccess": "Вы вышли из аккаунта!",
+    "loginError": "Ошибка авторизации",
+    "registerError": "Ошибка при регистрации",
+    "logoutError": "Ошибка выхода!",
+    "invalidCredentials": "Неверный email или пароль",
+    "usernameTaken": "Имя пользователя занято",
+    "emailTaken": "Email используется другим пользователем"
+  },
+  "subscriptions": {
+    "mySubscriptions": "Мои подписки",
+    "addSubscription": "Добавить подписку",
+    "editSubscription": "Редактировать подписку",
+    "service": "Сервис",
+    "serviceName": "Название сервиса",
+    "customSubscription": "Кастомная подписка",
+    "category": "Категория",
+    "amount": "Сумма списания",
+    "paymentDate": "Дата списания",
+    "paymentMethod": "Способ оплаты",
+    "chargeType": "Тип списания",
+    "oneTime": "Единоразово",
+    "monthly": "Ежемесячно",
+    "nextCharge": "Следующее списание",
+    "noSubscriptions": "Нет подписок",
+    "notSpecified": "Не указан",
+    "saveSuccess": "Подписка успешно сохранена!",
+    "deleteSuccess": "Подписка успешно удалена!",
+    "saveError": "Ошибка при сохранении!",
+    "deleteError": "Ошибка при удалении!",
+    "loadingForm": "Загрузка формы",
+    "selectService": "Netflix, Spotify...",
+    "selectCategory": "Видео, Музыка...",
+    "enterServiceName": "Введите название сервиса",
+    "enterPaymentMethod": "Введите способ оплаты",
+    "amountPlaceholder": "0",
+    "logo": "Изображение",
+    "upload": "+ Загрузить"
+  },
+  "calendar": {
+    "title": "Календарь платежей",
+    "subscriptionsOn": "Подписки на",
+    "subscriptionOn": "Подписки на"
+  },
+  "statistics": {
+    "title": "Статистика",
+    "activeSubscriptions": "Активных подписок",
+    "monthlyAmount": "Сумма в месяц",
+    "thisWeek": "На этой неделе",
+    "thisMonth": "В этом месяце",
+    "payThisWeek": "К оплате на этой неделе",
+    "payThisMonth": "К оплате в этом месяце",
+    "noData": "Нет данных"
+  },
+  "notifications": {
+    "title": "Уведомления",
+    "reminders": "Напоминания",
+    "channels": "Уведомления каналов",
+    "dayBefore": "За 1 день до списания",
+    "threeDaysBefore": "За 3 дня до списания",
+    "sevenDaysBefore": "За 7 дней до списания",
+    "push": "Push-уведомления",
+    "nearbyPayments": "Ближайшие платежи",
+    "noUpcomingPayments": "Ближайшее время не будет списаний"
+  },
+  "profile": {
+    "title": "Профиль",
+    "darkTheme": "Тёмная тема",
+    "loginMethods": "Способы входа",
+    "currency": "Валюта",
+    "currencyRub": "Рубли [₽]",
+    "currencyUsd": "Доллары [$]",
+    "currencyEur": "Евро [€]",
+    "language": "Язык / Language",
+    "totalAmount": "Общая сумма"
+  },
+  "categories": {
+    "ALL": "Все",
+    "STREAMING_VIDEO": "Видео",
+    "STREAMING_MUSIC": "Музыка",
+    "CLOUD_STORAGE": "Хранилища",
+    "PRODUCTIVITY": "Продуктивность",
+    "GAMING": "Игры",
+    "NEWS": "Новости",
+    "EDUCATION": "Образование",
+    "SOCIAL_MEDIA": "Соцсети",
+    "SHOPPING": "Шопинг",
+    "HEALTH_FITNESS": "Здоровье",
+    "FINANCE": "Финансы",
+    "TRAVEL": "Путешествия",
+    "OTHER": "Другое"
+  },
+  "greeting": {
+    "hello": "Привет"
+  },
+  "tooltip": {
+    "amount": "Сумма",
+    "paymentDate": "Списание",
+    "paymentMethod": "Оплата",
+    "chargeType": "Тип"
+  }
+}
