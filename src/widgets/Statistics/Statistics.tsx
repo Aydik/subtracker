@@ -22,10 +22,10 @@ export const Statistics: FC<StatisticsProps> = ({ analytics }) => {
       highlight: false,
     },
     {
-      label: t('statistics.monthlyAmount'),
-      value: totalAmount ?? 0,
-      unit: t('common.rub'),
-      highlight: true,
+      label: t('statistics.thisMonth'),
+      value: stats?.subscriptionsToPayThisMonthCount ?? 0,
+      unit: '',
+      highlight: false,
     },
     {
       label: t('statistics.thisWeek'),
@@ -34,10 +34,10 @@ export const Statistics: FC<StatisticsProps> = ({ analytics }) => {
       highlight: false,
     },
     {
-      label: t('statistics.thisMonth'),
-      value: stats?.subscriptionsToPayThisMonthCount ?? 0,
-      unit: '',
-      highlight: false,
+      label: t('statistics.monthlyAmount'),
+      value: totalAmount ?? 0,
+      unit: t('common.rub'),
+      highlight: true,
     },
     {
       label: t('statistics.payThisWeek'),
