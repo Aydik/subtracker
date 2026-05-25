@@ -25,7 +25,20 @@
     "selectDate": "Выберите дату",
     "selectService": "Выберите сервис",
     "enterServiceName": "Введите название сервиса",
-    "selectCategory": "Выберите категорию"
+    "selectCategory": "Выберите категорию",
+    "emailRequired": "Введите email",
+    "emailInvalid": "Неверный формат email",
+    "passwordRequired": "Введите пароль",
+    "passwordMinLength": "Минимум 8 символов",
+    "passwordUppercase": "Нужна хотя бы одна заглавная буква",
+    "passwordDigit": "Нужна хотя бы одна цифра",
+    "passwordInvalidChars": "Пароль содержит недопустимые символы",
+    "passwordMismatch": "Пароли не совпадают",
+    "confirmPasswordRequired": "Подтверждение пароля обязательно",
+    "usernameRequired": "Введите имя пользователя",
+    "usernameLatinOnly": "Только латинские буквы и цифры",
+    "usernameMinLength": "Минимум 3 символа",
+    "usernameMaxLength": "Максимум 20 символов"
   },
 
   "navigation": {

@@ -148,6 +148,19 @@
     "selectDate": "Select date",
     "selectService": "Select a service",
     "enterServiceName": "Enter service name",
-    "selectCategory": "Select a category"
+    "selectCategory": "Select a category",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Invalid email format",
+    "passwordRequired": "Password is required",
+    "passwordMinLength": "Minimum 8 characters",
+    "passwordUppercase": "At least one uppercase letter",
+    "passwordDigit": "At least one digit",
+    "passwordInvalidChars": "Password contains invalid characters",
+    "passwordMismatch": "Passwords do not match",
+    "confirmPasswordRequired": "Password confirmation is required",
+    "usernameRequired": "Username is required",
+    "usernameLatinOnly": "Only Latin letters and numbers",
+    "usernameMinLength": "Minimum 3 characters",
+    "usernameMaxLength": "Maximum 20 characters"
   }
 }
