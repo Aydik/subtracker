@@ -14,7 +14,8 @@
     "eur": "€",
     "today": "Today",
     "tomorrow": "Tomorrow",
-    "daysCount": "In {{count}} days"
+    "daysCount": "In {{count}} days",
+    "toggle": "Toggle"
   },
   "navigation": {
     "home": "Home",
@@ -46,7 +47,9 @@
     "logoutError": "Logout error!",
     "invalidCredentials": "Invalid email or password",
     "usernameTaken": "Username is taken",
-    "emailTaken": "Email is already in use"
+    "emailTaken": "Email is already in use",
+    "alreadyAuthenticated": "You are already authenticated",
+    "pleaseAuthenticate": "Please authenticate"
   },
   "subscriptions": {
     "mySubscriptions": "My subscriptions",
@@ -162,5 +165,9 @@
     "usernameLatinOnly": "Only Latin letters and numbers",
     "usernameMinLength": "Minimum 3 characters",
     "usernameMaxLength": "Maximum 20 characters"
+  },
+  "index": {
+    "subtitle": "Smart control of your payments",
+    "or": "or"
   }
 }

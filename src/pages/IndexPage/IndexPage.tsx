@@ -65,9 +65,7 @@ export const IndexPage: FC = () => {
         )}
         <div className={styles.title}>
           <h1>SubTracker</h1>
-          <h2>
-            Умный контроль ваших <br /> платежей
-          </h2>
+          <h2>{t('index.subtitle')}</h2>
         </div>
         <div className={styles.actions}>
           <div className={styles.auth}>
@@ -85,7 +83,7 @@ export const IndexPage: FC = () => {
           </div>
           <div className={styles.divider}>
             <div className={styles.divider__line} />
-            <span className={styles.divider__text}>или</span>
+            <span className={styles.divider__text}>{t('index.or')}</span>
             <div className={styles.divider__line} />
           </div>
           <div className={styles.oAuth}>
