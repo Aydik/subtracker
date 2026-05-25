@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import type { FC } from 'react';
 
 import styles from './ToggleSwitch.module.scss';
@@ -19,6 +21,8 @@ export const ToggleSwitch: FC<ToggleSwitchProps> = ({
   ariaLabel,
   disabled = false,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.toggleContainer}>
       {label && <span className={styles.toggleLabel}>{label}</span>}
@@ -30,7 +34,7 @@ export const ToggleSwitch: FC<ToggleSwitchProps> = ({
           checked={checked}
           onChange={(e) => onChange(e.target.checked)}
           disabled={disabled}
-          aria-label={ariaLabel || label || 'Переключатель'}
+          aria-label={ariaLabel || label || t('common.toggle')}
         />
         <span className={styles.slider}></span>
       </label>

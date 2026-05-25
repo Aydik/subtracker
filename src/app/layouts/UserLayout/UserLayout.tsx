@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { App, Spin } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { Outlet, useNavigate } from 'react-router-dom';
 
 import { useLazyGetAnalyticsQuery } from '@src/store/api/services/analyticsService.ts';
@@ -9,6 +10,8 @@ import { useLazyGetCurrentUserProfileQuery } from '@src/store/api/services/userS
 import type { FC } from 'react';
 
 export const UserLayout: FC = () => {
+  const { t } = useTranslation();
+
   const messageShown = useRef(false);
   const navigate = useNavigate();
   const { message } = App.useApp();
@@ -30,7 +33,7 @@ export const UserLayout: FC = () => {
       })
       .catch(() => {
         if (!messageShown.current) {
-          message.info('Пройдите аутентификацию');
+          message.info(t('auth.pleaseAuthenticate'));
           messageShown.current = true;
         }
         navigate('/auth/login');

@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'; // ← добавить
+import { useTranslation } from 'react-i18next';
 
 import { UserCard } from '@entities/User';
 import { LogoutButton } from '@features/auth';
@@ -10,7 +10,7 @@ import type { FC } from 'react';
 import styles from './ProfilePage.module.scss';
 
 export const ProfilePage: FC = () => {
-  const { t } = useTranslation(); // ← добавить
+  const { t } = useTranslation();
 
   const handleConfigure = () => {
     console.log('Настроить способы входа');
