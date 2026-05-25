@@ -14,7 +14,8 @@
     "eur": "€",
     "today": "Сегодня",
     "tomorrow": "Завтра",
-    "daysCount": "Через {{count}} дней"
+    "daysCount": "Через {{count}} дней",
+    "toggle": "Переключатель"
   },
 
   "validation": {
@@ -71,7 +72,9 @@
     "logoutError": "Ошибка выхода!",
     "invalidCredentials": "Неверный email или пароль",
     "usernameTaken": "Имя пользователя занято",
-    "emailTaken": "Email используется другим пользователем"
+    "emailTaken": "Email используется другим пользователем",
+    "alreadyAuthenticated": "Вы уже прошли аутентификацию",
+    "pleaseAuthenticate": "Пройдите аутентификацию"
   },
   "subscriptions": {
     "mySubscriptions": "Мои подписки",
@@ -137,7 +140,7 @@
     "currencyRub": "Рубли [₽]",
     "currencyUsd": "Доллары [$]",
     "currencyEur": "Евро [€]",
-    "language": "Язык / Language",
+    "language": "Язык",
     "totalAmount": "Общая сумма"
   },
   "categories": {
@@ -164,5 +167,9 @@
     "paymentDate": "Списание",
     "paymentMethod": "Оплата",
     "chargeType": "Тип"
+  },
+  "index": {
+    "subtitle": "Умный контроль ваших платежей",
+    "or": "или"
   }
 }

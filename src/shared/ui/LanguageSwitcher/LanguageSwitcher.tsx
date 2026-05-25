@@ -16,7 +16,7 @@ export const LanguageSwitcher: FC = () => {
 
   return (
     <button className={styles.languageButton} onClick={toggleLanguage}>
-      {currentLanguage === 'ru' ? 'English' : 'Русский'}
+      {currentLanguage === 'ru' ? 'Русский' : 'English'}
     </button>
   );
 };
