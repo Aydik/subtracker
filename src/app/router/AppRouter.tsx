@@ -10,7 +10,6 @@ import type { RouteObject } from 'react-router-dom';
 const AuthLayout = lazy(() => import('@app/layouts/AuthLayout'));
 const UserLayout = lazy(() => import('@app/layouts/UserLayout'));
 const HomeLayout = lazy(() => import('@app/layouts/HomeLayout'));
-const MainLayout = lazy(() => import('@app/layouts/MainLayout'));
 
 const IndexPage = lazy(() => import('@pages/IndexPage'));
 const HomePage = lazy(() => import('@pages/HomePage'));
@@ -69,7 +68,6 @@ const routeConfig: RouteObject[] = [
     ),
     children: [
       {
-        path: '/home',
         element: (
           <Suspense fallback={<PageLoader />}>
             <HomeLayout />
@@ -77,27 +75,10 @@ const routeConfig: RouteObject[] = [
         ),
         children: [
           {
-            index: true,
+            path: '/home',
             element: (
               <Suspense fallback={<PageLoader />}>
                 <HomePage />
-              </Suspense>
-            ),
-          },
-        ],
-      },
-      {
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <MainLayout />
-          </Suspense>
-        ),
-        children: [
-          {
-            path: '/subscription/:id',
-            element: (
-              <Suspense fallback={<PageLoader />}>
-                <SubscriptionPage />
               </Suspense>
             ),
           },
@@ -122,6 +103,14 @@ const routeConfig: RouteObject[] = [
             element: (
               <Suspense fallback={<PageLoader />}>
                 <ProfilePage />
+              </Suspense>
+            ),
+          },
+          {
+            path: '/subscription/:id',
+            element: (
+              <Suspense fallback={<PageLoader />}>
+                <SubscriptionPage />
               </Suspense>
             ),
           },
