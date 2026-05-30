@@ -14,8 +14,10 @@
     "eur": "€",
     "today": "Today",
     "tomorrow": "Tomorrow",
-    "daysCount": "In {{count}} days",
-    "toggle": "Toggle"
+    "toggle": "Toggle",
+    "dayOne": "in {{count}} day",
+    "daysFew": "in {{count}} days",
+    "daysMany": "in {{count}} days"
   },
   "navigation": {
     "home": "Home",

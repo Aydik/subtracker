@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 
 import { Icon } from '@shared/ui/Icon/Icon.tsx';
 
@@ -15,13 +16,18 @@ export type NavigationMobileProps = {
 
 export const NavigationMobile: FC<NavigationMobileProps> = ({ navItems, navigate }) => {
   const { t } = useTranslation();
+  const location = useLocation();
+
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
 
   return (
     <nav className={styles.navigationMobile}>
       {navItems.map((item) => (
         <button
           key={item.path}
-          className={styles.navButton}
+          className={`${styles.navButton} ${isActive(item.path) ? styles.navButton_active : ''}`}
           onClick={() => navigate(item.path)}
           title={t(item.label)}
         >

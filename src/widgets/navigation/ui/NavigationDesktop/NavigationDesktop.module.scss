@@ -35,11 +35,33 @@
   &:hover {
     opacity: 1;
   }
+
+  &_active {
+    opacity: 1;
+    background: rgba(var(--color-primary-rgb), 0.2);
+    color: var(--color-primary);
+    border-radius: 1rem;
+
+    svg {
+      fill: var(--color-primary);
+    }
+
+    .navButton__label {
+      color: var(--color-primary);
+    }
+  }
 }
 
 [data-theme='light'] {
   .navButton svg {
     fill: #000000;
     stroke: none;
+  }
+  .navButton_active {
+    background: rgba(var(--color-primary-rgb), 0.1);
+
+    svg {
+      fill: var(--color-primary);
+    }
   }
 }

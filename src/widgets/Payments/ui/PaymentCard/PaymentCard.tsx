@@ -17,6 +17,19 @@ export const PaymentCard: FC<PaymentCardProps> = ({ subscription, notifyDays }) 
   const { t, i18n } = useTranslation();
   const days = daysFromToday(subscription.timeToPay);
 
+  const getDaysText = (days: number) => {
+    if (days === 0) return t('common.today');
+    if (days === 1) return t('common.tomorrow');
+
+    const lastOne = days % 10;
+    const lastTwo = days % 100;
+
+    if (lastTwo >= 11 && lastTwo <= 19) return t('common.daysMany', { count: days });
+    if (lastOne === 1) return t('common.dayOne', { count: days });
+    if (lastOne >= 2 && lastOne <= 4) return t('common.daysFew', { count: days });
+    return t('common.daysMany', { count: days });
+  };
+
   return (
     <div className={styles.payment__card}>
       <AsyncImage
@@ -40,11 +53,7 @@ export const PaymentCard: FC<PaymentCardProps> = ({ subscription, notifyDays }) 
       </div>
       {days !== null && (
         <div className={`${styles.statusBadge} ${styles[`notify${notifyDays}`]}`}>
-          {days === 0
-            ? t('common.today')
-            : days === 1
-              ? t('common.tomorrow')
-              : t('common.daysCount', { count: days })}
+          {getDaysText(days)}
         </div>
       )}
     </div>

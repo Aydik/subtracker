@@ -24,17 +24,6 @@ export function formatDate(isoValue?: string, locale: string = 'ru') {
   return date.format('D MMMM');
 }
 
-export function pluralizeDays(n: number) {
-  const num = Math.abs(Math.floor(n));
-  const lastTwo = num % 100;
-  const lastOne = lastTwo % 10;
-
-  if (lastTwo >= 11 && lastTwo <= 19) return `${n} дней`;
-  if (lastOne === 1) return `${n} день`;
-  if (lastOne >= 2 && lastOne <= 4) return `${n} дня`;
-  return `${n} дней`;
-}
-
 export function daysFromToday(targetDate: string | Date | null | undefined): number | null {
   if (!targetDate) return null;
 
