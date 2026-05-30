@@ -14,8 +14,10 @@
     "eur": "€",
     "today": "Сегодня",
     "tomorrow": "Завтра",
-    "daysCount": "Через {{count}} дней",
-    "toggle": "Переключатель"
+    "toggle": "Переключатель",
+    "dayOne": "через {{count}} день",
+    "daysFew": "через {{count}} дня",
+    "daysMany": "через {{count}} дней"
   },
 
   "validation": {
