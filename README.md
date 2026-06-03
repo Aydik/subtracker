@@ -13,14 +13,14 @@
 
 
 ## Просмотр
-[Посмотреть на GitHub Pages](https://github.com/Aydik/subtracker.git)
+[Посмотреть на GitHub Pages](https://aydik.github.io/subtracker)
 
 ## Установка и запуск
 
 ### 1. Клонирование репозитория
 
 ```bash
-git clone https://github.com/aydik/subtracker.git
+git clone https://github.com/Aydik/subtracker.git
 ```
 
 ### 2. Установка зависимостей
